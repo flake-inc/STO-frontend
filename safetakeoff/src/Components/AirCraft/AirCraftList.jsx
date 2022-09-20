@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import TransitionsModal from './AddCraftModal';
 
 export default function Content() {
   return (
@@ -37,9 +38,11 @@ export default function Content() {
               />
             </Grid>
             <Grid item>
-              <Button variant="contained" sx={{ mr: 1 }}>
+              <Button variant="contained" sx={{ mr: 1 }} 
+              onClick={TransitionsModal}>
                 Add New
               </Button>
+    
               <Tooltip title="Reload">
                 <IconButton>
                   <RefreshIcon color="inherit" sx={{ display: 'block' }} />
