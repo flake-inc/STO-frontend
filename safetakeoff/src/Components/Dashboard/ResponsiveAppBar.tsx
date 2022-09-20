@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '@mui/material/Container';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,14 +14,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-
+import { useNavigate } from "react-router-dom";
 
 const pages = ['Check Weather', 'Flights', 'Configurations'];
 const settings = ['Profile Settings', 'Edit Dashboard', 'Logout'];
 
+
 export default function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  let navigate = useNavigate(); 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -31,13 +33,36 @@ export default function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (menuItem) => {
+    console.log(menuItem);
+    routeChange(menuItem);
     setAnchorElNav(null);
+    
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const routeChange = (e) =>{ 
+    if (e == 'Check Weather') {
+      let path = `/weather`; 
+      navigate(path);
+    } else if (e == 'Flights') {
+      let path = `/aircrafts`; 
+      navigate(path);
+    } else if (e == 'Configurations') {
+      let path = `/config`; 
+      navigate(path);
+    }
+
+   
+  }
+
+  useEffect(() => {
+    if (anchorElNav != null) {
+    } 
+  }, [anchorElNav]);
 
   return (
     <AppBar position="static">
@@ -55,8 +80,8 @@ export default function ResponsiveAppBar() {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontWeight: 900,
+              letterSpacing: '.25rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -94,7 +119,7 @@ export default function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -105,7 +130,7 @@ export default function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -123,7 +148,7 @@ export default function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
