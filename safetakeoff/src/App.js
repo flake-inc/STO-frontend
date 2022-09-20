@@ -1,9 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import Login from "./components/LoginComponent";
-import Main from "./components/Main/MainComponent";
-import Home from "./components/Home/HomeComponent";
+// import Login from "./components/LoginComponent";
+// import Main from "./components/Main/MainComponent";
+// import Home from "./components/Home/HomeComponent";
 // import EditAccountDetails from "./components/Edit Account Details/EditAccountDetails";
 
 
@@ -11,16 +11,17 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <h1></h1>
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* <Route path="/" element={<Login />} />
           <Route path="main" element={<Main />}>
             <Route index element={<Home />} />
             <Route path="home" element={<Home />}></Route>
-            {/* <Route
+            <Route
               path="editaccountdetails"
               element={<EditAccountDetails />}
-            ></Route> */}
-          </Route>
+            ></Route>
+          </Route> */}
        </Routes>
         </div>
     </BrowserRouter>
