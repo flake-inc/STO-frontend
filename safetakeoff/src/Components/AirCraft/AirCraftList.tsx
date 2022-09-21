@@ -10,10 +10,33 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import TransitionsModal from './AddCraftModal';
+import Modal from '@mui/material/Modal';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Fade from '@mui/material/Fade';
+import Form from './form';
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 
 export default function Content() {
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
+    <>
     <Paper sx={{ maxWidth: 936, margin: 'auto', overflow: 'hidden' }}>
       <AppBar
         position="static"
@@ -39,7 +62,7 @@ export default function Content() {
             </Grid>
             <Grid item>
               <Button variant="contained" sx={{ mr: 1 }} 
-              onClick={TransitionsModal}>
+              onClick={handleOpen}>
                 Add New
               </Button>
     
@@ -53,8 +76,31 @@ export default function Content() {
         </Toolbar>
       </AppBar>
       <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
-        No users for this project yet
+        No aircrafts imported for this application yet
       </Typography>
     </Paper>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              Form
+            </Typography>
+            <Form />
+          </Box>
+        </Fade>
+      </Modal>
+      </>
+
   );
 }
