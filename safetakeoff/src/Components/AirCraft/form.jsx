@@ -1,23 +1,77 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 const defaultValues = {
-  name: "",
-  age: 0,
-  gender: "",
-  os: "",
-  favoriteNumber: 0,
+  model: "",
+  make: "",
+  Year: "",
+  category: "",
+  reg: "",
+  temperature_threshold: 0,
+  wind_speed_threshold: 0,
+  relative_humidity_threshold: 0,
+  solar_radiation_threshold: 0,
+  thermal_radiation_threshold: 0,
 };
+
+
+const categories = [
+  {
+    value: '1',
+    label: "Gliders | Sailplanes",
+  },
+  {
+    value: '2',
+    label: "Gyrocopter",
+  },
+  {
+    value: '3',
+    label: "Military/Classic/Vintage",
+  },
+  {
+    value: '4',
+    label: "Multi Engine Piston",
+  },
+  {
+    value: '5',
+    label: "Piston Helicopters",
+  },
+  {
+    value: '6',
+    label: "Private Jets",
+  },
+  {
+    value: '7',
+    label: "Single Engine Piston",
+  },
+  {
+    value: '8',
+    label: "Single Piston",
+  },
+  {
+    value: '9',
+    label: "Turbine Helicopters",
+  },
+  {
+    value: '10',
+    label: "Turboprops",
+  },
+  {
+    value: '11',
+    label: "Twin Piston",
+  },
+  {
+    value: '12',
+    label: "Ultralight",
+  },
+]
 
 const Form = () => {
   const [formValues, setFormValues] = useState(defaultValues);
@@ -42,102 +96,152 @@ const Form = () => {
     <form onSubmit={handleSubmit}>
       <Grid container alignItems="center" justify="center" direction="column">
         <Grid item>
-          <TextField
-            id="name-input"
-            name="name"
-            label="Name"
+          <TextField fullWidth required
+            id="model-input"
+            name="model"
+            label="Model"
             type="text"
-            value={formValues.name}
+            value={formValues.model}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item>
-          <TextField
-            id="age-input"
-            name="age"
-            label="Age"
+          <TextField fullWidth required
+            id="make-input"
+            name="make"
+            label="Make"
+            type="text"
+            value={formValues.make}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item>
+        {/* <DatePicker
+          id="year-input"
+          name="year"
+          views={['year']}
+          label="Year"
+          value={formValues.Year}
+          onChange={handleInputChange}
+          renderInput={(params) => <TextField {...params} helperText={null} />}
+        /> */}
+          <TextField fullWidth required
+            id="year-input"
+            name="year"
+            label="Year"
             type="number"
-            value={formValues.age}
+            value={formValues.Year}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item>
-          <FormControl>
-            <FormLabel>Gender</FormLabel>
-            <RadioGroup
-              name="gender"
-              value={formValues.gender}
-              onChange={handleInputChange}
-              row
-            >
-              <FormControlLabel
-                key="male"
-                value="male"
-                control={<Radio size="small" />}
-                label="Male"
-              />
-              <FormControlLabel
-                key="female"
-                value="female"
-                control={<Radio size="small" />}
-                label="Female"
-              />
-              <FormControlLabel
-                key="other"
-                value="other"
-                control={<Radio size="small" />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
+          <TextField fullWidth required
+            id="reg-input"
+            name="reg"
+            label="Registration ID"
+            type="text"
+            value={formValues.reg}
+            onChange={handleInputChange}
+          />
         </Grid>
+        <br></br>
+
         <Grid item>
           <FormControl>
-            <Select
-              name="os"
+            <TextField
+              select
+              id="category"
+              label="Category: "
               value={formValues.os}
+              helperText="Please select the aircraft category"
               onChange={handleInputChange}
             >
-              <MenuItem key="mac" value="mac">
-                Mac
-              </MenuItem>
-              <MenuItem key="windows" value="windows">
-                Windows
-              </MenuItem>
-              <MenuItem key="linux " value="linux">
-                Linux
-              </MenuItem>
-            </Select>
+               {categories.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+            </TextField>
           </FormControl>
         </Grid>
+        <hr/>
+   
         <Grid item>
           <div style={{ width: "400px" }}>
-            Favorite Number
+            temperature_threshold
             <Slider
-              value={formValues.favoriteNumber}
-              onChange={handleSliderChange("favoriteNumber")}
+              label
+              value={formValues.temperature_threshold}
+              onChange={handleSliderChange("temperature_threshold")}
               defaultValue={1}
-              step={1}
+              step={0.01}
               min={1}
               max={3}
-              marks={[
-                {
-                  value: 1,
-                  label: "1",
-                },
-                {
-                  value: 2,
-                  label: "2",
-                },
-                {
-                  value: 3,
-                  label: "3",
-                },
-              ]}
-              valueLabelDisplay="off"
+              valueLabelDisplay="auto"
             />
           </div>
         </Grid>
+        <hr/>
+        <Grid item>
+          <div style={{ width: "400px" }}>
+              wind_speed_threshold            
+              <Slider
+              value={formValues.wind_speed_threshold}
+              onChange={handleSliderChange("wind_speed_threshold")}
+              defaultValue={1}
+              step={0.01}
+              min={1}
+              max={3}
+              valueLabelDisplay="auto"
+            />
+          </div>
+        </Grid>
+        <hr/>
+        <Grid item>
+          <div style={{ width: "400px" }}>
+          relative_humidity_threshold
+            <Slider
+              value={formValues.relative_humidity_threshold}
+              onChange={handleSliderChange("relative_humidity_threshold")}
+              defaultValue={1}
+              step={0.01}
+              min={1}
+              max={3}
+              valueLabelDisplay="auto"
+            />
+          </div>
+        </Grid>
+        <hr/>
+        <Grid item>
+          <div style={{ width: "400px" }}>
+          solar_radiation_threshold
+            <Slider
+              value={formValues.solar_radiation_threshold}
+              onChange={handleSliderChange("solar_radiation_threshold")}
+              defaultValue={1}
+              step={0.01}
+              min={1}
+              max={3}
+              valueLabelDisplay="auto"
+            />
+          </div>
+        </Grid>
+        <hr/>
+        <Grid item>
+          <div style={{ width: "400px" }}>
+          thermal_radiation_threshold
+            <Slider
+              value={formValues.thermal_radiation_threshold}
+              onChange={handleSliderChange("thermal_radiation_threshold")}
+              defaultValue={1}
+              step={0.01}
+              min={1}
+              max={3}
+              valueLabelDisplay="auto"
+            />
+          </div>
+        </Grid>
+        <hr/>
         <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>

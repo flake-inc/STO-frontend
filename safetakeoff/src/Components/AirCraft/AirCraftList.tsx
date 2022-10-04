@@ -29,7 +29,7 @@ const style = {
 };
 
 
-export default function Content() {
+export default function AirCraftList() {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -94,7 +94,7 @@ export default function Content() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Form
+              Add New AirCraft
             </Typography>
             <Form />
           </Box>

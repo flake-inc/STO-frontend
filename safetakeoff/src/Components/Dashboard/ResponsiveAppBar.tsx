@@ -34,7 +34,6 @@ export default function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (menuItem) => {
-    console.log(menuItem);
     routeChange(menuItem);
     setAnchorElNav(null);
     
