@@ -195,45 +195,12 @@ function DashboardContent() {
             </Grid>
             <Grid item />
           </Grid>
-          <MainCard sx={{ mt: 2 }} content={false}>
-            <List sx={{ p: 0, "& .MuiListItemButton-root": { py: 2 } }}>
-              <ListItemButton divider>
-                <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
-                <ListItemText primary="N187PH" />
-                <ListItemText secondary="SR20-G3" />
-                <ListItemText primary="Single Engine Piston" />
-              </ListItemButton>
-              <ListItemButton divider>
-              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
-                <ListItemText primary="N187PH" />
-                <ListItemText secondary="SR20-G3" />
-                <ListItemText primary="Single Engine Piston" />
-              </ListItemButton>
-              <ListItemButton divider>
-              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
-              <ListItemText primary="N187PH" />
-                <ListItemText secondary="SR20-G3" />
-                <ListItemText primary="Single Engine Piston" />
-              </ListItemButton>
-              <ListItemButton divider>
-              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
-              <ListItemText primary="N187PH" />
-                <ListItemText secondary="SR20-G3" />
-                <ListItemText primary="Single Engine Piston" />
-              </ListItemButton>
-              <ListItemButton divider>
-              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
-              <ListItemText primary="N187PH" />
-                <ListItemText secondary="SR20-G3" />
-                <ListItemText primary="Single Engine Piston" />
-              </ListItemButton>
-              <ListItemButton divider>
-              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
-              <ListItemText primary="N187PH" />
-                <ListItemText secondary="SR20-G3" />
-                <ListItemText primary="Single Engine Piston" />
-              </ListItemButton>
-            </List>
+          <MainCard sx={{ mt: 2, ml: 2 }} content={false}>
+            <Box sx={{ p: 3, pb: 0 }}>
+            <Statistics feature={feature} />
+
+            </Box>
+            {/* <MonthlyBarChart /> */}
           </MainCard>
         </Grid>
 
@@ -305,6 +272,7 @@ function DashboardContent() {
             </List>
           </MainCard>
         </Grid>
+       
       </Grid>
       <Copyright />
     </>
@@ -363,114 +331,128 @@ function GraphSelect({ feature,slot} ) {
     }
   }
 
-  function Statistics ({menu}){
+  function Statistics ({feature}){
 
     switch (feature) {
         case "Temperature":
-          console.log("Temp99")
-          return
-          <Grid container alignItems="center" justifyContent="space-between">
+          console.log("Temp23")
+          return <Stack spacing={2} paddingBottom={4}>
+          <Typography variant="h6" color="textSecondary">
+            Today's Statistics
+          </Typography>
+          <AnalyticEcommerce
+            title="Maximum Temperature"
+            count="34.2ºC"
+            percentage={10.3}
+            isLoss="true"
+            extra="1.5°C"
+            state="Temperature"
+            event="decreases"
+          />
+          <AnalyticEcommerce
+            title="Minimum Temperature"
+            count="12.56ºC"
+            percentage={7.3}
+            extra="2°C"
+            state="Temperature"
+            event="increases"
+          />
 
-          <Grid item xs={12} md={5} lg={4}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Overview</Typography>
-            </Grid>
-            <Grid item />
-          </Grid>
-          <MainCard sx={{ mt: 2, ml: 2 }} content={false}>
-            <Box sx={{ p: 3, pb: 0 }}>
-              <Stack spacing={2}>
-                <Typography variant="h6" color="textSecondary">
-                  Today's Statistics
-                </Typography>
-                <AnalyticEcommerce
-                  title="Maximum Temperature" 
-                  count="34.2ºC"
-                  percentage={10.3}
-                  isLoss="true"
-                  extra="1.5°C"
-                  state="Temperature"
-                  event="decreases"
-                />
-                <AnalyticEcommerce
-                  title="Minimum Temperature"
-                  count="12.56ºC"
-                  percentage={7.3}
-                  extra="2°C"
-                  state="Temperature"
-                  event="increases"
-                />
+          {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
+                      <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
+        </Stack>
 
-                {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
-                            <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
-              </Stack>
-            </Box>
-            {/* <MonthlyBarChart /> */}
-          </MainCard>
-        </Grid>
-        </Grid>;
-;
+        case "Windspeed":
+            return <Stack spacing={2} paddingBottom={4}>
+            <Typography variant="h6" color="textSecondary">
+              Today's Statistics
+            </Typography>
+            <AnalyticEcommerce
+              title="Maximum Wind Speed"
+              count="4.83kmph"
+              percentage={10.3}
+              isLoss="true"
+              extra="2kmph"
+              state="Wind speed"
+              event="decreases"
+            />
+            <AnalyticEcommerce
+             title="Minimum Wind Speed"
+             count="3.83kmph"
+             percentage={7.3}
+             extra="1kmph"
+             state="Wind speed"
+             event="increases"
+            />
   
-          case "Windspeed":
+            {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
+                        <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
+           </Stack>
+          case "CloudCover":
+
+            return <Stack spacing={2} paddingBottom={4}>
+            <Typography variant="h6" color="textSecondary">
+              Today's Statistics
+            </Typography>
+            <AnalyticEcommerce
+              title="Maximum Cloud Cover"
+              count="0.85"
+              percentage={0.1}
+              isLoss="true"
+              extra="0.085"
+              state="CloudCover"
+              event="decreases"
+            />
+            <AnalyticEcommerce
+             title="Minimum Cloud Cover"
+             count="0.54"
+             percentage={0.7}
+             extra="0.02"
+             state="CloudCover"
+             event="increases"
+            />
   
-            return
+            {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
+                        <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
+           </Stack>
   
-            <Grid item xs={12} md={5} lg={4}>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h5">Overview</Typography>
-              </Grid>
-              <Grid item />
-            </Grid>
-            <MainCard sx={{ mt: 2, ml: 2 }} content={false}>
-              <Box sx={{ p: 3, pb: 0 }}>
-                <Stack spacing={2}>
-                  <Typography variant="h6" color="textSecondary">
-                    Today's Statistics
-                  </Typography>
-                  <AnalyticEcommerce
-                    title="Maximum Windspeed" 
-                    count="5kmph"
-                    percentage={10.3}
-                    isLoss="true"
-                    extra="1.5kmph"
-                    state="Wind speed"
-                    event="decreases"
-                  />
-                  <AnalyticEcommerce
-                    title="Minimum Windspeed" 
-                    count="1kmph"
-                    percentage={7.3}
-                    extra="0.5kmph"
-                    state="Windspeed"
-                    event="increases"
-                  />
-  
-                  {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
-                              <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
-                </Stack>
-              </Box>
-              {/* <MonthlyBarChart /> */}
-            </MainCard>
-          </Grid>;
+    
     
   
-        //   case "CloudCover":
-        //       if(slot=="month"){
-        //           return <MonthlyCloud />;
-      
-        //       }else{
-        //           return <YearlyCloud />;
-        //       }
+          case "Pressure":
+            return <Stack spacing={2} paddingBottom={4}>
+            <Typography variant="h6" color="textSecondary">
+              Today's Statistics
+            </Typography>
+            <AnalyticEcommerce
+              title="Maximum Pressure"
+              count="101111.4Pa"
+              percentage={10.3}
+              isLoss="true"
+              extra="100Pa"
+              state="Pressure"
+              event="decreases"
+            />
+            <AnalyticEcommerce
+              title="Minimum Pressure"
+              count="100000Pa"
+              percentage={7.3}
+              extra="200"
+              state="Pressure"
+              event="increases"
+            />
   
-        //       case "Pressure":
-        //           if(slot=="month"){
-        //               return <MonthlyPressure/>;
+            {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
+                        <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
+           </Stack>
+  
+              // case "Pressure":
+              //     if(slot=="month"){
+              //         return <MonthlyPressure/>;
           
-        //           }else{
-        //               return <YearlyPressure />;
-        //           }
+              //     }else{
+              //         return <YearlyPressure />;
+              //     }
   
 
           default:
