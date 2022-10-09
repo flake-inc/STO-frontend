@@ -4,6 +4,7 @@ import Copyright from "../Public/Copyright/Copyright";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import axios from "axios";
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
+import AnalyticEcommerce from "../../utils/AnalyticEcommerce";
 
 import {
   Box,
@@ -89,9 +90,9 @@ function DashboardContent() {
     <>
       <ResponsiveAppBar />
       {/* <Container> */}
-      <Grid container justify="space-around" rowSpacing={5.5} columnSpacing={40} paddingBottom={5}>
+      <Grid container justify="space-around" rowSpacing={5.5} columnSpacing={40} paddingBottom={5} paddingLeft={5}>
         {/* row 1 */}
-        <Grid item xs={12} sx={{ mb: -2.25, mt: 4 }} rowSpacing={6.5 }>
+        <Grid item xs={12} sx={{ mb: -2.25, mt: 4 }} rowSpacing={6.5 } paddingLeft={2}>
           <Typography variant="h5">Today Overview:</Typography>
         </Grid>
         <Grid item xs={6} sm={3} md={2} lg={2} >
@@ -109,7 +110,7 @@ function DashboardContent() {
       </Grid>
 
       
-      <Grid container rowSpacing={5} columnSpacing={5} paddingBottom={5}>
+      <Grid container rowSpacing={5} columnSpacing={5} paddingBottom={5}paddingLeft={5}>
       <Grid item spacing={20}>
               <Stack direction="row" alignItems="center" spacing={5}>
                 <Button
@@ -147,7 +148,7 @@ function DashboardContent() {
               </Stack>
             </Grid>
             </Grid>
-            <Grid container rowSpacing={1.5} columnSpacing={5}>
+            <Grid container rowSpacing={1.5} columnSpacing={5}paddingLeft={5} paddingRight={2}>
 
         <Grid
           item
@@ -190,8 +191,8 @@ function DashboardContent() {
 
         <Grid item xs={12} md={5} lg={4}>
           <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Endangered Aircrafts</Typography>
+            <Grid item paddingLeft={2}>
+              <Typography variant="h5">Daily Stats</Typography>
             </Grid>
             <Grid item />
           </Grid>
@@ -337,9 +338,9 @@ function GraphSelect({ feature,slot} ) {
         case "Temperature":
           console.log("Temp23")
           return <Stack spacing={2} paddingBottom={4}>
-          <Typography variant="h6" color="textSecondary">
+          {/* <Typography variant="h6" color="textSecondary">
             Today's Statistics
-          </Typography>
+          </Typography> */}
           <AnalyticEcommerce
             title="Maximum Temperature"
             count="34.2ºC"
@@ -364,9 +365,9 @@ function GraphSelect({ feature,slot} ) {
 
         case "Windspeed":
             return <Stack spacing={2} paddingBottom={4}>
-            <Typography variant="h6" color="textSecondary">
+            {/* <Typography variant="h6" color="textSecondary">
               Today's Statistics
-            </Typography>
+            </Typography> */}
             <AnalyticEcommerce
               title="Maximum Wind Speed"
               count="4.83kmph"
@@ -391,9 +392,9 @@ function GraphSelect({ feature,slot} ) {
           case "CloudCover":
 
             return <Stack spacing={2} paddingBottom={4}>
-            <Typography variant="h6" color="textSecondary">
+            {/* <Typography variant="h6" color="textSecondary">
               Today's Statistics
-            </Typography>
+            </Typography> */}
             <AnalyticEcommerce
               title="Maximum Cloud Cover"
               count="0.85"
@@ -421,9 +422,9 @@ function GraphSelect({ feature,slot} ) {
   
           case "Pressure":
             return <Stack spacing={2} paddingBottom={4}>
-            <Typography variant="h6" color="textSecondary">
+            {/* <Typography variant="h6" color="textSecondary">
               Today's Statistics
-            </Typography>
+            </Typography> */}
             <AnalyticEcommerce
               title="Maximum Pressure"
               count="101111.4Pa"
