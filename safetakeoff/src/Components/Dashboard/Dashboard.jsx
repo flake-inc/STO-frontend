@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Copyright from "../Public/Copyright/Copyright";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import axios from "axios";
+import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 
 import {
   Box,
@@ -10,6 +11,7 @@ import {
   Grid,
   List,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   MenuItem,
   Stack,
@@ -249,27 +251,49 @@ function DashboardContent() {
         <Grid item xs={12} md={5} lg={4}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">Aircrafts</Typography>
+              <Typography variant="h5">Endangered Aircrafts</Typography>
             </Grid>
             <Grid item />
           </Grid>
           <MainCard sx={{ mt: 2 }} content={false}>
             <List sx={{ p: 0, "& .MuiListItemButton-root": { py: 2 } }}>
               <ListItemButton divider>
+                <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
                 <ListItemText primary="N187PH" />
                 <ListItemText secondary="SR20-G3" />
-                <Typography variant="h5">Single Engine Piston</Typography>
+                <ListItemText primary="Single Engine Piston" />
               </ListItemButton>
               <ListItemButton divider>
-                <ListItemText primary="Company Expenses Ratio" />
-                <Typography variant="h5">0.58%</Typography>
+              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
+                <ListItemText primary="N187PH" />
+                <ListItemText secondary="SR20-G3" />
+                <ListItemText primary="Single Engine Piston" />
               </ListItemButton>
-              <ListItemButton>
-                <ListItemText primary="Business Risk Cases" />
-                <Typography variant="h5">Low</Typography>
+              <ListItemButton divider>
+              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
+              <ListItemText primary="N187PH" />
+                <ListItemText secondary="SR20-G3" />
+                <ListItemText primary="Single Engine Piston" />
+              </ListItemButton>
+              <ListItemButton divider>
+              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
+              <ListItemText primary="N187PH" />
+                <ListItemText secondary="SR20-G3" />
+                <ListItemText primary="Single Engine Piston" />
+              </ListItemButton>
+              <ListItemButton divider>
+              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
+              <ListItemText primary="N187PH" />
+                <ListItemText secondary="SR20-G3" />
+                <ListItemText primary="Single Engine Piston" />
+              </ListItemButton>
+              <ListItemButton divider>
+              <ListItemIcon ><AirplanemodeActiveIcon/></ListItemIcon>
+              <ListItemText primary="N187PH" />
+                <ListItemText secondary="SR20-G3" />
+                <ListItemText primary="Single Engine Piston" />
               </ListItemButton>
             </List>
-            {/* <ReportAreaChart /> */}
           </MainCard>
         </Grid>
 
