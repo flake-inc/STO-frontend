@@ -1,6 +1,6 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import AirCraftList from "./AirCraftList"
-import Copyright from "../Public/Copyright/Copyright";
+import StickyFooter from "../Public/Copyright/Copyright";
 import React from 'react';
 import Box from '@mui/material/Box';
 
@@ -16,7 +16,7 @@ export default function ViewAllAirCrafts() {
                     <AirCraftList />
                 </Box>
             <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
-            <Copyright />
+            <StickyFooter />
           </Box>
         </Box>
             

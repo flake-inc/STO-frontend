@@ -17,7 +17,6 @@ var monthlytemp =[]
 
 
 d3.csv("/monthtemp.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);

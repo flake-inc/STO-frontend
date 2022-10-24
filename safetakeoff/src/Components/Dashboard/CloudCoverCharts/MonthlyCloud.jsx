@@ -16,7 +16,6 @@ var monthlycloud =[]
 
 
 d3.csv("/monthlycloud.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);

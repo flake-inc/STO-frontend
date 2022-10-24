@@ -16,7 +16,6 @@ var yearlycloud =[]
 
 
 d3.csv("/yearlycloud.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);

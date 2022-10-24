@@ -54,7 +54,7 @@ export default function TimevsTemperature(){
   return <Line
         data={data}
         // width={100}
-        height={150}
+        height={117}
         width={200}
         options={{
           // maintainAspectRatio: false

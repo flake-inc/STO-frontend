@@ -33,7 +33,6 @@ var yearlytemp =[]
 // });
 
 d3.csv("/yearlytemp.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);

@@ -24,7 +24,16 @@ const dataSource = {
     gaugeborderthickness: "2",
     plottooltext: "Temperature: <b>$datavalue</b> ",
     theme: "fusion",
-    showvalue: "1"
+    showvalue: "1",
+    showBorder: "0",
+    canvasBgAlpha: "0",
+    showAlternateHgridColor: "1",
+        //Background image properties
+    // bgImage: "https://i.gifer.com/7Ik1.gif",
+    //     //Background image transparency 
+    // bgImageAlpha: "75",
+    // bgImageDisplayMode: "stretch",
+
   },
   value: "25.5"
 };

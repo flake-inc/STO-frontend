@@ -16,7 +16,6 @@ var monthlywind =[]
 
 
 d3.csv("/monthlywind1.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);

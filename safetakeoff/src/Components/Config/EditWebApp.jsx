@@ -1,6 +1,6 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import React from 'react';
-import Copyright from "../Public/Copyright/Copyright";
+import StickyFooter from "../Public/Copyright/Copyright";
 import Box from '@mui/material/Box';
 
 export default function EditWebApp() {
@@ -13,7 +13,7 @@ export default function EditWebApp() {
                     <h1> This is Edit Web App Page!</h1><br />
                 </Box>
                 <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
-                    <Copyright />
+                    <StickyFooter />
                 </Box>
             </Box>
             

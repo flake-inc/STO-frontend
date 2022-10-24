@@ -36,7 +36,6 @@ export default function ResponsiveAppBar() {
   const handleCloseNavMenu = (menuItem) => {
     routeChange(menuItem);
     setAnchorElNav(null);
-    
   };
 
   const handleCloseUserMenu = () => {
@@ -52,6 +51,9 @@ export default function ResponsiveAppBar() {
       navigate(path);
     } else if (e == 'Configurations') {
       let path = `/config`; 
+      navigate(path);
+    } else if (e == 'Safe-TakeOff') {
+      let path = `/`; 
       navigate(path);
     }
 
@@ -70,11 +72,8 @@ export default function ResponsiveAppBar() {
         <Avatar sx={{ m: 2, bgcolor: 'secondary.main' }}>
             <FlightTakeoffIcon />
         </Avatar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
+          <MenuItem
+            onClick={() => handleCloseNavMenu('Safe-TakeOff')}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -86,7 +85,7 @@ export default function ResponsiveAppBar() {
             }}
           >
             Safe-TakeOff
-          </Typography>
+          </MenuItem>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -125,24 +124,26 @@ export default function ResponsiveAppBar() {
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+          <MenuItem
+            onClick={() => handleCloseNavMenu('Safe-TakeOff')}
           >
-            Safe-TakeOff
-          </Typography>
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Safe-TakeOff
+            </Typography>
+          </MenuItem>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button

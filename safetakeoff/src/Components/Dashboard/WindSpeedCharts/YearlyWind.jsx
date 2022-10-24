@@ -33,7 +33,6 @@ var yearlywind =[]
 // });
 
 d3.csv("/yearlywind.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);

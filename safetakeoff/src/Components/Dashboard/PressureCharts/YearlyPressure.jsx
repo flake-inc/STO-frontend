@@ -16,7 +16,6 @@ var yearlypressure =[]
 
 
 d3.csv("/yearlypressure.csv", function(data1) {
-  console.log("Hi")
 
 
 //   user.push(data.user);
