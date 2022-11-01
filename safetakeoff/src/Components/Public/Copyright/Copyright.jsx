@@ -1,51 +1,44 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import * as React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 export default function StickyFooter() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '30vh',
+        position: "fixed",
+        bottom: 0,
+        width: "100vw",
+        color: "white",
+        height: "$footer-height",
+        display: "flex",
+        textAlign: "center",
+        justifyContent: "center",
+        background: "black",
+        opacity: 0.6,
       }}
     >
       <CssBaseline />
-      <Box
-        component="footer"
-        sx={{
-          py: 3,
-          px: 2,
-          mt: 'auto',
-          textAlign:'center',
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[200]
-              : theme.palette.grey[800],
-        }}
-      >
+      <Box component="footer">
         <Container maxWidth="sm">
           <Typography variant="body1">
-            My sticky footer can be found here.
+            {"Copyright © "}
+            <Link color="inherit" href="#">
+              Your Website
+            </Link>{" "}
+            {new Date().getFullYear()}
+            {"."}
           </Typography>
-          <Copyright />
+          <Typography variant="body2">
+          <Link color="inherit" href="#">Privacy Policy</Link>  
+          <Link color="inherit" href="#">Visit Us</Link>
+ 
+          </Typography>
         </Container>
       </Box>
     </Box>

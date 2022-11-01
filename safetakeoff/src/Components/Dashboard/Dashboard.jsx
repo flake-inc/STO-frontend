@@ -120,14 +120,43 @@ function DashboardContent() {
   }, [feature]);
 
   return (
-    <div
-    className="bg-image shadow-4-strong"
-          style={{
-            backgroundColor: bgGif ?? "#41B3A3",
-          }}>
+    <div className="bg-image shadow-4-strong">
+      <div
+        className="visual"
+        style={{
+          // backgroundColor: bgGif ?? "#41B3A3",
+          width: "100vw",
+          height: "100vh",
+          textAlign: "center",
+          objectFit: "cover",
+          position: "fixed",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          zIndex: -1,
+          backgroundColor: "#F3F2F3",
+        }}
+      >
+        <video
+          id="idle_video"
+          autoplay=""
+          muted="true"
+          playsinline
+          loop
+          class="active"
+        >
+          <source
+            src="https://spire.com/wp-content/themes/spire2021/video/grey/large_aviation.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
       <ResponsiveAppBar />
       <>
-        <Typography variant="h5"  sx={{ p: 5, pb: 0 }}>Today Overview:</Typography>
+        <Typography variant="h5" sx={{ p: 5, pb: 0 }}>
+          Today Overview:
+        </Typography>
         <Grid item xs={12} md={5} lg={2}>
           <Button
             item
@@ -135,7 +164,7 @@ function DashboardContent() {
             sm={3}
             md={2}
             lg={5}
-            sx={{ mx: 'auto' }}
+            sx={{ mx: "auto" }}
             onClick={() => setFeature("Temperature")}
             color={feature === "Temperature" ? "primary" : "secondary"}
             variant={feature === "Temperature" ? "outlined" : "text"}
@@ -149,7 +178,7 @@ function DashboardContent() {
             sm={3}
             md={2}
             lg={5}
-            sx={{ mx: 'auto' }}
+            sx={{ mx: "auto" }}
             onClick={() => setFeature("Windspeed")}
             color={feature === "Windspeed" ? "primary" : "secondary"}
             variant={feature === "Windspeed" ? "outlined" : "text"}
@@ -163,7 +192,7 @@ function DashboardContent() {
             sm={4}
             md={3}
             lg={5}
-            sx={{ mx: 'auto' }}
+            sx={{ mx: "auto" }}
             onClick={() => setFeature("CloudCover")}
             color={feature === "CloudCover" ? "primary" : "secondary"}
             variant={feature === "CloudCover" ? "outlined" : "text"}
@@ -177,7 +206,7 @@ function DashboardContent() {
             sm={3}
             md={2}
             lg={5}
-            sx={{ mx: 'auto' }}
+            sx={{ mx: "auto" }}
             onClick={() => setFeature("Pressure")}
             color={feature === "Pressure" ? "primary" : "secondary"}
             variant={feature === "Pressure" ? "outlined" : "text"}
@@ -186,12 +215,11 @@ function DashboardContent() {
           </Button>
 
           <Button xs={6} sm={3} md={2} lg={5}>
-              <Box sx={{ p: 3, pb: 0 }}>
-                <Statistics feature={feature} />
-              </Box>
+            <Box sx={{ p: 3, pb: 0 }}>
+              <Statistics feature={feature} />
+            </Box>
           </Button>
         </Grid>
-
 
         <Grid
           container
@@ -243,7 +271,7 @@ function DashboardContent() {
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="h5">
-                  Seasonal Change in Temperature{" "}
+                  Seasonal Change in {feature}{" "}
                 </Typography>
               </Grid>
               <Grid item>
