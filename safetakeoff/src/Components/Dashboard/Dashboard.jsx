@@ -104,26 +104,6 @@ function DashboardContent() {
     });
   }, []);
 
-  useEffect(() => {
-    switch (feature) {
-      case "Temperature":
-        setBGGif("#E27D60");
-        break;
-      case "Windspeed":
-        setBGGif("#45A30C");
-        break;
-      case "CloudCover":
-        setBGGif("#E8A87C");
-        break;
-      case "Pressure":
-        setBGGif("#41B3A3");
-        break;
-      default:
-        setBGGif("#41B3A3");
-        break;
-    }
-  }, [feature]);
-
   return (
     <div className="bg-image shadow-4-strong">
       <div
@@ -157,6 +137,7 @@ function DashboardContent() {
           />
         </video>
       </div>
+      
       <ResponsiveAppBar />
       <>
         <Typography variant="h5" sx={{ p: 5, pb: 0 }}>
