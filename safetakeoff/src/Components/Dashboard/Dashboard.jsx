@@ -50,30 +50,35 @@ import MonthlyPressure from "./PressureCharts/MonthlyPressure";
 import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
 
+import TempTrend from "./TemperatureCharts/TempTrend";
+
+
 import {
   GiftOutlined,
   MessageOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import TempSeasonal from "./TemperatureCharts/TempSeasonal";
+import TemperatureObserved from "./TemperatureCharts/TemperatureObserved";
 
 // sales report status
 const status = [
   {
-    value: "today",
-    label: "Today",
+    value: "trend",
+    label: "Trend",
   },
   {
-    value: "month",
-    label: "This Month",
+    value: "seasonal",
+    label: "Seasonal",
   },
   {
-    value: "year",
-    label: "This Year",
+    value: "observed",
+    label: "Observed",
   },
 ];
 
 function DashboardContent() {
-  const [value, setValue] = useState("today");
+  const [value, setValue] = useState("trend");
   const [slot, setSlot] = useState("month");
   const [feature, setFeature] = useState("Temperature");
   const [bgGif, setBGGif] = useState(undefined);
