@@ -5,8 +5,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 
-
-
 export default function StickyFooter() {
   return (
     <Box
@@ -29,15 +27,19 @@ export default function StickyFooter() {
           <Typography variant="body1">
             {"Copyright © "}
             <Link color="inherit" href="#">
-              Your Website
+              flake inc.
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
           </Typography>
           <Typography variant="body2">
-          <Link color="inherit" href="#">Privacy Policy</Link>  
-          <Link color="inherit" href="#">Visit Us</Link>
- 
+            <Link color="inherit" href="#">
+              Privacy Policy
+            </Link>
+            &ensp;&ensp;&ensp;
+            <Link color="inherit" href="#">
+              Visit Us
+            </Link>
           </Typography>
         </Container>
       </Box>

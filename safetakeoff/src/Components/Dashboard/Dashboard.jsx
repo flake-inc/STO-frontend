@@ -7,8 +7,7 @@ import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import AnalyticEcommerce from "../../utils/AnalyticEcommerce";
 import WeatherCard from "./WeatherCard";
 import ReactSpeedometer from "react-d3-speedometer";
-import vid from '../../Assets/large_aviation.mp4'
-
+import vid from "../../Assets/large_aviation.mp4";
 
 import {
   Box,
@@ -53,7 +52,6 @@ import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
 
 import TempTrend from "./TemperatureCharts/TempTrend";
-
 
 import {
   GiftOutlined,
@@ -133,13 +131,10 @@ function DashboardContent() {
           loop
           class="active"
         >
-          <source
-            src={vid}
-            type="video/mp4"
-          />
+          <source src={vid} type="video/mp4" />
         </video>
       </div>
-      
+
       <ResponsiveAppBar />
       <>
         <Typography variant="h5" sx={{ p: 5, pb: 0 }}>
@@ -235,6 +230,15 @@ function DashboardContent() {
                     onClick={() => setSlot("month")}
                     color={slot === "month" ? "primary" : "secondary"}
                     variant={slot === "month" ? "outlined" : "text"}
+                    style={{
+                      fontSize: 14,
+                      fontStyle: "bold",
+                      backgroundColor: "#0a0a23",
+                      color: "#fff",
+                      borderRadius: "10px",
+                      boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                      transition: "0.25w",
+                    }}
                   >
                     Month
                   </Button>
@@ -243,6 +247,15 @@ function DashboardContent() {
                     onClick={() => setSlot("year")}
                     color={slot === "year" ? "primary" : "secondary"}
                     variant={slot === "year" ? "outlined" : "text"}
+                    style={{
+                      fontSize: 14,
+                      fontStyle: "bold",
+                      backgroundColor: "#0a0a23",
+                      color: "#fff",
+                      borderRadius: "10px",
+                      boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                      transition: "0.25w",
+                    }}
                   >
                     Year
                   </Button>
@@ -359,13 +372,6 @@ function GraphSelect({ feature, slot }) {
       }
     default:
       return null;
-
-    //   case 2:
-    //     return <Chats />;
-    //   case 3:
-    //     return <Rooms />;
-    //   default:
-    //     return null;
   }
 }
 

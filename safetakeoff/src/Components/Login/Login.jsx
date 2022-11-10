@@ -54,9 +54,17 @@ export default function Login() {
             <FlightTakeoffIcon />
           </Avatar>
 
-          <Typography component="h1" variant="h3">
-            Safe-TakeOff
-          </Typography>
+          <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="text.primary"
+                gutterBottom
+                marginTop={3}
+              >
+                Safe-TakeOff
+              </Typography>
+
           <Typography component="p" variant="p">
             Powered by flake inc.
           </Typography>
