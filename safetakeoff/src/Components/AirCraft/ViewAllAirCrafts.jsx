@@ -1,12 +1,13 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import AirCraftList from "./AirCraftList";
 import StickyFooter from "../Public/Copyright/Copyright";
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import vid from '../../Assets/large_aviation.mp4'
+import vid from "../../Assets/large_aviation.mp4";
 
 
 export default function ViewAllAirCrafts() {
+  
   return (
     <>
       <div
@@ -34,19 +35,13 @@ export default function ViewAllAirCrafts() {
           loop
           class="active"
         >
-          <source
-            src={vid}
-            type="video/mp4"
-          />
+          <source src={vid} type="video/mp4" />
         </video>
       </div>
       <ResponsiveAppBar />
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         {/* <Header onDrawerToggle={handleDrawerToggle} /> */}
-        <Box
-          component="main"
-          sx={{ flex: 1, py: 6, px: 4}}
-        >
+        <Box component="main" sx={{ flex: 1, py: 6, px: 4 }}>
           <br />
           <AirCraftList />
         </Box>
