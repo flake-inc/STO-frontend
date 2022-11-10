@@ -1,12 +1,11 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
-import AirCraftList from "./AirCraftList";
-import StickyFooter from "../Public/Copyright/Copyright";
 import React from "react";
+import StickyFooter from "../Public/Copyright/Copyright";
 import Box from "@mui/material/Box";
 import vid from '../../Assets/large_aviation.mp4'
 
 
-export default function ViewAllAirCrafts() {
+export default function FlightPredict() {
   return (
     <>
       <div
@@ -41,16 +40,7 @@ export default function ViewAllAirCrafts() {
         </video>
       </div>
       <ResponsiveAppBar />
-      <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* <Header onDrawerToggle={handleDrawerToggle} /> */}
-        <Box
-          component="main"
-          sx={{ flex: 1, py: 6, px: 4}}
-        >
-          <br />
-          <AirCraftList />
-        </Box>
-      </Box>
+
       <StickyFooter />
     </>
   );

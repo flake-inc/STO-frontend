@@ -7,6 +7,8 @@ import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import AnalyticEcommerce from "../../utils/AnalyticEcommerce";
 import WeatherCard from "./WeatherCard";
 import ReactSpeedometer from "react-d3-speedometer";
+import vid from '../../Assets/large_aviation.mp4'
+
 
 import {
   Box,
@@ -132,7 +134,7 @@ function DashboardContent() {
           class="active"
         >
           <source
-            src="https://spire.com/wp-content/themes/spire2021/video/grey/large_aviation.mp4"
+            src={vid}
             type="video/mp4"
           />
         </video>

@@ -5,8 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const defaultValues = {
   model: "",
@@ -21,57 +20,56 @@ const defaultValues = {
   thermal_radiation_threshold: 0,
 };
 
-
 const categories = [
   {
-    value: '1',
+    value: "1",
     label: "Gliders | Sailplanes",
   },
   {
-    value: '2',
+    value: "2",
     label: "Gyrocopter",
   },
   {
-    value: '3',
+    value: "3",
     label: "Military/Classic/Vintage",
   },
   {
-    value: '4',
+    value: "4",
     label: "Multi Engine Piston",
   },
   {
-    value: '5',
+    value: "5",
     label: "Piston Helicopters",
   },
   {
-    value: '6',
+    value: "6",
     label: "Private Jets",
   },
   {
-    value: '7',
+    value: "7",
     label: "Single Engine Piston",
   },
   {
-    value: '8',
+    value: "8",
     label: "Single Piston",
   },
   {
-    value: '9',
+    value: "9",
     label: "Turbine Helicopters",
   },
   {
-    value: '10',
+    value: "10",
     label: "Turboprops",
   },
   {
-    value: '11',
+    value: "11",
     label: "Twin Piston",
   },
   {
-    value: '12',
+    value: "12",
     label: "Ultralight",
   },
-]
+];
 
 const Form = () => {
   const [formValues, setFormValues] = useState(defaultValues);
@@ -94,9 +92,11 @@ const Form = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container alignItems="center" justify="center" direction="column">
+      <Grid container direction="column">
         <Grid item>
-          <TextField fullWidth required
+          <TextField
+            fullWidth
+            required
             id="model-input"
             name="model"
             label="Model"
@@ -106,7 +106,9 @@ const Form = () => {
           />
         </Grid>
         <Grid item>
-          <TextField fullWidth required
+          <TextField
+            fullWidth
+            required
             id="make-input"
             name="make"
             label="Make"
@@ -116,16 +118,9 @@ const Form = () => {
           />
         </Grid>
         <Grid item>
-        {/* <DatePicker
-          id="year-input"
-          name="year"
-          views={['year']}
-          label="Year"
-          value={formValues.Year}
-          onChange={handleInputChange}
-          renderInput={(params) => <TextField {...params} helperText={null} />}
-        /> */}
-          <TextField fullWidth required
+          <TextField
+            fullWidth
+            required
             id="year-input"
             name="year"
             label="Year"
@@ -135,7 +130,9 @@ const Form = () => {
           />
         </Grid>
         <Grid item>
-          <TextField fullWidth required
+          <TextField
+            fullWidth
+            required
             id="reg-input"
             name="reg"
             label="Registration ID"
@@ -146,7 +143,7 @@ const Form = () => {
         </Grid>
         <br></br>
 
-        <Grid item>
+        <Grid container justify="center">
           <FormControl>
             <TextField
               select
@@ -156,19 +153,19 @@ const Form = () => {
               helperText="Please select the aircraft category"
               onChange={handleInputChange}
             >
-               {categories.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
+              {categories.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
             </TextField>
           </FormControl>
         </Grid>
-        <hr/>
-   
-        <Grid item>
-          <div style={{ width: "400px" }}>
-            temperature_threshold
+        <hr />
+
+        <Grid item alignItems="center" justify="center">
+          <div>
+            Temperature Threshold
             <Slider
               label
               value={formValues.temperature_threshold}
@@ -181,11 +178,11 @@ const Form = () => {
             />
           </div>
         </Grid>
-        <hr/>
+        <hr />
         <Grid item>
-          <div style={{ width: "400px" }}>
-              wind_speed_threshold            
-              <Slider
+          <div>
+            Wind Speed Threshold
+            <Slider
               value={formValues.wind_speed_threshold}
               onChange={handleSliderChange("wind_speed_threshold")}
               defaultValue={1}
@@ -196,10 +193,10 @@ const Form = () => {
             />
           </div>
         </Grid>
-        <hr/>
+        <hr />
         <Grid item>
-          <div style={{ width: "400px" }}>
-          relative_humidity_threshold
+          <div>
+            Relative Humidity Threshold
             <Slider
               value={formValues.relative_humidity_threshold}
               onChange={handleSliderChange("relative_humidity_threshold")}
@@ -211,10 +208,10 @@ const Form = () => {
             />
           </div>
         </Grid>
-        <hr/>
+        <hr />
         <Grid item>
-          <div style={{ width: "400px" }}>
-          solar_radiation_threshold
+          <div>
+            Solar Radiation Threshold
             <Slider
               value={formValues.solar_radiation_threshold}
               onChange={handleSliderChange("solar_radiation_threshold")}
@@ -226,10 +223,10 @@ const Form = () => {
             />
           </div>
         </Grid>
-        <hr/>
+        <hr />
         <Grid item>
-          <div style={{ width: "400px" }}>
-          thermal_radiation_threshold
+          <div>
+            Thermal Radiation Threshold
             <Slider
               value={formValues.thermal_radiation_threshold}
               onChange={handleSliderChange("thermal_radiation_threshold")}
@@ -241,8 +238,23 @@ const Form = () => {
             />
           </div>
         </Grid>
-        <hr/>
-        <Button variant="contained" color="primary" type="submit">
+        <hr />
+
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={{
+            display: "inline-block",
+            fontSize: 24,
+            fontStyle: "bold",
+            backgroundColor: "#0a0a23",
+            color: "#fff",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+            transition: "0.25w",
+          }}
+        >
           Submit
         </Button>
       </Grid>

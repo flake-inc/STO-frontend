@@ -21,7 +21,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -35,8 +35,21 @@ export default function AirCraftList() {
 
   return (
     <>
+      <Paper
+        sx={{ maxWidth: 936, margin: "auto", overflow: "hidden", opacity: 0.9 }}
+      >
+        <Typography
+          component="h1"
+          variant="h2"
+          align="center"
+          color="text.primary"
+          gutterBottom
+          marginTop={3}
+        >
+          Aircrafts
+        </Typography>
+        
 
-      <Paper sx={{ maxWidth: 936, margin: "auto", overflow: "hidden" }}>
         <AppBar
           position="static"
           color="default"
@@ -60,7 +73,21 @@ export default function AirCraftList() {
                 />
               </Grid>
               <Grid item>
-                <Button variant="contained" sx={{ mr: 1 }} onClick={handleOpen}>
+                <Button
+                  variant="contained"
+                  sx={{ mr: 1 }}
+                  onClick={handleOpen}
+                  style={{
+                    display: "inline-block",
+                    fontSize: 14,
+                    fontStyle: "bold",
+                    backgroundColor: "#0a0a23",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                    transition: "0.25w",
+                  }}
+                >
                   Add New
                 </Button>
 

@@ -11,6 +11,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Select from "react-select";
+import Paper from "@mui/material/Paper";
+import { useNavigate } from "react-router-dom";
+import vid from "../../Assets/large_aviation.mp4";
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
@@ -28,9 +31,14 @@ const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
 );
 
 const Options = [
-  { value: "Mig-17", label: "Mig-17" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: "R44 RAVEN I", label: "R44 RAVEN I" },
+  { value: "CARBON CUB FX3", label: "CARBON CUB FX3" },
+  { value: "M20C", label: "M20C" },
+  { value: "CC11-160 CARBON CUB SS", label: "CC11-160 CARBON CUB SS" },
+  { value: "SR20-G3", label: "SR20-G3" },
+  { value: "SR22-G5 TURBO", label: "SR22-G5 TURBO" },
+  { value: "G36 BONANZA", label: "G36 BONANZA" },
+  { value: "VIPERJET MK II", label: "VIPERJET MK II" },
 ];
 
 export default function PredictWeather() {
@@ -41,12 +49,32 @@ export default function PredictWeather() {
   const [isLoading, setIsLoading] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
 
+  let navigate = useNavigate();
+
+  const getInitialState = () => {
+    const options = "R44 RAVEN I";
+    return options;
+  };
+
+  const [options, setOption] = useState(getInitialState);
+
+  const handleTypeChange = (e) => {
+    setOption(e.target.options);
+  };
+
+  const handleClick = () => {
+    if (isDisabled) {
+      navigate("/result-all")
+    } else {
+      navigate("/result-flight")
+    }
+  };
+
   return (
     <>
       <div
         className="visual"
         style={{
-          // backgroundColor: bgGif ?? "#41B3A3",
           width: "100vw",
           height: "100vh",
           textAlign: "center",
@@ -68,29 +96,34 @@ export default function PredictWeather() {
           loop
           class="active"
         >
-          <source
-            src="https://spire.com/wp-content/themes/spire2021/video/grey/large_aviation.mp4"
-            type="video/mp4"
-          />
+          <source src={vid} type="video/mp4" />
         </video>
       </div>
       <ResponsiveAppBar />
-      <Container>
+      <Container
+        sx={{
+          py: 5,
+          // background: "black",
+          // opacity: 0.6,
+          // color: "white",
+        }}
+      >
         <main>
           {/* Hero unit */}
           <Box
             sx={{
-              pt: 8,
-              pb: 6,
+              pt: 3,
+              pb: 3,
             }}
           >
-            <Container maxWidth="sm">
+            <Paper sx={{ maxWidth: 936, margin: "auto", overflow: "hidden", opacity: 0.9 }}>
               <Typography
                 component="h1"
                 variant="h2"
                 align="center"
                 color="text.primary"
                 gutterBottom
+                marginTop={3}
               >
                 Predict Weather
               </Typography>
@@ -107,8 +140,9 @@ export default function PredictWeather() {
                 next to it if you want to get a comparison of the predicted
                 weather and the selected aircraft type.
               </Typography>
-              <>
+              <Container>
                 <Select
+                  onChange={handleTypeChange}
                   className="basic-single"
                   classNamePrefix="select"
                   defaultValue={Options[0]}
@@ -117,15 +151,14 @@ export default function PredictWeather() {
                   isClearable={isClearable}
                   isRtl={isRtl}
                   isSearchable={isSearchable}
-                  name="color"
+                  name="aircraftcategory"
                   options={Options}
                 />
 
                 <div
                   style={{
-                    color: "hsl(0, 0%, 0%)",
                     display: "inline-block",
-                    fontSize: 18,
+                    fontSize: 14,
                     fontStyle: "italic",
                     marginTop: "1em",
                   }}
@@ -137,7 +170,7 @@ export default function PredictWeather() {
                     Remove Aircraft Type
                   </Checkbox>
                 </div>
-              </>
+              </Container>
 
               <Stack
                 sx={{ pt: 2 }}
@@ -158,14 +191,24 @@ export default function PredictWeather() {
                   />
                 </LocalizationProvider>
               </Stack>
-            </Container>
+            </Paper>
           </Box>
           <Box textAlign="center">
             <Button
               variant="contained"
               size="large"
-              color="primary"
-              sx={{ width: 200, padding: 1, margin: 2 }}
+              sx={{ width: 300, margin: "auto", overflow: "hidden" }}
+              onClick={() => handleClick(value)}
+              style={{
+                display: "inline-block",
+                fontSize: 24,
+                fontStyle: "bold",
+                backgroundColor: "#0a0a23",
+                color: "#fff",
+                borderRadius: "10px",
+                boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                transition: "0.25w",
+              }}
             >
               Predict
             </Button>
