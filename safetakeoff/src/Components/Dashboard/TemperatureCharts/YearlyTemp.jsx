@@ -47,6 +47,16 @@ d3.csv("/yearlytemp.csv", function(data1) {
 // }
 });
 
+// style={{
+//   display: "inline-block",
+//   fontSize: 14,
+//   fontStyle: "bold",
+//   backgroundColor: "#0a0a23",
+//   color: "#fff",
+//   borderRadius: "10px",
+//   boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+//   transition: "0.25w",
+// }}
 
 
 
@@ -60,17 +70,17 @@ export default function YearlyTemp(){
         label: 'Yearly Average Temperature',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: 'rgba(10, 10, 35, 0.4)',
+        borderColor: 'rgba(10, 10, 35, 1)',
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBorderColor: 'rgba(10, 10, 35, 1)',
         pointBackgroundColor: '#fff',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBackgroundColor: 'rgba(10, 10, 35, 1)',
         pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
         pointRadius: 1,
@@ -81,7 +91,6 @@ export default function YearlyTemp(){
   };
   return <Line
         data={data}
-        // width={100}
         height={100}
         width={200}
         options={{

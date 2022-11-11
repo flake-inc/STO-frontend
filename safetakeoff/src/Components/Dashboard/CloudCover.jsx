@@ -71,7 +71,7 @@ export default class CloudCover extends React.Component {
     return (
       <ReactFusioncharts
         type="angulargauge"
-        width="500"
+        width="300"
         height="300"
         dataFormat="JSON"
         dataSource={dataSource}

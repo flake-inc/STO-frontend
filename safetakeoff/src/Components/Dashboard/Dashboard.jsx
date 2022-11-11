@@ -8,6 +8,7 @@ import AnalyticEcommerce from "../../utils/AnalyticEcommerce";
 import WeatherCard from "./WeatherCard";
 import ReactSpeedometer from "react-d3-speedometer";
 import vid from "../../Assets/large_aviation.mp4";
+import Paper from "@mui/material/Paper";
 
 import {
   Box,
@@ -50,6 +51,7 @@ import YearlyCloud from "./CloudCoverCharts/YearlyCloud";
 import MonthlyPressure from "./PressureCharts/MonthlyPressure";
 import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
+import AirCraftPieChart from "./AirCraftCharts/DangeredCrafts"
 
 import TempTrend from "./TemperatureCharts/TempTrend";
 
@@ -136,73 +138,111 @@ function DashboardContent() {
       </div>
 
       <ResponsiveAppBar />
-      <>
-        <Typography variant="h5" sx={{ p: 5, pb: 0 }}>
-          Today Overview:
-        </Typography>
-        <Grid item xs={12} md={5} lg={2}>
-          <Button
-            item
-            xs={6}
-            sm={3}
-            md={2}
-            lg={5}
-            sx={{ mx: "auto" }}
-            onClick={() => setFeature("Temperature")}
-            color={feature === "Temperature" ? "primary" : "secondary"}
-            variant={feature === "Temperature" ? "outlined" : "text"}
-          >
-            <TempGauge />
-          </Button>
+      <Grid>
+        <Container>
+          <main>
+            {/* Hero unit */}
+            <Box
+              sx={{
+                pt: 3,
+                pb: 3,
+              }}
+            >
+              <Paper
+                sx={{
+                  maxWidth: 8000,
+                  margin: "auto",
+                  overflow: "hidden",
+                  opacity: 0.9,
+                }}
+              >
+                <Typography
+                  component="h5"
+                  variant="h5"
+                  align="left"
+                  color="text.primary"
+                >
+                  Today Overview:
+                </Typography>
 
-          <Button
-            item
-            xs={6}
-            sm={3}
-            md={2}
-            lg={5}
-            sx={{ mx: "auto" }}
-            onClick={() => setFeature("Windspeed")}
-            color={feature === "Windspeed" ? "primary" : "secondary"}
-            variant={feature === "Windspeed" ? "outlined" : "text"}
-          >
-            <WindGauge />
-          </Button>
+                <Grid item xs={12} md={5} lg={2}>
+                  <Button
+                    item
+                    xs={6}
+                    sm={3}
+                    md={2}
+                    lg={2}
+                    sx={{ mx: "auto" }}
+                    onClick={() => setFeature("Temperature")}
+                    color={feature === "Temperature" ? "primary" : "secondary"}
+                    variant={feature === "Temperature" ? "outlined" : "text"}
+                  >
+                    <TempGauge />
+                  </Button>
 
-          <Button
-            item
-            xs={6}
-            sm={4}
-            md={3}
-            lg={5}
-            sx={{ mx: "auto" }}
-            onClick={() => setFeature("CloudCover")}
-            color={feature === "CloudCover" ? "primary" : "secondary"}
-            variant={feature === "CloudCover" ? "outlined" : "text"}
-          >
-            <CloudCover />
-          </Button>
+                  <Button
+                    item
+                    xs={6}
+                    sm={3}
+                    md={2}
+                    lg={2}
+                    sx={{ mx: "auto" }}
+                    onClick={() => setFeature("Windspeed")}
+                    color={feature === "Windspeed" ? "primary" : "secondary"}
+                    variant={feature === "Windspeed" ? "outlined" : "text"}
+                  >
+                    <WindGauge />
+                  </Button>
 
-          <Button
-            item
-            xs={6}
-            sm={3}
-            md={2}
-            lg={5}
-            sx={{ mx: "auto" }}
-            onClick={() => setFeature("Pressure")}
-            color={feature === "Pressure" ? "primary" : "secondary"}
-            variant={feature === "Pressure" ? "outlined" : "text"}
-          >
-            <PressureGauge />
-          </Button>
+                  <Button
+                    item
+                    xs={6}
+                    sm={4}
+                    md={3}
+                    lg={2}
+                    sx={{ mx: "auto" }}
+                    onClick={() => setFeature("CloudCover")}
+                    color={feature === "CloudCover" ? "primary" : "secondary"}
+                    variant={feature === "CloudCover" ? "outlined" : "text"}
+                  >
+                    <CloudCover />
+                  </Button>
 
-          <Button xs={6} sm={3} md={2} lg={5}>
-            <Box sx={{ p: 3, pb: 0 }}>
-              <Statistics feature={feature} />
+                  <Button
+                    item
+                    xs={6}
+                    sm={3}
+                    md={2}
+                    lg={2}
+                    sx={{ mx: "auto" }}
+                    onClick={() => setFeature("Pressure")}
+                    color={feature === "Pressure" ? "primary" : "secondary"}
+                    variant={feature === "Pressure" ? "outlined" : "text"}
+                  >
+                    <PressureGauge />
+                  </Button>
+                  
+                  <Box xs={6} sm={3} md={2} lg={2}>
+                    <Box sx={{ p: 3, pb: 0 }}>
+                      <Statistics feature={feature} />
+                    </Box>
+                  </Box>
+                  
+                  <Box
+                    item
+                    xs={6}
+                    sm={3}
+                    md={2}
+                    lg={2}
+                    sx={{ mx: "auto" }}
+                  >
+                    <AirCraftPieChart/>
+                  </Box>
+                </Grid>
+              </Paper>
             </Box>
-          </Button>
-        </Grid>
+          </main>
+        </Container>
 
         <Grid
           container
@@ -218,7 +258,7 @@ function DashboardContent() {
           />
 
           {/* row 2 */}
-          <Grid item xs={12} md={4} lg={6}>
+          <Grid item xs={12} md={12} lg={12}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="h5">Average {feature}</Typography>
@@ -268,7 +308,7 @@ function DashboardContent() {
             </MainCard>
           </Grid>
 
-          <Grid item xs={12} md={4} lg={6}>
+          <Grid item xs={12} md={12} lg={12}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="h5">
@@ -328,11 +368,13 @@ function DashboardContent() {
                   </Typography>
                 </ListItemButton>
               </List>
+              
             </MainCard>
           </Grid>
         </Grid>
         <StickyFooter />
-      </>
+      </Grid>
+      
     </div>
   );
 }
