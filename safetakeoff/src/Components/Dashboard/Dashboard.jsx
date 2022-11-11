@@ -418,7 +418,8 @@ function GraphSelect({ feature, slot }) {
 }
 
 function Statistics({ feature }) {
-  switch (feature) {
+
+  switch(feature){
     case "Temperature":
       console.log("Temp23");
       return (
