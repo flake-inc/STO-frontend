@@ -17,13 +17,8 @@ var monthlytemp =[]
 
 
 d3.csv("/monthtemp.csv", function(data1) {
-
-
-//   user.push(data.user);
   month.push(data1.month);
   monthlytemp.push(data1.temperature);
-  console.log(month)
-
 
 });
 

@@ -21,15 +21,8 @@ d3.csv("/monthlycloud.csv", function(data1) {
 //   user.push(data.user);
   month.push(data1.Month);
   monthlycloud.push(data1.total_cloud_cover);
-  console.log(month)
-
 
 });
-
-
-
-
-
 
 
 export default function MonthlyCloud(){

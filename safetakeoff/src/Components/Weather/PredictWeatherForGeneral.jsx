@@ -1,17 +1,15 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import React from "react";
 import StickyFooter from "../Public/Copyright/Copyright";
-import Box from "@mui/material/Box";
 import vid from '../../Assets/large_aviation.mp4'
 
-
 export default function GeneralPredict() {
+
   return (
     <>
       <div
         className="visual"
         style={{
-          // backgroundColor: bgGif ?? "#41B3A3",
           width: "100vw",
           height: "100vh",
           textAlign: "center",

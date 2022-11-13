@@ -21,15 +21,8 @@ d3.csv("/monthlywind1.csv", function(data1) {
 //   user.push(data.user);
   month.push(data1.Month);
   monthlywind.push(data1.wind_speed);
-  console.log(month)
-
 
 });
-
-
-
-
-
 
 
 export default function MonthlyAvgWindSpeed(){

@@ -21,16 +21,8 @@ d3.csv("/monthlypressure.csv", function(data1) {
 //   user.push(data.user);
   month.push(data1.Month);
   monthlypressure.push(data1.mean_sea_level_pressure);
-  console.log(month)
-
 
 });
-
-
-
-
-
-
 
 export default function MonthlyPressure(){
   var data = {
