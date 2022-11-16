@@ -14,7 +14,7 @@ charts(FusionCharts);
 
 const dataSource = {
   chart: {
-    caption: "Temp",
+    caption: "Temperature",
     lowerlimit: "-20",
     upperlimit: "50",
     numbersuffix: "°C",
@@ -43,7 +43,7 @@ export default class Thermo extends React.Component {
     return (
       <ReactFusioncharts
         type="thermometer"
-        width="150"
+        width="500"
         height="300"
         dataFormat="JSON"
         dataSource={dataSource}

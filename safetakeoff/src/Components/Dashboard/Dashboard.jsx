@@ -9,6 +9,7 @@ import WeatherCard from "./WeatherCard";
 import ReactSpeedometer from "react-d3-speedometer";
 import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
+import Cards from './cards';
 
 import {
   Box,
@@ -236,7 +237,10 @@ function DashboardContent() {
                     lg={2}
                     sx={{ mx: "auto" }}
                   >
-                    <AirCraftPieChart/>
+                    {/* <AirCraftPieChart/> */}
+                    <Cards />
+
+
                   </Box>
                 </Grid>
               </Paper>

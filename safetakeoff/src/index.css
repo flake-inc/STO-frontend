@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.weathercard{
+  /* border-style: solid; */
+  width: 300px;
+  /* overflow-x: scroll; */
+  padding: 20px;
+
+}
+.stackscroll{
+  overflow-x: scroll;
+  padding: 100px;
+}
+
+.button1{
+  width: 500px;
+}

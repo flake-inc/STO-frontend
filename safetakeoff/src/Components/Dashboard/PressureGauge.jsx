@@ -60,7 +60,7 @@ export default class Pressure extends React.Component {
     return (
       <ReactFusioncharts
         type="angulargauge"
-        width="400"
+        width="500"
         height="300"
         dataFormat="JSON"
         dataSource={dataSource}

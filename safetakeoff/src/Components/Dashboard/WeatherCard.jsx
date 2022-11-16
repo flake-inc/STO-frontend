@@ -10,12 +10,14 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { WiCloud, WiThermometer,WiWindy, WiBarometer,WiDayCloudyWindy } from "react-icons/wi";
 
-export default function WeatherCard() {
+
+export default function WeatherCard(time,temp,wind_speed,pressure,cloud) {
   return (
-    <section className="vh-100" style={{ backgroundColor: "#eee" }}>
-      <MDBContainer className="h-100">
-        <MDBRow className="justify-content-center align-items-center h-100">
+    <section className="vh-60" >
+      <MDBContainer className="weathercard" >
+        <MDBRow className="rowclass">
           <MDBCol md="8" lg="6" xl="4">
             <MDBCard style={{ borderRadius: "10px" }}>
               <MDBRipple
@@ -28,11 +30,10 @@ export default function WeatherCard() {
                 }}
               >
                 <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/draw2.webp"
-                  className="w-100"
-                />
+                  src="https://images.template.net/wp-content/uploads/2016/06/27115844/Sunny-Weather-Icon.jpg"
+                  width={100}/>
                 <div
-                  className="mask"
+                  // className="mask"
                   style={{ backgroundColor: "rgba(0,0,0,.45)" }}
                 >
                   <div className="d-flex justify-content-between p-4">
@@ -40,42 +41,35 @@ export default function WeatherCard() {
                       <MDBIcon fas icon="chevron-left" size="lg" />
                     </a>
                     <a href="#!" className="text-white">
-                      <MDBIcon fas icon="cog" size="lg" />
+                      <MDBIcon fas icon="cog" size="sm" />
                     </a>
                   </div>
-                  <div className="text-center text-white">
-                    <p className="h3 mb-4">Clear night</p>
-                    <p className="h5 mb-4">Detroit, US</p>
-                    <p className="display-2">
-                      <strong>20°C</strong>{" "}
-                    </p>
-                  </div>
+                 
                 </div>
               </MDBRipple>
               <MDBCardBody className="p-4 text-center">
                 <a href="#!" className="text-body">
                   <MDBIcon fas icon="chevron-up mb-4" size="lg" />
                 </a>
-                <div className="d-flex justify-content-between mb-3">
-                  <p className="h5 fw-normal">Yesterday</p>
+                <div >
+                  <p >00:00</p>
                   <p className="h5 fw-normal">
-                    <MDBIcon fas icon="sun pe-2" /> 23°C
+                    <WiThermometer /> 23°C
+                  </p>
+                  <p className="h5 fw-normal">
+                    <WiWindy /> 4kmph
+                  </p><p className="h5 fw-normal">
+                    <WiBarometer /> 100MPa
+                  </p><p className="h5 fw-normal">
+                    <WiCloud /> 75%
                   </p>
                 </div>
-                <div
-                  className="d-flex justify-content-between"
-                  style={{ color: "#aaa" }}
-                >
-                  <p className="h5 fw-normal">Tommorow</p>
-                  <p className="h5 fw-normal">
-                    <MDBIcon fas icon="cloud pe-2" /> 21°C
-                  </p>
-                </div>
+                
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-    </section>
+     </section>
   );
 }
