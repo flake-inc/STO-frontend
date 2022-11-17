@@ -9,6 +9,8 @@ import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Form from "./form";
 import BasicTable from "./Table";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
 import * as d3 from "d3";
 
@@ -24,11 +26,6 @@ const style = {
   p: 4,
 };
 
-// d3.csv("/AirCrafts.csv", function DATA(dataset) {
-//   const x = dataset;
-// });
-
-
 export default function AirCraftList() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -36,7 +33,7 @@ export default function AirCraftList() {
   // let x = "";
 
   useEffect(() => {
-    d3.csv("/AirCrafts.csv").then(function(dataset) {
+    d3.csv("/AirCrafts.csv").then(function (dataset) {
       // console.log(dataset)
     });
   }, []);
@@ -44,8 +41,36 @@ export default function AirCraftList() {
   return (
     <>
       <Paper
-        sx={{ maxWidth: 2000, margin: "auto", overflow: "hidden", opacity: 0.9 }}
+        sx={{
+          maxWidth: 2000,
+          margin: "auto",
+          overflow: "hidden",
+          opacity: 0.9,
+        }}
       >
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>
+            <Button
+              variant="contained"
+              sx={{ mr: 1 }}
+                onClick={handleOpen}
+              style={{
+                display: "inline-block",
+                fontSize: 14,
+                fontStyle: "bold",
+                backgroundColor: "#0a0a23",
+                color: "#fff",
+                borderRadius: "10px",
+                boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                transition: "0.25w",
+                margin: "10px",
+              }}
+            >
+              Add New
+            </Button>
+          </Grid>
+        </Grid>
+
         <Typography
           component="h1"
           variant="h2"
