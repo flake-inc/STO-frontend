@@ -41,7 +41,6 @@ export default function ViewAllAirCrafts() {
       </div>
       <ResponsiveAppBar />
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* <Header onDrawerToggle={handleDrawerToggle} /> */}
         <Box component="main" sx={{ flex: 1, py: 6, px: 4 }}>
           <br />
           <AirCraftList />

@@ -43,8 +43,8 @@ export default class Thermo extends React.Component {
     return (
       <ReactFusioncharts
         type="thermometer"
-        width="500"
-        height="300"
+        width="175"
+        height="400"
         dataFormat="JSON"
         dataSource={dataSource}
       />
