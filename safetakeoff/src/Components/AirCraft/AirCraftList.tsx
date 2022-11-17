@@ -37,14 +37,14 @@ export default function AirCraftList() {
 
   useEffect(() => {
     d3.csv("/AirCrafts.csv").then(function(dataset) {
-      console.log(dataset)
+      // console.log(dataset)
     });
   }, []);
 
   return (
     <>
       <Paper
-        sx={{ maxWidth: 936, margin: "auto", overflow: "hidden", opacity: 0.9 }}
+        sx={{ maxWidth: 2000, margin: "auto", overflow: "hidden", opacity: 0.9 }}
       >
         <Typography
           component="h1"
@@ -56,8 +56,6 @@ export default function AirCraftList() {
         >
           Aircrafts
         </Typography>
-
-
 
         <div>
           <BasicTable />
