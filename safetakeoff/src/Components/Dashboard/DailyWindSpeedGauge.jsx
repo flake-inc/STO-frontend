@@ -82,7 +82,7 @@ export default class WindSpeed extends React.Component {
     return (
       <ReactFusioncharts
         type="angulargauge"
-        width="400"
+        width="200"
         height="400"
         dataFormat="JSON"
         dataSource={dataSource}
