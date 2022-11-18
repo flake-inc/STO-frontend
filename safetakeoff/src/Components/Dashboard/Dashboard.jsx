@@ -84,12 +84,12 @@ function DashboardContent() {
     wind_speed: 2.6,
   });
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/summary").then((response) => {
-      const data = response.data;
-      setArticles(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:8000/summary").then((response) => {
+  //     const data = response.data;
+  //     setArticles(data);
+  //   });
+  // }, []);
 
   // const useStyles = makeStyles({
   //   root: {

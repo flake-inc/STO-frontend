@@ -5,6 +5,10 @@ import * as React from 'react';
 import {Line} from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler } from 'chart.js';
 // import Papa from 'papaparse';
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+
 import * as d3 from "d3";
 
 Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler)
@@ -12,6 +16,8 @@ Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,T
 
 
 var year=[]
+var temperature=[]
+
 var yearlytemp =[]
 // d3.csv("/weatherdata.csv").then(function(data) {
 //     console.log(data[0]);
@@ -32,20 +38,20 @@ var yearlytemp =[]
 // // }
 // });
 
-d3.csv("/yearlytemp.csv", function(data1) {
+// d3.csv("/yearlytemp.csv", function(data1) {
 
 
-//   user.push(data.user);
-  year.push(data1.year);
-  yearlytemp.push(data1.temperature);
+// //   user.push(data.user);
+//   year.push(data1.year);
+//   yearlytemp.push(data1.temperature);
 
-//   systems.push(data.temperature)
-//   console.log(data);
-//   for (var i = 0; i < data.length; i++) {
-//     console.log(data[i].user);
-//     console.log(data[i].systems);
-// }
-});
+// //   systems.push(data.temperature)
+// //   console.log(data);
+// //   for (var i = 0; i < data.length; i++) {
+// //     console.log(data[i].user);
+// //     console.log(data[i].systems);
+// // }
+// });
 
 // style={{
 //   display: "inline-block",
@@ -61,7 +67,57 @@ d3.csv("/yearlytemp.csv", function(data1) {
 
 
 
+
 export default function YearlyTemp(){
+  // var dataset;
+  const [weatherdata,setWeatherdata] = useState(null)
+
+  useEffect(() => {
+    // Using fetch to fetch the api from 
+    // flask server it will be redirected to proxy
+    // fetch("/api/v1/user/weather").then((res) =>
+    //     res.json().then((data) => {
+    //         // Setting a data from api
+    //         console.log("Niru")
+    //         console.log(data)
+    //         setWeatherdata(data);
+    //         console.log(weatherdata)
+    //     })
+    // );
+    axios.get('http://127.0.0.1:5000/test',{
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((res)=>{
+        let s = res.data 
+        year= s.map(function(elem){
+          return elem.year;
+        })
+        temperature= s.map(function(elem){
+          return elem.temperature;
+        })
+        console.log(s)
+        console.log(year)
+        console.log(temperature)
+
+
+    })
+}, []);
+  // console.log("hello")
+
+//   useEffect(() => {
+//     // Using fetch to fetch the api from 
+//     // flask server it will be redirected to proxy
+//     fetch("/data").then((res) =>
+//         res.json().then((data) => {
+//             // Setting a data from api
+//             console.log(data)
+//         })
+//     );
+// }, []);
+
+
   
   var data = {
     labels: year,
@@ -85,7 +141,7 @@ export default function YearlyTemp(){
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: yearlytemp
+        data: temperature
       }
     ]
   };
