@@ -54,7 +54,6 @@ export default function MonthlyCloud(){
   };
   return <Line
   data={data}
-  // width={100}
   height={100}
   width={200}
   options={{

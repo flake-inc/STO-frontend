@@ -91,13 +91,13 @@ function DashboardContent() {
     });
   }, []);
 
-  const useStyles = makeStyles({
-    root: {
-      maxWidth: 100,
-    },
-  });
+  // const useStyles = makeStyles({
+  //   root: {
+  //     maxWidth: 100,
+  //   },
+  // });
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -212,33 +212,33 @@ function DashboardContent() {
                   Dangered Aircrafts Today!
                 </Typography>
 
-                <Card className={classes.root}>
+                <Card>
                   <CardHeader
-                    avatar={<Avatar className={classes.avatar}>:(</Avatar>}
+                    avatar={<Avatar>:-</Avatar>}
                     title="R44 RAVEN I"
                     subheader="A flexbox with avatar, title, subtitle and action"
                   />
                 </Card>
 
-                <Card className={classes.root}>
+                <Card>
                   <CardHeader
-                    avatar={<Avatar className={classes.avatar}>:(</Avatar>}
+                    avatar={<Avatar>:-</Avatar>}
                     title="CARBON CUB FX3"
                     subheader="A flexbox with avatar, title, subtitle and action"
                   />
                 </Card>
 
-                <Card className={classes.root}>
+                <Card>
                   <CardHeader
-                    avatar={<Avatar className={classes.avatar}>:(</Avatar>}
+                    avatar={<Avatar>:-</Avatar>}
                     title="CC11-160 CARBON CUB SS"
                     subheader="A flexbox with avatar, title, subtitle and action"
                   />
                 </Card>
 
-                <Card className={classes.root}>
+                <Card>
                   <CardHeader
-                    avatar={<Avatar className={classes.avatar}>:(</Avatar>}
+                    avatar={<Avatar>:-</Avatar>}
                     title="CARBON CUB FX3"
                     subheader="A flexbox with avatar, title, subtitle and action"
                   />
@@ -463,7 +463,6 @@ function DashboardContent() {
 }
 
 function GraphSelect({ feature, slot }) {
-  console.log("Temp");
 
   switch (feature) {
     case "Temperature":
