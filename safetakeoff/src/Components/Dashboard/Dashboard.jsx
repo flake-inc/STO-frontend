@@ -8,6 +8,7 @@ import WeatherCard from "./WeatherCard";
 import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
 import Cards from "./cards";
+import YearlyTemp1 from "./TemperatureCharts/yearlytemp1"; 
 
 import {
   Box,
@@ -29,7 +30,7 @@ import WindGauge from "./DailyWindSpeedGauge";
 import PressureGauge from "./PressureGauge";
 import CloudCover from "./CloudCover";
 import MonthlyTemp from "./TemperatureCharts/MonthlyAvgTemp";
-import YearlyTemp from "./TemperatureCharts/YearlyTemp";
+// import YearlyTemp from "./TemperatureCharts/YearlyTemp";
 import TimevsTemperature from "./TemperatureCharts/TimevsTemperature";
 import MonthlyAvgWindSpeed from "./WindSpeedCharts/MonthlyAverageWindSpeed";
 import YearlyWind from "./WindSpeedCharts/YearlyWind";
@@ -50,6 +51,7 @@ import {
 } from "@ant-design/icons";
 import TempSeasonal from "./TemperatureCharts/TempSeasonal";
 import TemperatureObserved from "./TemperatureCharts/TemperatureObserved";
+import TempMinMaxMean from "./TemperatureCharts/MinMaxMean";
 
 // sales report status
 const status = [
@@ -447,8 +449,12 @@ function DashboardContent() {
 
             <Grid>
               <Grid item xs={6} sm={3} md={2} lg={2} sx={{ mx: "auto" }}>
-                <AirCraftPieChart />
-                <AirCraftCategories />
+                <div className="minmaxmean">
+
+                <TempMinMaxMean />
+
+                </div>
+                {/* <TempMinMaxMean /> */}
               </Grid>
             </Grid>
             {/* </Grid> */}
@@ -471,7 +477,7 @@ function GraphSelect({ feature, slot }) {
       if (slot == "month") {
         return <MonthlyTemp />;
       } else {
-        return <YearlyTemp />;
+        return <YearlyTemp1 />;
       }
 
     case "Windspeed":

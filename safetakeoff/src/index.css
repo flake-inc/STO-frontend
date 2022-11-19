@@ -27,3 +27,23 @@ code {
 .button1{
   width: 500px;
 }
+
+.minmaxmean{
+  overflow-x: scroll;
+  width: 70%;
+  height: 500px;
+}
+
+.chartWrapper {/* w w w. j a v  a2 s.co  m*/
+  position: relative;
+}
+.chartWrapper > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events:none;
+}
+.chartAreaWrapper {
+  width: 600px;
+  overflow-x: scroll;
+}

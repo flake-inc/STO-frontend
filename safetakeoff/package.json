@@ -21,6 +21,7 @@
     "cdbreact": "^1.5.3",
     "chart.js": "^3.9.1",
     "chartjs": "^0.3.24",
+    "chartjs-plugin-zoom": "^1.2.1",
     "components": "^0.1.0",
     "d3": "^7.6.1",
     "fusioncharts": "^3.19.0",
