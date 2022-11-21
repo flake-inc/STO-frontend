@@ -23,7 +23,7 @@ export default function WeatherCard(time,temp,wind_speed,pressure,cloud) {
               <MDBRipple
                 tag="div"
                 className="bg-image"
-                rippleColor="light"
+                rippleColor="dark"
                 style={{
                   borderTopLeftRadius: "10px",
                   borderTopRightRadius: "10px",

@@ -53,3 +53,8 @@ code {
   max-width: 700px;
   overflow-x: scroll;
 }
+.Gauges{
+  max-width: 700px;
+  overflow-x: scroll;
+  margin-right: 120px;
+}

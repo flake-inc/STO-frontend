@@ -63,7 +63,7 @@ export default function Cards() {
         component="h3"
         variant="h3"
         align="center"
-        color="text.primary"
+        color="text.secondary"
         paddingTop={5}
         gutterBottom
       >

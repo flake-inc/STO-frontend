@@ -180,7 +180,9 @@ function DashboardContent() {
               paddingLeft={5}
               paddingRight={2}
               paddingBottom={5}
+              
             >
+              <Stack direction="row" alignItems="center" spacing={1} className="Gauges" >
               <Grid
                 item
                 sx={{ mx: "auto" }}
@@ -208,60 +210,18 @@ function DashboardContent() {
               >
                 <PressureGauge />
               </Grid>
+              </Stack>
+              
 
               <Grid sx={{ p: 3, pb: 0 }}>
                 <Statistics feature={feature} />
               </Grid>
 
-              <Grid
-                item
-                style={{
-                  width: "100",
-                  height: "400",
-                }}
-              >
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  marginBottom={3}
-                  align="center"
-                  color="text.primary"
-                >
-                  Dangered Aircrafts Today!
-                </Typography>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="R44 RAVEN I"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CC11-160 CARBON CUB SS"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-              </Grid>
+           
+              <MainCard content={false} sx={{ mt: 1.5 }}>
+                  <Cards/>
+                </MainCard>
+              
             </Grid>
 
             <Box
@@ -445,18 +405,67 @@ function DashboardContent() {
                   <Stack spacing={1.5} sx={{ mb: -12 }}></Stack>
                   <TempMinMaxMean />
                 </MainCard> */}
+
+<Grid
+                item
+                style={{
+                  width: "100",
+                  height: "400",
+                }}
+              >
+                <Typography
+                  component="h5"
+                  variant="h5"
+                  marginBottom={3}
+                  align="center"
+                  color="text.primary"
+                >
+                  Dangered Aircrafts Today!
+                </Typography>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="R44 RAVEN I"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="CARBON CUB FX3"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="CC11-160 CARBON CUB SS"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="CARBON CUB FX3"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+              </Grid>
               </Grid>
             </Grid>
 
             <hr />
 
-            <Grid item xs={6} sx={{ mx: "auto" }}>
-              <Cards />
-            </Grid>
+      
 
+            
             <hr />
 
-            <Typography
+            {/* <Typography
               component="h3"
               variant="h3"
               align="center"
@@ -465,20 +474,10 @@ function DashboardContent() {
               gutterBottom
             >
               About Aircrafts
-            </Typography>
+            </Typography> */}
 
-            <Grid>
-              <Grid item xs={6} sm={3} md={2} lg={2} sx={{ mx: "auto" }}>
-                <div className="minmaxmean">
-
-                {/* <TempMinMaxMean /> */}
-
-                </div>
-                {/* <TempMinMaxMean /> */}
-              </Grid>
-            </Grid>
             {/* </Grid> */}
-            <hr />
+            {/* <hr /> */}
           </Paper>
         </Box>
 

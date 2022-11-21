@@ -53,7 +53,7 @@ const WindMinMaxMean = () => {
           datasets: [
             {
               label: "Average Wind Speed",
-              data: res.press,
+              data: res.wind,
               borderColor: "#ff0000",
               borderWidth: 3,
               fill: true,
@@ -65,7 +65,7 @@ const WindMinMaxMean = () => {
             },
             {
                 label: "Minimum Wind Speed",
-                data: res.minpress,
+                data: res.minwind,
                 backgroundColor: [
                  
                   "rgba(255, 99, 132, 1)",
@@ -76,7 +76,7 @@ const WindMinMaxMean = () => {
               },
               {
                 label: "Maximum Wind Speed",
-                data: res.maxpress,
+                data: res.maxwind,
                 backgroundColor: [
                   "rgba(114, 245, 71, 0.5)",
                 ],
