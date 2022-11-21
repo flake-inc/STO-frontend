@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+
 // import { useTheme } from '@mui/material/styles';
 // import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 // import Title from './Title';
@@ -7,40 +9,15 @@ import { Chart, CategoryScale, LinearScale, BarElement,PointElement,LineElement,
 // import Papa from 'papaparse';
 import * as d3 from "d3";
 
+import  { useState, useEffect } from "react";
+
+import axios from 'axios';
+
 Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler)
 
 
 
-var year=[]
-var yearlywind =[]
-// d3.csv("/weatherdata.csv").then(function(data) {
-//     console.log(data[0]);
-//   });
-// d3.csv("/weather1.csv", function(data) {
-//   console.log("Hello")
 
-
-// //   user.push(data.user);
-//   timestamp.push(data.date);
-//   temperature.push(data.temperature);
-
-// //   systems.push(data.temperature)
-// //   console.log(data);
-// //   for (var i = 0; i < data.length; i++) {
-// //     console.log(data[i].user);
-// //     console.log(data[i].systems);
-// // }
-// });
-
-d3.csv("/yearlywind.csv", function(data1) {
-
-
-//   user.push(data.user);
-  year.push(data1.year);
-  yearlywind.push(data1.wind_speed);
-
-
-});
 
 
 
@@ -48,49 +25,70 @@ d3.csv("/yearlywind.csv", function(data1) {
 
 export default function YearlyWind(){
   
-  var data = {
-    labels: year,
-    datasets: [
-      {
-        label: 'Yearly Average Wind Speed',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(10, 10, 35,0.4)',
-        borderColor: 'rgba(10, 10, 35,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(10, 10, 35,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(10, 10, 35,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: yearlywind
+  const [lineData, set_lineData] =
+  useState({ datasets: [] });
+const [lineOptions, set_lineOptions] =
+  useState({});
+
+
+useEffect(() => {
+  //   Normal and Anomaly Doughnut chart setup using useeffect
+  const position = "left"; // CSS for graphs
+
+  axios.get('http://127.0.0.1:5000/yearlyavg',{
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  })
+    .then((response) => {
+      const res = response.data;
+      console.log(res.year)
+
+      set_lineData({
+        labels: res.year,
+        datasets: [
+          {
+            // label: "# of Votes",
+            data: res.wind,
+            backgroundColor: [
+              "rgba(255, 0, 200, 1)",
+              "rgba(50, 0, 253, 0.6)",
+            ],
+            //   borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      });
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log(error.response);
+        console.log(error.response.status);
+        console.log(error.response.headers);
       }
-    ]
-  };
+    });
+
+  set_lineOptions({
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false, position: position },
+
+      title: {
+        display: true,
+        text: "Average Yearly Wind Speed",
+        position: "bottom",
+      },
+    },
+  });
+
+  
+       
+}, []);
   return <Line
-        data={data}
-        height={100}
-        width={200}
-        options={{
-          // maintainAspectRatio: false
-          scales: {
-            xAxis: [{
-              type: 'year',
-              ticks: {
-                  autoSkip: true,
-                  maxTicksLimit: 50
-              }
-          }]
-        }
-        }}
-      /> ;
+  data={lineData}
+  options={lineOptions}
+/> ;
 
   }
 

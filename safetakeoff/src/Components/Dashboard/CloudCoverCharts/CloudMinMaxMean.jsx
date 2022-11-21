@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-const TempMinMaxMean = () => {
+const CloudMinMaxMean = () => {
   const [lineData, set_lineData] =
     useState({ datasets: [] });
   const [lineOptions, set_lineOptions] =
@@ -45,15 +45,15 @@ const TempMinMaxMean = () => {
       .then((response) => {
         console.log('hell')
         const res = response.data;
-        console.log(res.date)
-        console.log(res.temp)
+        console.log(res)
+        // console.log(reCloud Cover)
 
         set_lineData({
           labels: res.date,
           datasets: [
             {
-              label: "Average Temperature",
-              data: res.temp,
+              label: "Average Cloud Cover",
+              data: res.cloud,
               borderColor: "#ff0000",
               borderWidth: 3,
               fill: true,
@@ -64,8 +64,8 @@ const TempMinMaxMean = () => {
               //   borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
             },
             {
-                label: "Minimum Temperature",
-                data: res.mintemp,
+                label: "Minimum Cloud Cover",
+                data: res.mincloud,
                 backgroundColor: [
                  
                   "rgba(255, 99, 132, 1)",
@@ -75,8 +75,8 @@ const TempMinMaxMean = () => {
                 //   borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
               },
               {
-                label: "Maximum Temperature",
-                data: res.maxtemp,
+                label: "Maximum Cloud Cover",
+                data: res.maxcloud,
                 backgroundColor: [
                   "rgba(114, 245, 71, 0.5)",
                 ],
@@ -96,33 +96,21 @@ const TempMinMaxMean = () => {
       });
 
     set_lineOptions({
-      responsive: true,
-      maintainAspectRatio: false,
+      // responsive: true,
+      // maintainAspectRatio: false,
+
+
       plugins: {
         legend: { display: true, position: position },
 
         title: {
           display: true,
-          text: " Temperature",
+          text: " Cloud Cover",
           position: "bottom",
         },
 
-        scales: {
-            xAxes: [{
-                ticks: {
-                    fontSize: 100,
-                    display: false,
-                    autoSkip:false,
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    fontSize: 12,
-                    beginAtZero: true
-                }
-            }]
-        },
 
+        
         zoom: {
             pan: {
                 enabled: true,
@@ -143,6 +131,23 @@ const TempMinMaxMean = () => {
         }
     
       },
+
+      scales: {
+        x: {
+            ticks: {
+                fontSize: 12,
+                display: true,
+                // autoSkip:false,
+            }
+        },
+        yAxes: [{
+            ticks: {
+                fontSize: 12,
+                beginAtZero: true
+            }
+        }]
+    },
+
     });
 
     
@@ -151,15 +156,15 @@ const TempMinMaxMean = () => {
 
   return (
     
-          
               <Bar
                 data={lineData}
                 options={lineOptions}
               />
+            
            
 
         
   );
 };
 
-export default TempMinMaxMean;
+export default CloudMinMaxMean;

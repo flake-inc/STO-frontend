@@ -6,70 +6,86 @@ import {Line} from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler } from 'chart.js';
 // import Papa from 'papaparse';
 import * as d3 from "d3";
+import  { useState, useEffect } from "react";
+
+import axios from 'axios';
 
 Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler)
 
 
 
-var month =[]
-var monthlywind =[]
 
 
-d3.csv("/monthlywind1.csv", function(data1) {
+export default function MonthlyAverageWindSpeed(){
+  const [lineData, set_lineData] =
+    useState({ datasets: [] });
+  const [lineOptions, set_lineOptions] =
+    useState({});
 
 
-//   user.push(data.user);
-  month.push(data1.Month);
-  monthlywind.push(data1.wind_speed);
+  useEffect(() => {
+    //   Normal and Anomaly Doughnut chart setup using useeffect
+    const position = "left"; // CSS for graphs
 
-});
+    axios.get('http://127.0.0.1:5000/monthlyavg',{
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+      .then((response) => {
+        const res = response.data;
 
-
-export default function MonthlyAvgWindSpeed(){
-  var data = {
-    labels: month,
-    datasets: [
-      {
-        label: 'Monthly Average Wind Speed',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(10, 10, 35,0.4)',
-        borderColor: 'rgba(10, 10, 35,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(10, 10, 35,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(10, 10, 35,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: monthlywind
-      }
-    ]
-  };
-  return <Line
-  data={data}
-  height={100}
-  width={200}
-  options={{
-    // maintainAspectRatio: false
-    scales: {
-      xAxis: [{
-        type: 'month',
-        ticks: {
-            autoSkip: true,
-            maxTicksLimit: 50
+        set_lineData({
+          labels: res.month,
+          datasets: [
+            {
+              // label: "# of Votes",
+              data: res.wind,
+              backgroundColor: [
+                "rgba(255, 0, 200, 1)",
+                "rgba(50, 0, 253, 0.6)",
+              ],
+              //   borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
+              borderWidth: 1,
+            },
+          ],
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
         }
-    }]
-  }
-  }}
+      });
+
+    set_lineOptions({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false, position: position },
+
+        title: {
+          display: true,
+          text: "Average Monthly Cloud Cover",
+          position: "bottom",
+        },
+      },
+    });
+
+    
+         
+  }, []);
+
+  return (
+    
           
+              <Line
+                data={lineData}
+                options={lineOptions}
+              />
+           
+
         
-      /> ;
-}
-  
+  );
+};

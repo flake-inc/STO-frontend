@@ -51,7 +51,11 @@ import {
 } from "@ant-design/icons";
 import TempSeasonal from "./TemperatureCharts/TempSeasonal";
 import TemperatureObserved from "./TemperatureCharts/TemperatureObserved";
-import TempMinMaxMean from "./TemperatureCharts/MinMaxMean";
+import TempMinMaxMean from "./TemperatureCharts/TempMinMaxMean";
+import WindMinMaxMean from "./WindSpeedCharts/WindMinMaxMean";
+import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
+import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
+
 
 // sales report status
 const status = [
@@ -73,18 +77,30 @@ function DashboardContent() {
   const [value, setValue] = useState("trend");
   const [slot, setSlot] = useState("month");
   const [feature, setFeature] = useState("Temperature");
+  const [year, setYear] = useState({ datasets: [] });
 
-  const [articles, setArticles] = useState({
-    dewpoint_temperature: 16.39,
-    mean_sea_level_pressure: 101046.38,
-    relative_humidity: 0.89,
-    surface_solar_radiation: 287.01,
-    surface_thermal_radiation: 408.35,
-    temperature: 18.26,
-    time_stamp: "1/1/2010 0:00",
-    total_cloud_cover: 1,
-    wind_speed: 2.6,
-  });
+  const [temperature, setTemperature] = useState([]);
+  const [wind, setWind] = useState([]);
+  const [press, setPress] = useState([]);
+  const [cloud, setCloud] = useState([]);
+
+
+
+
+
+
+
+  // const [articles, setArticles] = useState({
+  //   dewpoint_temperature: 16.39,
+  //   mean_sea_level_pressure: 101046.38,
+  //   relative_humidity: 0.89,
+  //   surface_solar_radiation: 287.01,
+  //   surface_thermal_radiation: 408.35,
+  //   temperature: 18.26,
+  //   time_stamp: "1/1/2010 0:00",
+  //   total_cloud_cover: 1,
+  //   wind_speed: 2.6,
+  // });
 
   // useEffect(() => {
   //   axios.get("http://localhost:8000/summary").then((response) => {
@@ -99,7 +115,7 @@ function DashboardContent() {
   //   },
   // });
 
-  // const classes = useStyles();
+  
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -337,7 +353,7 @@ function DashboardContent() {
                   </Grid>
 
                   <Grid item>
-                    <Stack direction="row" alignItems="center" spacing={0}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
                       <Button
                         size="small"
                         onClick={() => setSlot("month")}
@@ -396,11 +412,11 @@ function DashboardContent() {
                       paddingTop={5}
                       gutterBottom
                     >
-                      Seasonal Change in {feature}{" "}
+                      Variation for {feature}{" "}
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <TextField
+                    {/* <TextField
                       id="standard-select-currency"
                       size="small"
                       select
@@ -412,19 +428,23 @@ function DashboardContent() {
                           fontSize: "0.875rem",
                         },
                       }}
-                    >
-                      {status.map((option) => (
+                    > */}
+                      {/* {status.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                           {option.label}
                         </MenuItem>
-                      ))}
-                    </TextField>
+                      ))} */}
+                    {/* </TextField> */}
                   </Grid>
                 </Grid>
-                <MainCard sx={{ mt: 1.5 }}>
-                  <Stack spacing={1.5} sx={{ mb: -12 }}></Stack>
-                  <TimevsTemperature />
+
+                <MainCard content={false} sx={{ mt: 1.5 }}>
+                <GraphSelect2 feature={feature} slot={slot} />
                 </MainCard>
+                {/* <MainCard sx={{ mt: 1.5 }}>
+                  <Stack spacing={1.5} sx={{ mb: -12 }}></Stack>
+                  <TempMinMaxMean />
+                </MainCard> */}
               </Grid>
             </Grid>
 
@@ -451,7 +471,7 @@ function DashboardContent() {
               <Grid item xs={6} sm={3} md={2} lg={2} sx={{ mx: "auto" }}>
                 <div className="minmaxmean">
 
-                <TempMinMaxMean />
+                {/* <TempMinMaxMean /> */}
 
                 </div>
                 {/* <TempMinMaxMean /> */}
@@ -467,6 +487,31 @@ function DashboardContent() {
     </div>
   );
 }
+
+function GraphSelect2({ feature, slot }) {
+
+  switch (feature) {
+    case "Temperature":
+
+     
+        return <TempMinMaxMean />;
+   
+
+    case "Windspeed":
+      return <WindMinMaxMean />;
+
+
+    case "CloudCover":
+      return <CloudMinMaxMean />;
+
+    case "Pressure":
+      return <PressMinMaxMean />;
+
+    default:
+      return null;
+  }
+}
+
 
 function GraphSelect({ feature, slot }) {
 

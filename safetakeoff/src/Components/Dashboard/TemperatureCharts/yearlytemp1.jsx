@@ -42,7 +42,7 @@ const YearlyTemp1 = () => {
     //   Normal and Anomaly Doughnut chart setup using useeffect
     const position = "left"; // CSS for graphs
 
-    axios.get('http://127.0.0.1:5000/test',{
+    axios.get('http://127.0.0.1:5000/yearlyavg',{
         headers: {
             'Content-Type': 'application/json',
         },
@@ -58,8 +58,8 @@ const YearlyTemp1 = () => {
               // label: "# of Votes",
               data: res.temp,
               backgroundColor: [
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 99, 132, 1)",
+                "rgba(255, 0, 200, 1)",
+                "rgba(50, 0, 253, 0.6)",
               ],
               //   borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
               borderWidth: 1,
