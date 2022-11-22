@@ -1,67 +1,134 @@
 import React from "react";
-import Plot from "react-plotly.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import zoomPlugin from "chartjs-plugin-zoom";
+
+ChartJS.register(
+  CategoryScale,
+  zoomPlugin,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function AirCraftCategories() {
-  return (
-    <Plot
-      data={[
-        {
-          x: [
-            1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-            2006, 2007, 2008, 2009, 2010, 2011, 2012,
-          ],
-          y: [
-            219, 146, 112, 127, 124, 180, 236, 207, 236, 263, 350, 430, 474,
-            526, 488, 537, 500, 439,
-          ],
-          name: "Rest of world",
-          marker: { color: "rgb(55, 83, 109)" },
-          type: "bar",
+  const [lineData, set_lineData] = useState({ datasets: [] });
+  const [lineOptions, set_lineOptions] = useState({});
+
+  useEffect(() => {
+    const position = "top";
+
+    axios
+      .get("http://127.0.0.1:5000/aircraftsdata", {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          x: [
-            1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-            2006, 2007, 2008, 2009, 2010, 2011, 2012,
+      })
+      .then((response) => {
+        const res = response.data;
+
+        set_lineData({
+          labels: res.Model,
+          datasets: [
+            {
+              label: "Temperature Threshold",
+              data: res.Temperature_t,
+              borderColor: "rgba(54, 162, 235, 1)", 
+              borderWidth: 3,
+              backgroundColor: ["rgba(54, 162, 235, 1)"],
+            },
+            {
+              label: "WindSpeed Threshold",
+              data: res.Wind_t,
+              backgroundColor: ["#0a0a23"],
+              borderColor: "#0a0a23",
+              borderWidth: 3,
+            },
+            {
+              label: "Total Cloud Cover Threshold",
+              data: res.Cloud_t,
+              backgroundColor: ["rgba(255, 99, 132, 1)"],
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 3,
+            },
+            {
+              label: "Relative Humidity Threshold",
+              data: res.humidity_t,
+              backgroundColor: ["rgba(114, 245, 71, 0.5)"],
+              borderColor: "rgba(114, 245, 71, 0.5)",
+              borderWidth: 5,
+            },
+            
           ],
-          y: [
-            16, 13, 10, 11, 28, 37, 43, 55, 56, 88, 105, 156, 270, 299, 340,
-            403, 549, 499,
-          ],
-          name: "China",
-          marker: { color: "rgb(26, 118, 255)" },
-          type: "bar",
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+
+    set_lineOptions({
+      plugins: {
+        legend: { display: true, position: position },
+
+        title: {
+          display: true,
+          text: " Aircrafts thresholds",
+          position: "bottom",
         },
-      ]}
-      layout={{
-        title: "US Export of Plastic Scrap",
-        xaxis: {
-          tickfont: {
-            size: 14,
-            color: "rgb(107, 107, 107)",
+        zoom: {
+          pan: {
+            enabled: true,
+            mode: "x",
+          },
+          zoom: {
+            pinch: {
+              enabled: true, // Enable pinch zooming
+            },
+            wheel: {
+              enabled: true, // Enable wheel zooming
+            },
+            mode: "x",
+            drag: {
+              enabled: true,
+            },
           },
         },
-        yaxis: {
-          title: "USD (millions)",
-          titlefont: {
-            size: 16,
-            color: "rgb(107, 107, 107)",
-          },
-          tickfont: {
-            size: 14,
-            color: "rgb(107, 107, 107)",
+      },
+
+      scales: {
+        x: {
+          ticks: {
+            fontSize: 4,
+            display: true,
           },
         },
-        legend: {
-          x: 0,
-          y: 1.0,
-          bgcolor: "rgba(255, 255, 255, 0)",
-          bordercolor: "rgba(255, 255, 255, 0)",
-        },
-        barmode: "group",
-        bargap: 0.15,
-        bargroupgap: 0.1,
-        width: 900,
-      }}
-    />
-  );
+        yAxes: [
+          {
+            ticks: {
+              fontSize: 12,
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    });
+  }, []);
+
+  return <Bar data={lineData} options={lineOptions} />;
 }

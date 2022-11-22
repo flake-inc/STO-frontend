@@ -13,9 +13,6 @@ import axios from 'axios';
 Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler)
 
 
-
-
-
 export default function MonthlyAverageWindSpeed(){
   const [lineData, set_lineData] =
     useState({ datasets: [] });
