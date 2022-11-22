@@ -7,7 +7,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import PredictWeather from "./Components/Weather/PredictWeather"
 import ViewAllAirCrafts from "./Components/AirCraft/ViewAllAirCrafts"
 import EditWebApp from "./Components/Config/EditWebApp";
-import GeneralPredict from "./Components/Weather/PredictWeatherForGeneral";
+import WeatherPredictGeneral from "./Components/Weather/PredictWeatherForGeneral";
 import FlightPredict from "./Components/Weather/PredictWeatherForAirCraft";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Route path="/aircrafts" element={<ViewAllAirCrafts />} />  
           <Route path="/config" element={<EditWebApp />} />  
           <Route path="/" element={<Dashboard />} />  
-          <Route path="/result-all" element={<GeneralPredict/>} />
+          <Route path="/result-all" element={<WeatherPredictGeneral/>} />
           <Route path="/result-flight" element={<FlightPredict/>} />
 
        </Routes>

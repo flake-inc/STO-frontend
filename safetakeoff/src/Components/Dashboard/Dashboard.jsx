@@ -8,7 +8,7 @@ import WeatherCard from "./WeatherCard";
 import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
 import Cards from "./cards";
-import YearlyTemp1 from "./TemperatureCharts/yearlytemp1"; 
+import YearlyTemp1 from "./TemperatureCharts/yearlytemp1";
 
 import {
   Box,
@@ -39,10 +39,14 @@ import YearlyCloud from "./CloudCoverCharts/YearlyCloud";
 import MonthlyPressure from "./PressureCharts/MonthlyPressure";
 import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
-import AirCraftPieChart from "./AirCraftCharts/DangeredCrafts";
+import AirCraftPieChart from "./AirCraftCharts/AirCraftPieChart";
 import AirCraftCategories from "./AirCraftCharts/Categories";
-import { makeStyles } from "@material-ui/core/styles";
+
 import TempTrend from "./TemperatureCharts/TempTrend";
+import CloudTrend from "./CloudCoverCharts/CloudCoverTrend"
+import PressureTrend from "./PressureCharts/PressureTrend";
+import WindTrend from "./WindSpeedCharts/WindTrend";
+
 
 import {
   GiftOutlined,
@@ -55,7 +59,6 @@ import TempMinMaxMean from "./TemperatureCharts/TempMinMaxMean";
 import WindMinMaxMean from "./WindSpeedCharts/WindMinMaxMean";
 import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
 import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
-
 
 // sales report status
 const status = [
@@ -84,12 +87,6 @@ function DashboardContent() {
   const [press, setPress] = useState([]);
   const [cloud, setCloud] = useState([]);
 
-
-
-
-
-
-
   // const [articles, setArticles] = useState({
   //   dewpoint_temperature: 16.39,
   //   mean_sea_level_pressure: 101046.38,
@@ -114,8 +111,6 @@ function DashboardContent() {
   //     maxWidth: 100,
   //   },
   // });
-
-  
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -180,48 +175,87 @@ function DashboardContent() {
               paddingLeft={5}
               paddingRight={2}
               paddingBottom={5}
-              
             >
-              <Stack direction="row" alignItems="center" spacing={1} className="Gauges" >
-              <Grid
-                item
-                sx={{ mx: "auto" }}
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                className="Gauges"
               >
-                <TempGauge />
-              </Grid>
+                <Grid item sx={{ mx: "auto" }}>
+                  <TempGauge />
+                </Grid>
 
-              <Grid
-                item
-                sx={{ mx: "auto" }}
-              >
-                <WindGauge />
-              </Grid>
+                <Grid item sx={{ mx: "auto" }}>
+                  <WindGauge />
+                </Grid>
 
-              <Grid
-                item
-                sx={{ mx: "auto" }}
-              >
-                <CloudCover />
-              </Grid>
+                <Grid item sx={{ mx: "auto" }}>
+                  <CloudCover />
+                </Grid>
 
-              <Grid
-                item
-                sx={{ mx: "auto" }}
-              >
-                <PressureGauge />
-              </Grid>
+                <Grid item sx={{ mx: "auto" }}>
+                  <PressureGauge />
+                </Grid>
               </Stack>
-              
 
               <Grid sx={{ p: 3, pb: 0 }}>
                 <Statistics feature={feature} />
               </Grid>
 
-           
+              <Grid
+                item
+                style={{
+                  width: "100",
+                  height: "400",
+                }}
+              >
+                <Typography
+                  component="h5"
+                  variant="h5"
+                  marginBottom={3}
+                  align="center"
+                  color="text.primary"
+                >
+                  Dangered Aircrafts Today!
+                </Typography>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="R44 RAVEN I"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="CARBON CUB FX3"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="CC11-160 CARBON CUB SS"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+
+                <Card>
+                  <CardHeader
+                    avatar={<Avatar>:-</Avatar>}
+                    title="CARBON CUB FX3"
+                    subheader="A flexbox with avatar, title, subtitle and action"
+                  />
+                </Card>
+              </Grid>
+
               <MainCard content={false} sx={{ mt: 1.5 }}>
-                  <Cards/>
-                </MainCard>
-              
+                <Cards />
+              </MainCard>
             </Grid>
 
             <Box
@@ -249,29 +283,29 @@ function DashboardContent() {
               >
                 <Button
                   onClick={() => setFeature("Temperature")}
-                  // color={feature === "Temperature" ? "primary" : "secondary"}
-                  // variant={feature === "Temperature" ? "outlined" : "text"}
+                  color={feature === "Temperature" ? "primary" : "secondary"}
+                  variant={feature === "Temperature" ? "outlined" : "text"}
                 >
                   Temperature
                 </Button>
                 <Button
                   onClick={() => setFeature("Windspeed")}
-                  // color={feature === "Windspeed" ? "primary" : "secondary"}
-                  // variant={feature === "Windspeed" ? "outlined" : "text"}
+                  color={feature === "Windspeed" ? "primary" : "secondary"}
+                  variant={feature === "Windspeed" ? "outlined" : "text"}
                 >
                   Windspeed
                 </Button>
                 <Button
                   onClick={() => setFeature("CloudCover")}
-                  // color={feature === "CloudCover" ? "primary" : "secondary"}
-                  // variant={feature === "CloudCover" ? "outlined" : "text"}
+                  color={feature === "CloudCover" ? "primary" : "secondary"}
+                  variant={feature === "CloudCover" ? "outlined" : "text"}
                 >
                   CloudCover
                 </Button>
                 <Button
                   onClick={() => setFeature("Pressure")}
-                  // color={feature === "Pressure" ? "primary" : "secondary"}
-                  // variant={feature === "Pressure" ? "outlined" : "text"}
+                  color={feature === "Pressure" ? "primary" : "secondary"}
+                  variant={feature === "Pressure" ? "outlined" : "text"}
                 >
                   Pressure
                 </Button>
@@ -389,7 +423,7 @@ function DashboardContent() {
                         },
                       }}
                     > */}
-                      {/* {status.map((option) => (
+                    {/* {status.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                           {option.label}
                         </MenuItem>
@@ -399,73 +433,20 @@ function DashboardContent() {
                 </Grid>
 
                 <MainCard content={false} sx={{ mt: 1.5 }}>
-                <GraphSelect2 feature={feature} slot={slot} />
+                  <GraphSelect2 feature={feature} slot={slot} />
                 </MainCard>
                 {/* <MainCard sx={{ mt: 1.5 }}>
                   <Stack spacing={1.5} sx={{ mb: -12 }}></Stack>
                   <TempMinMaxMean />
                 </MainCard> */}
-
-<Grid
-                item
-                style={{
-                  width: "100",
-                  height: "400",
-                }}
-              >
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  marginBottom={3}
-                  align="center"
-                  color="text.primary"
-                >
-                  Dangered Aircrafts Today!
-                </Typography>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="R44 RAVEN I"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CC11-160 CARBON CUB SS"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-              </Grid>
               </Grid>
             </Grid>
 
+            <GraphSelectTrend feature={feature}/>
+
             <hr />
 
-      
-
-            
-            <hr />
-
-            {/* <Typography
+            <Typography
               component="h3"
               variant="h3"
               align="center"
@@ -474,10 +455,11 @@ function DashboardContent() {
               gutterBottom
             >
               About Aircrafts
-            </Typography> */}
+            </Typography>
 
-            {/* </Grid> */}
-            {/* <hr /> */}
+            <AirCraftCategories />
+            <AirCraftPieChart />
+            <hr />
           </Paper>
         </Box>
 
@@ -488,17 +470,12 @@ function DashboardContent() {
 }
 
 function GraphSelect2({ feature, slot }) {
-
   switch (feature) {
     case "Temperature":
-
-     
-        return <TempMinMaxMean />;
-   
+      return <TempMinMaxMean />;
 
     case "Windspeed":
       return <WindMinMaxMean />;
-
 
     case "CloudCover":
       return <CloudMinMaxMean />;
@@ -511,9 +488,7 @@ function GraphSelect2({ feature, slot }) {
   }
 }
 
-
 function GraphSelect({ feature, slot }) {
-
   switch (feature) {
     case "Temperature":
       console.log("Temp99");
@@ -546,6 +521,25 @@ function GraphSelect({ feature, slot }) {
       }
     default:
       return null;
+  }
+}
+
+function GraphSelectTrend({ feature }) {
+  switch (feature) {
+    case "Temperature":
+      return <TempTrend />;
+
+    case "Windspeed":
+      return <WindTrend/>;
+
+    case "CloudCover":
+      return <CloudTrend/>;
+
+    case "Pressure":
+      return <PressureTrend/>;
+
+    default:
+      return <TempTrend />;
   }
 }
 

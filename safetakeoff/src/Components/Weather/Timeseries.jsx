@@ -7,14 +7,27 @@ Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,T
 
 var time_stamp=[]
 var temptrend =[]
+var windtrend =[]
+var cloudtrend =[]
+var pressuretrend =[]
 
 d3.csv("/temperature_series.csv", function(data1) {
     time_stamp.push(data1.date);
     temptrend.push(data1.trend);  
   });
 
+  // d3.csv("/windspeed_series.csv", function(data2) {
+  //   windtrend.push(data2.trend);  
+  // });
+  // d3.csv("/cloud_series.csv", function(data3) {
+  //   cloudtrend.push(data3.trend);  
+  // });
+  // d3.csv("/pressure_series.csv", function(data4) {
+  //   pressuretrend.push(data4.trend);  
+  // });
 
-export default function TempTrend(){
+
+export default function TempSeries(){
   
   var data = {
     labels: time_stamp,
@@ -23,24 +36,25 @@ export default function TempTrend(){
         label: 'Temperature Trend ',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(54, 162, 235, 1)',
-        borderColor: '#6a5acd',
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'miter',
-        pointBorderColor: '#914887',
-        pointBackgroundColor: 'rgba(114, 245, 71, 0.5)',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: '#914887',
-        pointHoverBorderColor: '#914887',
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
         data: temptrend
       }
     ]
+    
   };
 
   return <Line

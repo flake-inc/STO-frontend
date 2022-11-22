@@ -8,19 +8,19 @@ Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,T
 var time_stamp=[]
 var temptrend =[]
 
-d3.csv("/temperature_series.csv", function(data1) {
+d3.csv("/windspeed_series.csv", function(data1) {
     time_stamp.push(data1.date);
     temptrend.push(data1.trend);  
   });
 
 
-export default function TempTrend(){
+export default function WindTrend(){
   
   var data = {
     labels: time_stamp,
     datasets: [
       {
-        label: 'Temperature Trend ',
+        label: 'WindSpeed Trend ',
         fill: false,
         lineTension: 0.1,
         backgroundColor: 'rgba(54, 162, 235, 1)',
