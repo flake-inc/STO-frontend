@@ -6,6 +6,9 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import { useEffect } from "react";
+import axios from "axios";
+import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -30,24 +33,10 @@ const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
   </label>
 );
 
-const Options = [
-  { value: "R44 RAVEN I", label: "R44 RAVEN I" },
-  { value: "CARBON CUB FX3", label: "CARBON CUB FX3" },
-  { value: "M20C", label: "M20C" },
-  { value: "CC11-160 CARBON CUB SS", label: "CC11-160 CARBON CUB SS" },
-  { value: "SR20-G3", label: "SR20-G3" },
-  { value: "SR22-G5 TURBO", label: "SR22-G5 TURBO" },
-  { value: "G36 BONANZA", label: "G36 BONANZA" },
-  { value: "VIPERJET MK II", label: "VIPERJET MK II" },
-];
-
 export default function PredictWeather() {
   const [value, setValue] = React.useState(dayjs("2022-04-07"));
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRtl, setIsRtl] = useState(false);
+  const [Options, setOptions] = useState([]);
 
   let navigate = useNavigate();
 
@@ -56,19 +45,43 @@ export default function PredictWeather() {
     return options;
   };
 
-  const [options, setOption] = useState(getInitialState);
+  const [option, setOption] = useState(getInitialState);
 
   const handleTypeChange = (e) => {
-    setOption(e.target.options);
+    setOption(e.target.option);
   };
 
   const handleClick = () => {
     if (isDisabled) {
-      navigate("/result-all")
+      navigate("/result-all", {
+        state: { date: value }
+      });
     } else {
-      navigate("/result-flight")
+      navigate("/result-flight", {
+        state: { option: option, date: value },
+      });
     }
   };
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:5000/aircraftscategories", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        setOptions(res.Categories);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  }, []);
 
   return (
     <>
@@ -116,7 +129,14 @@ export default function PredictWeather() {
               pb: 3,
             }}
           >
-            <Paper sx={{ maxWidth: 936, margin: "auto", overflow: "hidden", opacity: 0.9 }}>
+            <Paper
+              sx={{
+                maxWidth: 936,
+                margin: "auto",
+                overflow: "hidden",
+                opacity: 0.9,
+              }}
+            >
               <Typography
                 component="h1"
                 variant="h2"
@@ -141,18 +161,16 @@ export default function PredictWeather() {
                 weather and the selected aircraft type.
               </Typography>
               <Container>
-                <Select
-                  onChange={handleTypeChange}
-                  className="basic-single"
-                  classNamePrefix="select"
+                <Autocomplete
+                  disablePortal
                   defaultValue={Options[0]}
-                  isDisabled={isDisabled}
-                  isLoading={isLoading}
-                  isClearable={isClearable}
-                  isRtl={isRtl}
-                  isSearchable={isSearchable}
-                  name="aircraftcategory"
+                  id="selectbox"
                   options={Options}
+                  disabled={isDisabled}
+                  onChange={handleTypeChange}
+                  renderInput={(params) => (
+                    <TextField {...params} label="options" />
+                  )}
                 />
 
                 <div

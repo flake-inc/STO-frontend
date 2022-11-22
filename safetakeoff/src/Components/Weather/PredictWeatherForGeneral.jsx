@@ -16,8 +16,13 @@ import {
 } from "@mui/material";
 
 import TempSeries from "./Timeseries";
+import { useLocation } from "react-router-dom";
+
 
 export default function WeatherPredictGeneral() {
+  const { state } = useLocation();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const date = state.date.toLocaleString('de-DE', options)
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -73,7 +78,7 @@ export default function WeatherPredictGeneral() {
               color="text.primary"
               gutterBottom
             >
-              Predicted Day's Overview
+              Prediction for {date}
             </Typography>
             <Grid
               container
