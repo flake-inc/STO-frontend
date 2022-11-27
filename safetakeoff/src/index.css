@@ -13,10 +13,10 @@ code {
 }
 
 .weathercard{
-  /* border-style: solid; */
+  border-style: solid;
   width: 300px;
   /* overflow-x: scroll; */
-  padding: 20px;
+  padding: 10px;
 
 }
 .stackscroll{

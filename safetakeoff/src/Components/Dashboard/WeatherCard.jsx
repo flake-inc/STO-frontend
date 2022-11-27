@@ -29,9 +29,9 @@ export default function WeatherCard(time,temp,wind_speed,pressure,cloud) {
                   borderTopRightRadius: "10px",
                 }}
               >
-                <MDBCardImage
+                {/* <MDBCardImage
                   src="https://images.template.net/wp-content/uploads/2016/06/27115844/Sunny-Weather-Icon.jpg"
-                  width={100}/>
+                  width={100}/> */}
                 <div
                   // className="mask"
                   style={{ backgroundColor: "rgba(0,0,0,.45)" }}
