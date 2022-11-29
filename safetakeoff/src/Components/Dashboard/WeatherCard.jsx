@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -13,55 +13,33 @@ import {
 import { WiCloud, WiThermometer,WiWindy, WiBarometer,WiDayCloudyWindy } from "react-icons/wi";
 
 
-export default function WeatherCard(time,temp,wind_speed,pressure,cloud) {
+export default function WeatherCard(data) {
+
+  const [row,setrow] = useState(data)
+  console.log(row.time)
+  var temp = parseFloat(row.temperature).toFixed(2)
+  var wind = parseFloat(row.wind).toFixed(2) 
+  var pressure = parseFloat(row.pressure).toFixed(2)
+  var cloud = parseFloat(row.cloud).toFixed(2)
   return (
-    <section className="vh-60" >
       <MDBContainer className="weathercard" >
-        <MDBRow className="rowclass">
-          <MDBCol md="8" lg="6" xl="4">
-            <MDBCard style={{ borderRadius: "10px" }}>
-              <MDBRipple
-                tag="div"
-                className="bg-image"
-                rippleColor="dark"
-                style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px",
-                }}
-              >
-                {/* <MDBCardImage
-                  src="https://images.template.net/wp-content/uploads/2016/06/27115844/Sunny-Weather-Icon.jpg"
-                  width={100}/> */}
-                <div
-                  // className="mask"
-                  style={{ backgroundColor: "rgba(0,0,0,.45)" }}
-                >
-                  <div className="d-flex justify-content-between p-4">
-                    <a href="#!" className="text-white">
-                      <MDBIcon fas icon="chevron-left" size="lg" />
-                    </a>
-                    <a href="#!" className="text-white">
-                      <MDBIcon fas icon="cog" size="sm" />
-                    </a>
-                  </div>
-                 
-                </div>
-              </MDBRipple>
-              <MDBCardBody className="p-4 text-center">
-                <a href="#!" className="text-body">
-                  <MDBIcon fas icon="chevron-up mb-4" size="lg" />
-                </a>
+        <MDBRow >
+          <MDBCol >
+            <MDBCard >
+              {/*  */}
+              <MDBCardBody >
+               
                 <div >
-                  <p >00:00</p>
-                  <p className="h5 fw-normal">
-                    <WiThermometer /> 23°C
+                  <p className="cardtext" >{row.time}</p>
+                  <p className="cardtext">
+                    <WiThermometer /> {temp} °C
                   </p>
-                  <p className="h5 fw-normal">
-                    <WiWindy /> 4kmph
-                  </p><p className="h5 fw-normal">
-                    <WiBarometer /> 100MPa
-                  </p><p className="h5 fw-normal">
-                    <WiCloud /> 75%
+                  <p className="cardtext">
+                    <WiWindy /> {wind} m/s
+                  </p><p className="cardtext">
+                    <WiBarometer /> {pressure} Pa
+                  </p><p className="cardtext">
+                    <WiCloud /> {cloud}
                   </p>
                 </div>
                 
@@ -70,6 +48,5 @@ export default function WeatherCard(time,temp,wind_speed,pressure,cloud) {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-     </section>
   );
 }

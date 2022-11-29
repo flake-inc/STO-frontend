@@ -13,10 +13,10 @@ code {
 }
 
 .weathercard{
-  border-style: solid;
   width: 300px;
+  
+  
   /* overflow-x: scroll; */
-  padding: 10px;
 
 }
 .stackscroll{
@@ -57,4 +57,32 @@ code {
   max-width: 700px;
   overflow-x: scroll;
   margin-right: 120px;
+}
+
+.weathercontainer{
+  width: 70%;
+  height: 350px;
+}
+
+.cardcontainer{
+  display: flex;
+  
+  overflow-x: scroll;
+  /* overflow-y: hidden; */
+  height: 100px;
+
+
+  width: 80%;
+  /* // margin-top: 60px; */
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.cardtext{
+  margin-left: 10px;
+}
+
+.cardcontainer::-webkit-scrollbar{
+  margin-top: 30px;
+  
 }
