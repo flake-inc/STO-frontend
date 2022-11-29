@@ -21,11 +21,6 @@ import vid from "../../Assets/large_aviation.mp4";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 
-const isWeekend = (date) => {
-  const day = date.day();
-  return day === 0 || day === 6;
-};
-
 const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
   <label style={{ marginRight: "1em" }}>
     <input type="checkbox" {...props} />
@@ -34,7 +29,7 @@ const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
 );
 
 export default function PredictWeather() {
-  const [value, setValue] = React.useState(dayjs("2022-04-07"));
+  const [value, setValue] = React.useState(dayjs("2022-01-01"));
   const [isDisabled, setIsDisabled] = useState(true);
   const [Options, setOptions] = useState([]);
 
@@ -54,11 +49,11 @@ export default function PredictWeather() {
   const handleClick = () => {
     if (isDisabled) {
       navigate("/result-all", {
-        state: { date: value },
+        state: { date: value.add(1, 'day')},
       });
     } else {
       navigate("/result-flight", {
-        state: { option: option, date: value },
+        state: { option: option, date: value.add(1, 'day') },
       });
     }
   };
@@ -116,9 +111,6 @@ export default function PredictWeather() {
       <Container
         sx={{
           py: 5,
-          // background: "black",
-          // opacity: 0.6,
-          // color: "white",
         }}
       >
         <main>
@@ -201,7 +193,6 @@ export default function PredictWeather() {
                     orientation="landscape"
                     openTo="day"
                     value={value}
-                    shouldDisableDate={isWeekend}
                     onChange={(newValue) => {
                       setValue(newValue);
                     }}

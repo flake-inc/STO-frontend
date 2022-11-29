@@ -25,11 +25,17 @@ import Windseries from "./Windseries";
 import BasicTable from "../AirCraft/Table";
 import DangeredTable from "./Table";
 
-
 export default function WeatherPredictGeneral() {
   const { state } = useLocation();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const date = state.date.toLocaleString('de-DE', options)
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  
+  const selected_date = state.date.toLocaleString("de-DE", options);
+  const date = selected_date.slice(0, 16);
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -99,10 +105,7 @@ export default function WeatherPredictGeneral() {
                 <Cards />
               </MainCard>
 
-              <Grid
-                item
-
-              >
+              <Grid item>
                 <Typography
                   component="h5"
                   variant="h5"
@@ -117,7 +120,6 @@ export default function WeatherPredictGeneral() {
               </Grid>
             </Grid>
 
-           
             <Grid
               container
               rowSpacing={1.5}
@@ -151,8 +153,7 @@ export default function WeatherPredictGeneral() {
                       Temperature Prediction
                     </Typography>
                   </Grid>
-                  <TempSeries />  
-
+                  <TempSeries />
                 </Grid>
                 <Grid
                   container
@@ -172,7 +173,6 @@ export default function WeatherPredictGeneral() {
                     </Typography>
                   </Grid>
                   <Cloudseries />
-       
                 </Grid>
                 <Grid
                   container
@@ -210,9 +210,8 @@ export default function WeatherPredictGeneral() {
                       Wind Speed Prediction
                     </Typography>
                   </Grid>
-                  <Windseries /> 
+                  <Windseries />
                 </Grid>
-                
               </Grid>
             </Grid>
             <hr />
