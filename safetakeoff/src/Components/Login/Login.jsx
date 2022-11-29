@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import StickyFooter from "../Public/Copyright/Copyright";
 import { Paper } from "@mui/material";
 import Image from "../../Assets/login.jpg"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const theme = createTheme(
 );
@@ -27,6 +30,15 @@ const styles = {
   }
 };
 export default function Login() {
+   const navigate = useNavigate();
+
+   const [usererror,setusererror] = useState(false)
+   const [usererrormsge,setusererrormsge] =useState(null)
+
+
+   const [passerror,setpasserror] = useState(false)
+   const [passerrormsge,setpasserrormsge] =useState(null)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -34,7 +46,49 @@ export default function Login() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    axios.post('http://127.0.0.1:5000/login',{
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      email: data.get('email'),
+      password: data.get("password"),
+
+  })
+    .then((response) => {
+      const res = response.data;
+      console.log(response.data.Message)
+      navigate('/')
+      
+    })
+    .catch((error) => {
+      if (error.response) {
+
+        if (error.response.data.error=='User error'){
+          setusererror(true)
+          setusererrormsge('User does not exist' );
+          setpasserror(false)
+
+
+        }
+        else if(error.response.data.error=='Password error'){
+          setpasserror(true)
+          setpasserrormsge('Invalid password' );
+          setusererror(false)
+
+        }
+       
+
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    });
+
+ 
+
   };
+
+  
 
   return (
     <Paper style={styles.paperContainer}>
@@ -72,16 +126,18 @@ export default function Login() {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
+            Validate
             sx={{ mt: 1 }}
           >
             <TextField
               margin="normal"
               required
               fullWidth
+              error ={usererror}
               id="email"
               label="Email Address"
               name="email"
+              helperText ={usererrormsge}
               autoComplete="email"
               autoFocus
             />
@@ -93,6 +149,8 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
+              error={passerror}
+              helperText={passerrormsge}
               autoComplete="current-password"
             />
             <FormControlLabel

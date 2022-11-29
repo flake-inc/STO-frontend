@@ -14,10 +14,39 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+
 
 const pages = ["Check Weather", "Flights", "Configurations"];
 
 export default function ResponsiveAppBar() {
+
+  const [user, setUser] = useState();
+
+
+
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:5000/info',{
+      headers: {
+          'Content-Type': 'application/json',
+      },
+     
+
+  })
+    .then((response) => {
+      const res = response.data;
+      console.log(response.data.Message)
+      setUser(response.data.email)
+      navigate('/login')
+      
+    })
+    .catch((error) => {
+      console.log("Not authenticated");
+      // navigate('/login')
+    });
+  }, []);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -42,6 +71,28 @@ export default function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout =()=>{
+    axios.get('http://127.0.0.1:5000/logout',{
+      headers: {
+          'Content-Type': 'application/json',
+      },
+     
+
+  })
+    .then((response) => {
+     
+      navigate('/login')
+      
+    })
+    .catch((error) => {
+      if (error.response) {
+
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    });
+  }
 
   const routeChange = (e) => {
     if (e == "Check Weather") {
@@ -158,6 +209,7 @@ export default function ResponsiveAppBar() {
           <Box>Logout
           <IconButton
             className="material-icons"
+            onClick={handleLogout}
             style={{
               color: "white",
             }}

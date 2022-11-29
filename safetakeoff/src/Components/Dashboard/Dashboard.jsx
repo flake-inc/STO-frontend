@@ -43,10 +43,9 @@ import AirCraftPieChart from "./AirCraftCharts/AirCraftPieChart";
 import AirCraftCategories from "./AirCraftCharts/Categories";
 
 import TempTrend from "./TemperatureCharts/TempTrend";
-import CloudTrend from "./CloudCoverCharts/CloudCoverTrend"
+import CloudTrend from "./CloudCoverCharts/CloudCoverTrend";
 import PressureTrend from "./PressureCharts/PressureTrend";
 import WindTrend from "./WindSpeedCharts/WindTrend";
-
 
 import {
   GiftOutlined,
@@ -81,37 +80,60 @@ function DashboardContent() {
   const [value, setValue] = useState("trend");
   const [slot, setSlot] = useState("month");
   const [feature, setFeature] = useState("Temperature");
-  const [year, setYear] = useState({ datasets: [] });
+  const [time, settime] = useState([]);
 
   const [temperature, setTemperature] = useState([]);
   const [wind, setWind] = useState([]);
   const [press, setPress] = useState([]);
   const [cloud, setCloud] = useState([]);
+  const [preddata, setpreddata] = useState([]);
 
-  // const [articles, setArticles] = useState({
-  //   dewpoint_temperature: 16.39,
-  //   mean_sea_level_pressure: 101046.38,
-  //   relative_humidity: 0.89,
-  //   surface_solar_radiation: 287.01,
-  //   surface_thermal_radiation: 408.35,
-  //   temperature: 18.26,
-  //   time_stamp: "1/1/2010 0:00",
-  //   total_cloud_cover: 1,
-  //   wind_speed: 2.6,
-  // });
+  const today = formatDate(new Date());
+  console.log(today);
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:8000/summary").then((response) => {
-  //     const data = response.data;
-  //     setArticles(data);
-  //   });
-  // }, []);
+  function formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
 
-  // const useStyles = makeStyles({
-  //   root: {
-  //     maxWidth: 100,
-  //   },
-  // });
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
+  useEffect(() => {
+    //   Normal and Anomaly Doughnut chart setup using useeffect
+
+    axios
+      .get("http://127.0.0.1:5000/getpred", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        // setTemperature(...temperature,res.temp)
+        // setWind(...wind,res.wind)
+        // setCloud(...cloud,res.cloud)
+        // setPress(...press,res.press)
+        // setdate(...time,res.time)
+        setpreddata(...preddata, res);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  }, []);
+  // console.log(time)
+  // console.log(temperature)
+  // console.log(cloud)
+  // console.log(press)
+  console.log(preddata);
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -207,23 +229,93 @@ function DashboardContent() {
               <Grid
                 item
               >
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  marginBottom={3}
-                  align="center"
-                  color="text.primary"
+          
+             
+                <Grid
+                  item
+                  style={{
+                    width: "100",
+                    height: "400",
+                  }}
                 >
-                  Dangered Aircrafts Today!
-                </Typography>
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    marginBottom={3}
+                    align="center"
+                    color="text.primary"
+                  >
+                    Dangered Aircrafts Today!
+                  </Typography>
 
                 <DangeredTable />
               </Grid>
+                  <Card>
+                    <CardHeader
+                      avatar={<Avatar>:-</Avatar>}
+                      title="R44 RAVEN I"
+                      subheader="A flexbox with avatar, title, subtitle and action"
+                    />
+                  </Card>
 
-              <MainCard content={false} sx={{ mt: 1.5 }}>
-                <Cards />
-              </MainCard>
+                  <Card>
+                    <CardHeader
+                      avatar={<Avatar>:-</Avatar>}
+                      title="CARBON CUB FX3"
+                      subheader="A flexbox with avatar, title, subtitle and action"
+                    />
+                  </Card>
+
+                  <Card>
+                    <CardHeader
+                      avatar={<Avatar>:-</Avatar>}
+                      title="CC11-160 CARBON CUB SS"
+                      subheader="A flexbox with avatar, title, subtitle and action"
+                    />
+                  </Card>
+
+                  <Card>
+                    <CardHeader
+                      avatar={<Avatar>:-</Avatar>}
+                      title="CARBON CUB FX3"
+                      subheader="A flexbox with avatar, title, subtitle and action"
+                    />
+                  </Card>
+                </Grid>
+                
             </Grid>
+
+            <MainCard className="weathercontainer" content={false}>
+                  {/* <Cards  /> */}
+
+                  <Typography
+                    component="h3"
+                    variant="h3"
+                    align="center"
+                    color="text.secondary"
+                    paddingTop={5}
+                    gutterBottom
+                  >
+                    Weather Conditions for last 24 Hours
+                  </Typography>
+                  <div
+                    className="cardcontainer"
+                    spacing={5}
+                    style={{ height: "200px" }}
+                  >
+                    {console.log()}
+                    {preddata.map((row) => (
+                      <WeatherCard
+                        style={{ width: "200px" }}
+                        time={row.time}
+                        temperature={row.temperature}
+                        cloud={row.cloudcover}
+                        wind={row.windspeed}
+                        pressure={row.pressure}
+                      />
+                    ))}
+                  </div>
+                </MainCard>
 
             <Box
               sx={{
@@ -236,8 +328,8 @@ function DashboardContent() {
               }}
             >
               <Typography
-                component="h5"
-                variant="h5"
+                component="h3"
+                variant="h3"
                 marginBottom={3}
                 align="center"
                 color="text.primary"
@@ -409,7 +501,7 @@ function DashboardContent() {
               </Grid>
             </Grid>
 
-            <GraphSelectTrend feature={feature}/>
+            <GraphSelectTrend feature={feature} />
 
             <hr />
 
@@ -497,13 +589,13 @@ function GraphSelectTrend({ feature }) {
       return <TempTrend />;
 
     case "Windspeed":
-      return <WindTrend/>;
+      return <WindTrend />;
 
     case "CloudCover":
-      return <CloudTrend/>;
+      return <CloudTrend />;
 
     case "Pressure":
-      return <PressureTrend/>;
+      return <PressureTrend />;
 
     default:
       return <TempTrend />;

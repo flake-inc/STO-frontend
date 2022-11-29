@@ -7,6 +7,7 @@ import TempGauge from "./dailytempgauge";
 import WeatherCard from "./WeatherCard";
 import { padding } from "@mui/system";
 import { Typography } from "@mui/material";
+import { useState } from "react";
 
 const clamp = (value: number, clampAt: number = 30) => {
   if (value > 0) {
@@ -44,7 +45,9 @@ const movies = [
   "/logo192.png",
 ];
 
-export default function Cards() {
+export default function Cards(props) {
+  const [preddata, setpreddata] = useState(props.data)
+  console.log(preddata)
   const [style, set] = useSpring(() => ({
     transform: "perspective(500px) rotateY(0deg)",
   }));

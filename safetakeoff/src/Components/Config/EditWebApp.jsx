@@ -9,10 +9,15 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import * as XLSX from "xlsx";
 import DataTable from "react-data-table-component";
+import axios from "axios";
 
 export default function EditWebApp() {
   const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
+
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState(null);
+  const [selectedFile, setSelected] = useState(null);
 
   // process CSV data
   const processData = (dataString) => {
@@ -58,8 +63,13 @@ export default function EditWebApp() {
 
   // handle file upload
   const handleFileUpload = (e) => {
+    setFile(e.target.files);
+    setSelected(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+
     const file = e.target.files[0];
     const reader = new FileReader();
+    console.log(file);
     reader.onload = (evt) => {
       /* Parse data */
       const bstr = evt.target.result;
@@ -72,29 +82,41 @@ export default function EditWebApp() {
       processData(data);
     };
     reader.readAsBinaryString(file);
-
   };
 
-  // useEffect(() => {
-  //   return (
-  //     <Button
-  //       variant="contained"
-  //       sx={{ mr: 1 }}
-  //       style={{
-  //         display: "inline-block",
-  //         fontSize: 14,
-  //         fontStyle: "bold",
-  //         backgroundColor: "#0a0a23",
-  //         color: "#fff",
-  //         borderRadius: "10px",
-  //         boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
-  //         transition: "0.25w",
-  //       }}
-  //     >
-  //       Use this!
-  //     </Button>
-  //   );
-  // }, [columns])
+  console.log(file);
+  console.log(fileName);
+  console.log(selectedFile);
+
+  const OnSubmit = (event) => {
+    const data1 = { file: selectedFile, fileName: fileName };
+    console.log(selectedFile);
+    var x = "";
+    console.log(data1);
+    console.log(data1);
+
+    axios
+      .post("http://127.0.0.1:5000/upload", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        myfile: selectedFile,
+        fileName: fileName,
+      })
+      .then((response) => {
+        const res = response.data;
+        // console.log(response.data.Message)
+        // navigate('/')
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -167,6 +189,16 @@ export default function EditWebApp() {
                     accept=".csv,.xlsx,.xls"
                     onChange={handleFileUpload}
                   />
+                  <Button
+                    className="buttons3"
+                    type="submit"
+                    size="lg"
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={OnSubmit}
+                  >
+                    Upload{" "}
+                  </Button>
                   <DataTable
                     pagination
                     highlightOnHover
