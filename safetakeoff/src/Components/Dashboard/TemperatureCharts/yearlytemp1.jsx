@@ -94,15 +94,10 @@ const YearlyTemp1 = () => {
   }, []);
 
   return (
-    
-          
               <Line
                 data={lineData}
                 options={lineOptions}
-              />
-           
-
-        
+              /> 
   );
 };
 

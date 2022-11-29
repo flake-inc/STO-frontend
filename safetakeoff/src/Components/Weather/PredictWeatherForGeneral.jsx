@@ -4,6 +4,8 @@ import StickyFooter from "../Public/Copyright/Copyright";
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
+import MainCard from "../MainCard";
+import Cards from "../Dashboard/cards";
 
 import {
   Box,
@@ -88,40 +90,9 @@ export default function WeatherPredictGeneral() {
               paddingRight={2}
               paddingBottom={5}
             >
-              <Stack
-                direction="row"
-                alignItems="center"
-                spacing={1}
-                className="Gauges"
-              >
-                <Grid item sx={{ mx: "auto" }}>
-                  <Card>
-                    <h3>Temperature:</h3>
-                    <h1>&deg;24</h1>
-                  </Card>
-                </Grid>
-
-                <Grid item sx={{ mx: "auto" }}>
-                  <Card>
-                    <h3>WindSpeed:</h3>
-                    <h1>&deg;24</h1>
-                  </Card>
-                </Grid>
-
-                <Grid item sx={{ mx: "auto" }}>
-                  <Card>
-                    <h3>Cloud Cover:</h3>
-                    <h1>&deg;24</h1>
-                  </Card>
-                </Grid>
-
-                <Grid item sx={{ mx: "auto" }}>
-                  <Card>
-                    <h3>Pressure:</h3>
-                    <h1>&deg;24</h1>
-                  </Card>
-                </Grid>
-              </Stack>
+              <MainCard content={false} sx={{ mt: 1.5 }}>
+                <Cards />
+              </MainCard>
 
               <Grid
                 item
@@ -209,7 +180,6 @@ export default function WeatherPredictGeneral() {
                     </Typography>
                   </Grid>
                   <TempSeries />  
-                  
                 </Grid>
               </Grid>
             </Grid>

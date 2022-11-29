@@ -1,78 +1,98 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
 import {Line} from 'react-chartjs-2';
-import { Chart, CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler } from 'chart.js';
-import * as d3 from "d3";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import axios from "axios";
 
-Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler)
+import {
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Filler,
+} from "chart.js";
 
-var time_stamp=[]
-var temptrend =[]
-var windtrend =[]
-var cloudtrend =[]
-var pressuretrend =[]
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  BarElement,
+    Filler
+);
 
-d3.csv("/temperature_series.csv", function(data1) {
-    time_stamp.push(data1.date);
-    temptrend.push(data1.trend);  
-  });
-
-  // d3.csv("/windspeed_series.csv", function(data2) {
-  //   windtrend.push(data2.trend);  
-  // });
-  // d3.csv("/cloud_series.csv", function(data3) {
-  //   cloudtrend.push(data3.trend);  
-  // });
-  // d3.csv("/pressure_series.csv", function(data4) {
-  //   pressuretrend.push(data4.trend);  
-  // });
+const TempSeries = () => {
+  const [lineData, set_lineData] =
+    useState({ datasets: [] });
+  const [lineOptions, set_lineOptions] =
+    useState({});
 
 
-export default function TempSeries(){
-  
-  var data = {
-    labels: time_stamp,
-    datasets: [
-      {
-        label: 'Temperature Trend ',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(75,192,192,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: temptrend
-      }
-    ]
-    
-  };
+  useEffect(() => {
+    //   Normal and Anomaly Doughnut chart setup using useeffect
+    const position = "left"; // CSS for graphs
 
-  return <Line
-        data={data}
-        height={50}
-        width={200}
-        options={{
-          scales: {
-            xAxis: [{
-              type: 'time',
-              ticks: {
-                  autoSkip: true,
-                  maxTicksLimit: 50
-              }
-          }]
+    axios.get('http://127.0.0.1:5000/temppred',{
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+      .then((response) => {
+        const res = response.data;
+
+        set_lineData({
+          labels: res.ds,
+          datasets: [
+            {
+              data: res.yhat1,
+              backgroundColor: [
+                "rgba(255, 0, 200, 1)",
+                "rgba(50, 0, 253, 0.6)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
         }
-        }}
-      /> ;
+      });
 
-  }
+    set_lineOptions({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false, position: position },
 
+        title: {
+          display: true,
+          text: "Predicted Temperature",
+          position: "bottom",
+        },
+      },
+    });
+
+    
+         
+  }, []);
+
+  return (
+              <Line
+                data={lineData}
+                options={lineOptions}
+                height={50}
+                width={200}
+              /> 
+  );
+};
+
+export default TempSeries;
