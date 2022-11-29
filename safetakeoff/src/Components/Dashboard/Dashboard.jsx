@@ -226,11 +226,7 @@ function DashboardContent() {
                 <Statistics feature={feature} />
               </Grid>
 
-              <Grid
-                item
-              >
-          
-             
+              <Grid item>
                 <Grid
                   item
                   style={{
@@ -248,74 +244,42 @@ function DashboardContent() {
                     Dangered Aircrafts Today!
                   </Typography>
 
-                <DangeredTable />
-              </Grid>
-                  <Card>
-                    <CardHeader
-                      avatar={<Avatar>:-</Avatar>}
-                      title="R44 RAVEN I"
-                      subheader="A flexbox with avatar, title, subtitle and action"
-                    />
-                  </Card>
-
-                  <Card>
-                    <CardHeader
-                      avatar={<Avatar>:-</Avatar>}
-                      title="CARBON CUB FX3"
-                      subheader="A flexbox with avatar, title, subtitle and action"
-                    />
-                  </Card>
-
-                  <Card>
-                    <CardHeader
-                      avatar={<Avatar>:-</Avatar>}
-                      title="CC11-160 CARBON CUB SS"
-                      subheader="A flexbox with avatar, title, subtitle and action"
-                    />
-                  </Card>
-
-                  <Card>
-                    <CardHeader
-                      avatar={<Avatar>:-</Avatar>}
-                      title="CARBON CUB FX3"
-                      subheader="A flexbox with avatar, title, subtitle and action"
-                    />
-                  </Card>
+                  <DangeredTable />
                 </Grid>
-                
+              </Grid>
             </Grid>
 
             <MainCard className="weathercontainer" content={false}>
-                  {/* <Cards  /> */}
+              {/* <Cards  /> */}
 
-                  <Typography
-                    component="h3"
-                    variant="h3"
-                    align="center"
-                    color="text.secondary"
-                    paddingTop={5}
-                    gutterBottom
-                  >
-                    Weather Conditions for last 24 Hours
-                  </Typography>
-                  <div
-                    className="cardcontainer"
-                    spacing={5}
-                    style={{ height: "200px" }}
-                  >
-                    {console.log()}
-                    {preddata.map((row) => (
-                      <WeatherCard
-                        style={{ width: "200px" }}
-                        time={row.time}
-                        temperature={row.temperature}
-                        cloud={row.cloudcover}
-                        wind={row.windspeed}
-                        pressure={row.pressure}
-                      />
-                    ))}
-                  </div>
-                </MainCard>
+              <Typography
+                component="h3"
+                variant="h3"
+                align="center"
+                color="text.secondary"
+                paddingTop={5}
+                gutterBottom
+              >
+                Weather Conditions for last 24 Hours
+              </Typography>
+              <div
+                className="cardcontainer"
+                spacing={5}
+                style={{ height: "200px" }}
+              >
+                {console.log()}
+                {preddata.map((row) => (
+                  <WeatherCard
+                    style={{ width: "200px" }}
+                    time={row.time}
+                    temperature={row.temperature}
+                    cloud={row.cloudcover}
+                    wind={row.windspeed}
+                    pressure={row.pressure}
+                  />
+                ))}
+              </div>
+            </MainCard>
 
             <Box
               sx={{

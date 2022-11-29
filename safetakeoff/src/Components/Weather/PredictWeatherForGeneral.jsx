@@ -185,7 +185,7 @@ export default function WeatherPredictGeneral() {
                       paddingTop={5}
                       gutterBottom
                     >
-                      Mean Sea Level Prediction
+                      Mean Sea Level Pressure Prediction
                     </Typography>
                   </Grid>
                   <Pressureseries />
