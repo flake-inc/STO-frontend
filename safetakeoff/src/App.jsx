@@ -10,6 +10,7 @@ import EditWebApp from "./Components/Config/EditWebApp";
 import WeatherPredictGeneral from "./Components/Weather/PredictWeatherForGeneral";
 import FlightPredict from "./Components/Weather/PredictWeatherForAirCraft";
 
+
 function App() {
   return (
     <BrowserRouter>

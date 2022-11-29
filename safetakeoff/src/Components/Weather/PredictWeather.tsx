@@ -17,9 +17,11 @@ import Select from "react-select";
 import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
 import vid from "../../Assets/large_aviation.mp4";
+import { useSelector, useDispatch } from 'react-redux'
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
+import { saveDate, saveOption } from "../../redux/date";
 
 const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
   <label style={{ marginRight: "1em" }}>
@@ -28,10 +30,12 @@ const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
   </label>
 );
 
+
 export default function PredictWeather() {
   const [value, setValue] = React.useState(dayjs("2022-01-01"));
   const [isDisabled, setIsDisabled] = useState(true);
   const [Options, setOptions] = useState([]);
+  const dispatch = useDispatch()
 
   let navigate = useNavigate();
 
@@ -43,17 +47,18 @@ export default function PredictWeather() {
   const [option, setOption] = useState(getInitialState);
 
   const handleTypeChange = (e) => {
-    setOption(e.target.option);
+    setOption(e.target.innerText);
   };
 
   const handleClick = () => {
     if (isDisabled) {
+      dispatch(saveDate(value.add(1, 'day').toLocaleString()))
       navigate("/result-all", {
-        state: { date: value.add(1, 'day')},
       });
     } else {
+      dispatch(saveDate(value.add(1, 'day').toLocaleString()))
+      dispatch(saveOption(option))
       navigate("/result-flight", {
-        state: { option: option, date: value.add(1, 'day') },
       });
     }
   };

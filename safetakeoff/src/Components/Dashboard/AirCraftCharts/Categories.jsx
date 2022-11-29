@@ -63,13 +63,6 @@ export default function AirCraftCategories() {
               borderColor: "rgba(255, 99, 132, 1)",
               borderWidth: 3,
             },
-            {
-              label: "Relative Humidity Threshold",
-              data: res.humidity_t,
-              backgroundColor: ["rgba(114, 245, 71, 0.5)"],
-              borderColor: "rgba(114, 245, 71, 0.5)",
-              borderWidth: 5,
-            },
           ],
         });
       })

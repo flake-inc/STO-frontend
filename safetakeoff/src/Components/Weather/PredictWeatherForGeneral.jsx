@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import StickyFooter from "../Public/Copyright/Copyright";
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import vid from "../../Assets/large_aviation.mp4";
@@ -10,10 +9,6 @@ import Cards from "../Dashboard/cards";
 import {
   Box,
   Grid,
-  Stack,
-  CardHeader,
-  Avatar,
-  Card,
   Typography,
 } from "@mui/material";
 
@@ -22,10 +17,13 @@ import { useLocation } from "react-router-dom";
 import Cloudseries from "./Cloudseries";
 import Pressureseries from "./Pressureseries";
 import Windseries from "./Windseries";
-import BasicTable from "../AirCraft/Table";
 import DangeredTable from "./Table";
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function WeatherPredictGeneral() {
+  
+  const date1 = useSelector((state) => state.date.date)
+
   const { state } = useLocation();
   const options = {
     weekday: "long",
@@ -34,8 +32,7 @@ export default function WeatherPredictGeneral() {
     day: "numeric",
   };
   
-  const selected_date = state.date.toLocaleString("de-DE", options);
-  const date = selected_date.slice(0, 16);
+  const date = date1.slice(0, 16);
 
   return (
     <div className="bg-image shadow-4-strong">

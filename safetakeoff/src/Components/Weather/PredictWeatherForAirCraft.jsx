@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import StickyFooter from "../Public/Copyright/Copyright";
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import vid from "../../Assets/large_aviation.mp4";
@@ -10,10 +9,6 @@ import Cards from "../Dashboard/cards";
 import {
   Box,
   Grid,
-  Stack,
-  CardHeader,
-  Avatar,
-  Card,
   Typography,
 } from "@mui/material";
 
@@ -24,8 +19,12 @@ import Pressureseries from "./Pressureseries";
 import Windseries from "./Windseries";
 import BasicTable from "../AirCraft/Table";
 import DangeredTable from "./Table";
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function WeatherPredictGeneral() {
+  const date1 = useSelector((state)=>state.date.date)
+  const option1 = useSelector((state)=>state.date.option)
+
   const { state } = useLocation();
   const options = {
     weekday: "long",
@@ -33,9 +32,7 @@ export default function WeatherPredictGeneral() {
     month: "long",
     day: "numeric",
   };
-  const selected_date = state.date.toLocaleString("de-DE", options);
-  const date = selected_date.slice(0, 16);
-  const option = state.option;
+  const date = date1.slice(0, 16);
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -91,7 +88,7 @@ export default function WeatherPredictGeneral() {
               color="text.primary"
               gutterBottom
             >
-              Prediction for {option} on {date}
+              Prediction for {option1} on {date}
             </Typography>
             <Grid
               container
