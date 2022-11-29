@@ -17,8 +17,13 @@ import {
   Typography,
 } from "@mui/material";
 
-import TempSeries from "./Timeseries";
+import TempSeries from "./Tempseries";
 import { useLocation } from "react-router-dom";
+import Cloudseries from "./Cloudseries";
+import Pressureseries from "./Pressureseries";
+import Windseries from "./Windseries";
+import BasicTable from "../AirCraft/Table";
+import DangeredTable from "./Table";
 
 
 export default function WeatherPredictGeneral() {
@@ -50,7 +55,7 @@ export default function WeatherPredictGeneral() {
           muted="true"
           playsinline
           loop
-          class="active"
+          className="active"
         >
           <source src={vid} type="video/mp4" />
         </video>
@@ -96,10 +101,7 @@ export default function WeatherPredictGeneral() {
 
               <Grid
                 item
-                style={{
-                  width: "100",
-                  height: "400",
-                }}
+
               >
                 <Typography
                   component="h5"
@@ -111,37 +113,7 @@ export default function WeatherPredictGeneral() {
                   Dangered Aircrafts Today!
                 </Typography>
 
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="R44 RAVEN I"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CC11-160 CARBON CUB SS"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
+                <DangeredTable />
               </Grid>
             </Grid>
 
@@ -180,7 +152,67 @@ export default function WeatherPredictGeneral() {
                     </Typography>
                   </Grid>
                   <TempSeries />  
+
                 </Grid>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Grid item>
+                    <Typography
+                      component="h5"
+                      variant="h5"
+                      align="center"
+                      color="text.primary"
+                      paddingTop={5}
+                      gutterBottom
+                    >
+                      Total Cloud Cover Prediction
+                    </Typography>
+                  </Grid>
+                  <Cloudseries />
+       
+                </Grid>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Grid item>
+                    <Typography
+                      component="h5"
+                      variant="h5"
+                      align="center"
+                      color="text.primary"
+                      paddingTop={5}
+                      gutterBottom
+                    >
+                      Mean Sea Level Prediction
+                    </Typography>
+                  </Grid>
+                  <Pressureseries />
+                </Grid>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Grid item>
+                    <Typography
+                      component="h5"
+                      variant="h5"
+                      align="center"
+                      color="text.primary"
+                      paddingTop={5}
+                      gutterBottom
+                    >
+                      Wind Speed Prediction
+                    </Typography>
+                  </Grid>
+                  <Windseries /> 
+                </Grid>
+                
               </Grid>
             </Grid>
             <hr />

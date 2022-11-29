@@ -45,7 +45,7 @@ export default function AirCraftCategories() {
             {
               label: "Temperature Threshold",
               data: res.Temperature_t,
-              borderColor: "rgba(54, 162, 235, 1)", 
+              borderColor: "rgba(54, 162, 235, 1)",
               borderWidth: 3,
               backgroundColor: ["rgba(54, 162, 235, 1)"],
             },
@@ -70,7 +70,6 @@ export default function AirCraftCategories() {
               borderColor: "rgba(114, 245, 71, 0.5)",
               borderWidth: 5,
             },
-            
           ],
         });
       })
@@ -98,14 +97,14 @@ export default function AirCraftCategories() {
           },
           zoom: {
             pinch: {
-              enabled: true, // Enable pinch zooming
+              enabled: false, // Enable pinch zooming
             },
             wheel: {
-              enabled: true, // Enable wheel zooming
+              enabled: false, // Enable wheel zooming
             },
             mode: "x",
             drag: {
-              enabled: true,
+              enabled: false,
             },
           },
         },
@@ -130,5 +129,5 @@ export default function AirCraftCategories() {
     });
   }, []);
 
-  return <Bar data={lineData} options={lineOptions} />;
+  return <Bar data={lineData} options={lineOptions} height={50} width={200} />;
 }

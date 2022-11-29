@@ -30,13 +30,7 @@ export default function AirCraftList() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // let x = "";
 
-  useEffect(() => {
-    d3.csv("/AirCrafts.csv").then(function (dataset) {
-      // console.log(dataset)
-    });
-  }, []);
 
   return (
     <>

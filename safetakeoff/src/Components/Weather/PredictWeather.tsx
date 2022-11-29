@@ -54,7 +54,7 @@ export default function PredictWeather() {
   const handleClick = () => {
     if (isDisabled) {
       navigate("/result-all", {
-        state: { date: value }
+        state: { date: value },
       });
     } else {
       navigate("/result-flight", {
@@ -107,7 +107,7 @@ export default function PredictWeather() {
           muted="true"
           playsinline
           loop
-          class="active"
+          className="active"
         >
           <source src={vid} type="video/mp4" />
         </video>

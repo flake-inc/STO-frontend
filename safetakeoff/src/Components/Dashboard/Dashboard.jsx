@@ -59,6 +59,7 @@ import TempMinMaxMean from "./TemperatureCharts/TempMinMaxMean";
 import WindMinMaxMean from "./WindSpeedCharts/WindMinMaxMean";
 import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
 import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
+import DangeredTable from "./Table";
 
 // sales report status
 const status = [
@@ -136,7 +137,7 @@ function DashboardContent() {
           muted="true"
           playsinline
           loop
-          class="active"
+          className="active"
         >
           <source src={vid} type="video/mp4" />
         </video>
@@ -205,10 +206,6 @@ function DashboardContent() {
 
               <Grid
                 item
-                style={{
-                  width: "100",
-                  height: "400",
-                }}
               >
                 <Typography
                   component="h5"
@@ -220,37 +217,7 @@ function DashboardContent() {
                   Dangered Aircrafts Today!
                 </Typography>
 
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="R44 RAVEN I"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CC11-160 CARBON CUB SS"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
-
-                <Card>
-                  <CardHeader
-                    avatar={<Avatar>:-</Avatar>}
-                    title="CARBON CUB FX3"
-                    subheader="A flexbox with avatar, title, subtitle and action"
-                  />
-                </Card>
+                <DangeredTable />
               </Grid>
 
               <MainCard content={false} sx={{ mt: 1.5 }}>

@@ -31,7 +31,7 @@ export default function temp() {
           muted="true"
           playsinline
           loop
-          class="active"
+          ="active"
         >
           <source
             src={vid}

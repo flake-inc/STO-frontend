@@ -31,7 +31,7 @@ export default function FlightPredict() {
           muted="true"
           playsinline
           loop
-          class="active"
+          className="active"
         >
           <source
             src={vid}

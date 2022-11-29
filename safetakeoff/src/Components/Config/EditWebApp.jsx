@@ -121,7 +121,7 @@ export default function EditWebApp() {
           muted="true"
           playsinline
           loop
-          class="active"
+          className="active"
         >
           <source src={vid} type="video/mp4" />
         </video>

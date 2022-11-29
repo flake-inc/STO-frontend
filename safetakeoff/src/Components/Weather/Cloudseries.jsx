@@ -26,7 +26,7 @@ ChartJS.register(
     Filler
 );
 
-const TempSeries = () => {
+const Cloudseries = () => {
   const [lineData, set_lineData] =
     useState({ datasets: [] });
   const [lineOptions, set_lineOptions] =
@@ -37,7 +37,7 @@ const TempSeries = () => {
     //   Normal and Anomaly Doughnut chart setup using useeffect
     const position = "left"; // CSS for graphs
 
-    axios.get('http://127.0.0.1:5000/temppred',{
+    axios.get('http://127.0.0.1:5000/cloudpred',{
         headers: {
             'Content-Type': 'application/json',
         },
@@ -51,8 +51,8 @@ const TempSeries = () => {
             {
               data: res.yhat1,
               backgroundColor: [
-                "rgba(255, 0, 200, 1)",
-                "rgba(50, 0, 253, 0.6)",
+                "#FF0000",
+                "#0a0a23"
               ],
               borderWidth: 1,
             },
@@ -68,14 +68,14 @@ const TempSeries = () => {
       });
 
     set_lineOptions({
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false, position: position },
 
         title: {
           display: true,
-          text: "Predicted Temperature",
+          text: "Predicted Total Cloud Cover",
           position: "bottom",
         },
       },
@@ -95,4 +95,4 @@ const TempSeries = () => {
   );
 };
 
-export default TempSeries;
+export default Cloudseries;
