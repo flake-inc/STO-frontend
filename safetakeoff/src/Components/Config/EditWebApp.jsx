@@ -1,5 +1,5 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import StickyFooter from "../Public/Copyright/Copyright";
 import Box from "@mui/material/Box";
 import vid from "../../Assets/large_aviation.mp4";
@@ -10,6 +10,10 @@ import Paper from "@mui/material/Paper";
 import * as XLSX from "xlsx";
 import DataTable from "react-data-table-component";
 import axios from "axios";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { Toast } from 'primereact/toast';
+
 
 export default function EditWebApp() {
   const [columns, setColumns] = useState([]);
@@ -18,6 +22,7 @@ export default function EditWebApp() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [selectedFile, setSelected] = useState(null);
+  const toast = useRef(null);
 
   // process CSV data
   const processData = (dataString) => {
@@ -90,26 +95,31 @@ export default function EditWebApp() {
 
   const OnSubmit = (event) => {
     let formData = new FormData();
+    // console.log(selectedFile)
     formData.append("file", selectedFile);
     formData.append("filename",fileName)
 
 
-    console.log(selectedFile);
+    for (var key of formData.entries()) {
+      console.log(key[0] + ', ' + key[1]);
+  }
     var x = "";
     // console.log(data1);
     // console.log(data1);
 
     axios
-      .post("http://127.0.0.1:5000/upload", {
+      .post("http://127.0.0.1:5000/upload",formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        data:formData
+     
       })
       .then((response) => {
         const res = response.data;
-        // console.log(response.data.Message)
-        // navigate('/')
+        console.log(res)
+        // toast.success("File successfully uploaded");
+        window. location. reload(false);
+                // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
       })
       .catch((error) => {
         if (error.response) {
@@ -152,6 +162,7 @@ export default function EditWebApp() {
         </video>
       </div>
       <ResponsiveAppBar />
+      <ToastContainer />
 
       <Container
         sx={{
