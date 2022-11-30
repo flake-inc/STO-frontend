@@ -89,19 +89,22 @@ export default function EditWebApp() {
   console.log(selectedFile);
 
   const OnSubmit = (event) => {
-    const data1 = { file: selectedFile, fileName: fileName };
+    let formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("filename",fileName)
+
+
     console.log(selectedFile);
     var x = "";
-    console.log(data1);
-    console.log(data1);
+    // console.log(data1);
+    // console.log(data1);
 
     axios
       .post("http://127.0.0.1:5000/upload", {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        myfile: selectedFile,
-        fileName: fileName,
+        data:formData
       })
       .then((response) => {
         const res = response.data;
