@@ -1,81 +1,49 @@
-import FusionCharts from "fusioncharts";
-import charts from "fusioncharts/fusioncharts.charts";
-import ReactFusioncharts from "react-fusioncharts";
-import React from 'react';
+import React from "react";
+import GaugeChart from "react-gauge-chart";
 
-import Widgets from 'fusioncharts/fusioncharts.widgets';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-import ReactFC from 'react-fusioncharts';
-
-// Resolves charts dependancy
-charts(FusionCharts);
-
-const dataSource = {
-  chart: {
-    caption: "Cloud Cover",
-    lowerlimit: "0",
-    upperlimit: "100",
-    showvalue: "1",
-    numbersuffix: "%",
-    theme: "fusion",
-    valuefontsize: "20",
-    
-
+const styles = {
+  dial: {
+    display: "inline-block",
+    width: `300px`,
+    height: `auto`,
+    color: "#000",
+    border: "0.5px solid #fff",
+    padding: "2px"
   },
-  colorrange: {
-    color: [
-      {
-        minvalue: "0",
-        maxvalue: "50",
-        code: "#62B58F"
+  title: {
+    fontSize: "0.7em",
+    color: "#000",
+    // marginTop:"60px",
+    // marginLeft:"60px"
 
-      },
-      {
-        minvalue: "50",
-        maxvalue: "75",
-        code: "#FFC533"
-      },
-      {
-        minvalue: "75",
-        maxvalue: "100",
-        code: "#F2726F"
-
-      }
-    ]
-  },
-  dials: {
-    dial: [
-      {
-        value: "71",
-        tooltext: "<b>9%</b> lesser that target"
-      }
-    ]
-  },
-//   trendpoints: {
-//     point: [
-//       {
-//         startvalue: "80",
-//         displayvalue: "Target",
-//         thickness: "2",
-//         color: "#E15A26",
-//         usemarker: "1",
-//         markerbordercolor: "#E15A26",
-//         markertooltext: "80%"
-//       }
-//     ]
-//   }
+  }
 };
 
-export default class CloudCover extends React.Component {
-  render() {
-    return (
-      <ReactFusioncharts
-        type="angulargauge"
-        width="350"
-        height="400"
-        dataFormat="JSON"
-        dataSource={dataSource}
+const CloudCover = ({ id, value, title }) => {
+  let percent = value / 100;
+  // value: "-50" -> percent: 0
+  // value: "0" ---> percent: .5
+  // value: "50" ---> percent: 1
+  // -25 ... .5 + (-25/100) = .25
+  // 25 ...  .5 + (25/100) = .75
+  // -110 .. .5 + (-110/100) = -0.6
+
+  return (
+    <div style={styles.dial}>
+      <GaugeChart
+        id={id}
+        nrOfLevels={3}
+        arcsLength={[0.25, 0.5, 0.25]}
+        colors={["#2d74da", "#1f57a4", "#25467a"]}
+        arcPadding={0.02}
+        percent={percent}
+        textColor={"#000000"}
+        needleColor={"#5392ff"}
+        formatTextValue={(value) => value}
       />
-    );
-  }
-}
+      <div style={styles.title}>{title}</div>
+    </div>
+  );
+};
+
+export default CloudCover;

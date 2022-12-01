@@ -1,53 +1,41 @@
-import FusionCharts from "fusioncharts";
-import charts from "fusioncharts/fusioncharts.charts";
-import ReactFusioncharts from "react-fusioncharts";
-import React from 'react';
-import Widgets from 'fusioncharts/fusioncharts.widgets';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-import ReactFC from 'react-fusioncharts';
+import React from "react";
+import Thermometer from "react-thermometer-component";
 
-ReactFC.fcRoot(FusionCharts, Widgets, FusionTheme);
-
-
-// Resolves charts dependancy
-charts(FusionCharts);
-
-const dataSource = {
-  chart: {
-    caption: "Temperature",
-    lowerlimit: "-20",
-    upperlimit: "50",
-    numbersuffix: "°C",
-    thmfillcolor: "#008ee4",
-    showgaugeborder: "1",
-    gaugebordercolor: "#008ee4",
-    gaugeborderthickness: "2",
-    plottooltext: "Temperature: <b>$datavalue</b> ",
-    theme: "fusion",
-    showvalue: "1",
-    showBorder: "0",
-    canvasBgAlpha: "0",
-    showAlternateHgridColor: "1",
-        //Background image properties
-    // bgImage: "https://i.gifer.com/7Ik1.gif",
-    //     //Background image transparency 
-    // bgImageAlpha: "75",
-    // bgImageDisplayMode: "stretch",
-
+const styles = {
+  dial: {
+    display: "inline-block",
+    width: `300px`,
+    height: `auto`,
+    color: "#000",
+    border: "0.5px solid #fff",
+    padding: "2px"
   },
-  value: "25.5"
+  title: {
+    fontSize: "0.7em",
+    color: "#000",
+    marginTop: "15px",
+    marginLeft: "5px",
+    position:'top'
+  }
 };
 
-export default class Thermo extends React.Component {
-  render() {
-    return (
-      <ReactFusioncharts
-        type="thermometer"
-        width="200"
-        height="400"
-        dataFormat="JSON"
-        dataSource={dataSource}
+const TempGauge = ({ id, value, title }) => {
+  return (
+    <div style={styles.dial}>
+      <Thermometer
+        theme="light"
+        value={value}
+        max="100"
+        steps="1"
+        format="°C"
+        size="normal"
+        height="160"
       />
-    );
-  }
-}
+      <div style={styles.title}>
+        {title}: {value}°C
+      </div>
+    </div>
+  );
+};
+
+export default TempGauge;

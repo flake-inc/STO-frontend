@@ -27,7 +27,6 @@ import {
 
 import TempGauge from "./dailytempgauge";
 import WindGauge from "./DailyWindSpeedGauge";
-import PressureGauge from "./PressureGauge";
 import CloudCover from "./CloudCover";
 import MonthlyTemp from "./TemperatureCharts/MonthlyAvgTemp";
 // import YearlyTemp from "./TemperatureCharts/YearlyTemp";
@@ -59,6 +58,7 @@ import WindMinMaxMean from "./WindSpeedCharts/WindMinMaxMean";
 import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
 import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
 import DangeredTable from "./Table";
+import Barometer from "./PressureGauge";
 
 // sales report status
 const status = [
@@ -193,7 +193,7 @@ function DashboardContent() {
             </Typography>
             <Grid
               container
-              rowSpacing={1.5}
+              rowSpacing={1}
               columnSpacing={5}
               paddingLeft={5}
               paddingRight={2}
@@ -202,23 +202,26 @@ function DashboardContent() {
               <Stack
                 direction="row"
                 alignItems="center"
-                spacing={1}
                 className="Gauges"
               >
-                <Grid item sx={{ mx: "auto" }}>
-                  <TempGauge />
+                <Grid style ={{width:'200px'}}item sx={{ mx: "auto" }}>
+                  <TempGauge id="dial7" value={20} title="Average Temperature" />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                  <WindGauge />
+                <WindGauge
+            id="dial5"
+            value={20}
+            title="Average Wind Speed"
+          />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                  <CloudCover />
+                  <CloudCover id="dial4" value={20} title="Average Total Cloud Cover" />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                  <PressureGauge />
+                <Barometer id="dial9" value={100} title="" />
                 </Grid>
               </Stack>
 
@@ -248,6 +251,7 @@ function DashboardContent() {
                 </Grid>
               </Grid>
             </Grid>
+            <Grid item>
 
             <MainCard className="weathercontainer" content={false}>
               {/* <Cards  /> */}
@@ -280,6 +284,8 @@ function DashboardContent() {
                 ))}
               </div>
             </MainCard>
+            </Grid>
+
 
             <Box
               sx={{
@@ -559,7 +565,7 @@ function GraphSelectTrend({ feature }) {
       return <CloudTrend />;
 
     case "Pressure":
-      return <PressureTrend />;
+      return <Barometer/>
 
     default:
       return <TempTrend />;

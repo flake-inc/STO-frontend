@@ -1,70 +1,44 @@
+import React from "react";
+import { Chart } from "react-google-charts";
 
-import FusionCharts from "fusioncharts";
-import charts from "fusioncharts/fusioncharts.charts";
-import ReactFusioncharts from "react-fusioncharts";
-import React from 'react';
-
-import Widgets from 'fusioncharts/fusioncharts.widgets';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-import ReactFC from 'react-fusioncharts';
-// Resolves charts dependancy
-charts(FusionCharts);
-
-const dataSource = {
-  chart: {
-    caption: "Pressure",
-    captionontop: "1",
-    origw: "380",
-    origh: "260",
-    gaugestartangle: "135",
-    gaugeendangle: "45",
-    gaugeoriginx: "190",
-    gaugeoriginy: "220",
-    gaugeouterradius: "160",
-    theme: "fusion",
-    showvalue: "1",
-    numbersuffix: " MPa",
-    valuefontsize: "20"
+const styles = {
+  dial: {
+    width: `auto`,
+    height: `auto`,
+    color: "#000",
+    border: "0.5px solid #fff",
+    padding: "2px"
   },
-  colorrange: {
-    color: [
-      {
-        minvalue: "0",
-        maxvalue: "0.1",
-        code: "#62B58F"
-      },
-      {
-        minvalue: "0.1",
-        maxvalue: "0.2",
-        code: "#FFC533"
-      },
-      {
-        minvalue: "0.2",
-        maxvalue: "0.3",
-        code: "#F2726F"
-      }
-    ]
-  },
-  dials: {
-    dial: [
-      {
-        value: "0.17",
-        tooltext: "Moderate Pressure"
-      }
-    ]
+  title: {
+    fontSize: "0.7em",
+    color: "#000",
+    marginTop:'200px'
   }
 };
 
-export default class Pressure extends React.Component {
-  render() {
-    return (
-      <ReactFusioncharts
-        type="angulargauge"
-        width="400"
-        height="400"
-        dataFormat="JSON"
-        dataSource={dataSource}
+const Barometer = ({ id, value, title }) => {
+  return (
+    <div style={styles.dial}>
+      <Chart
+        height={120}
+        chartType="Gauge"
+        loader={<div></div>}
+        data={[
+          ["Label", "Value"],
+          [title, Number(value)]
+        ]}
+        options={{
+          redFrom: 90,
+          redTo: 200,
+          yellowFrom: 50,
+          yellowTo: 90,
+          minorTicks: 5,
+          min: -200,
+          max: 200
+        }}
       />
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Barometer;

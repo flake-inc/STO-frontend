@@ -12988,6 +12988,16 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
 
+"react-dom@16.0.0":
+  "integrity" "sha512-MjJdK6es/HG+kcjpa6eRhXrusL4hh4omy/036mI7uykjredUkk8Z0E6FzJW+g3JBR2bxov8AQxiE71WDlja6dw=="
+  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.0.0.tgz"
+  "version" "16.0.0"
+  dependencies:
+    "fbjs" "^0.8.16"
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.0"
+
 "react-element-to-jsx-string@^15.0.0":
   "integrity" "sha512-UDg4lXB6BzlobN60P8fHWVPX3Kyw8ORrTeBtClmIlGdkOOE+GYQSFvmEU5iLLpwp/6v42DINwNcwOhOLfQ//FQ=="
   "resolved" "https://registry.npmjs.org/react-element-to-jsx-string/-/react-element-to-jsx-string-15.0.0.tgz"
@@ -13014,10 +13024,22 @@
   dependencies:
     "uuid" "^3.2.1"
 
+"react-gauge-chart@^0.4.1":
+  "integrity" "sha512-xc1pQ6tF3shRpjyzIGA5EeQcRNfjy5og6Ory5fUe9cWChw8ZadaONMnUIpGHdfUefF+Ffzh6HAZuOX5+AMzOzw=="
+  "resolved" "https://registry.npmjs.org/react-gauge-chart/-/react-gauge-chart-0.4.1.tgz"
+  "version" "0.4.1"
+  dependencies:
+    "d3" "^7.6.1"
+
 "react-gesture@^0.0.5":
   "integrity" "sha512-Op1REPhc7JIPlVr/a/ZJBzKsw075X9radhdrCBh4SWBm8cWLWTXi7yAiCr9jCvHWTmQ/dmXPkUEYN2HOo5vNAQ=="
   "resolved" "https://registry.npmjs.org/react-gesture/-/react-gesture-0.0.5.tgz"
   "version" "0.0.5"
+
+"react-google-charts@^4.0.0":
+  "integrity" "sha512-9OG0EkBb9JerKEPQYdhmAXnhGLzOdOHOPS9j7l+P1a3z1kcmq9mGDa7PUoX/VQUY4IjZl2/81nsO4o+1cuYsuw=="
+  "resolved" "https://registry.npmjs.org/react-google-charts/-/react-google-charts-4.0.0.tgz"
+  "version" "4.0.0"
 
 "react-horizontal-scrolling-menu@^3.2.3":
   "integrity" "sha512-23uR9+/1mYgvOxpR5tx99F8fQmRrPOO4NsHeZJsMLQtsksZZ4sGFCWxxUMZMgFaLROHM/oKj4y3IHyFyHsUGXA=="
@@ -13361,6 +13383,14 @@
   "resolved" "https://registry.npmjs.org/react-table/-/react-table-7.8.0.tgz"
   "version" "7.8.0"
 
+"react-thermometer-component@^1.0.1":
+  "integrity" "sha512-37ZY+Rkzkfjc8mrVqJW9AhQ536sdwCmYcd/0SSRG+a2lYGqhn02v4QJJ3UZ9I7uQvSAWBWdg65D91i8TWSqCxg=="
+  "resolved" "https://registry.npmjs.org/react-thermometer-component/-/react-thermometer-component-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "react" "16.0.0"
+    "react-dom" "16.0.0"
+
 "react-timeseries-charts@^0.16.1":
   "integrity" "sha512-WK2Pege5/FGrE5ifGX1XTVQOZkobRUV5YMwRQi4+TpYAALL5cBLp+XCuAX8x8agq4AmqChpClPIrANc8pRL5RA=="
   "resolved" "https://registry.npmjs.org/react-timeseries-charts/-/react-timeseries-charts-0.16.1.tgz"
@@ -13483,6 +13513,16 @@
   "version" "18.2.0"
   dependencies:
     "loose-envify" "^1.1.0"
+
+"react@16.0.0":
+  "integrity" "sha512-9lay736NuQpSpNwkxcqHOD/Jswpi/C5C7TYqHU9Xi19OEM+3LEkULYsUc3E65W+Sv3AyoVi2ZovCuXi2Ifz1MQ=="
+  "resolved" "https://registry.npmjs.org/react/-/react-16.0.0.tgz"
+  "version" "16.0.0"
+  dependencies:
+    "fbjs" "^0.8.16"
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.0"
 
 "read-cache@^1.0.0":
   "integrity" "sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA=="
