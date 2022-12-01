@@ -118,7 +118,7 @@ export default function EditWebApp() {
         const res = response.data;
         console.log(res)
         // toast.success("File successfully uploaded");
-        window. location. reload(false);
+        // window. location. reload(false);
                 // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
       })
       .catch((error) => {
