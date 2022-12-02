@@ -7,7 +7,6 @@ import AnalyticEcommerce from "../../utils/AnalyticEcommerce";
 import WeatherCard from "./WeatherCard";
 import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
-import Cards from "./cards";
 import YearlyTemp1 from "./TemperatureCharts/yearlytemp1";
 import { useNavigate } from "react-router-dom";
 
@@ -15,14 +14,8 @@ import {
   Box,
   Button,
   Grid,
-  MenuItem,
   Stack,
-  TextField,
-  CardHeader,
-  IconButton,
   ButtonGroup,
-  Avatar,
-  Card,
   Typography,
 } from "@mui/material";
 
@@ -30,7 +23,6 @@ import TempGauge from "./dailytempgauge";
 import WindGauge from "./DailyWindSpeedGauge";
 import CloudCover from "./CloudCover";
 import MonthlyTemp from "./TemperatureCharts/MonthlyAvgTemp";
-// import YearlyTemp from "./TemperatureCharts/YearlyTemp";
 import TimevsTemperature from "./TemperatureCharts/TimevsTemperature";
 import MonthlyAvgWindSpeed from "./WindSpeedCharts/MonthlyAverageWindSpeed";
 import YearlyWind from "./WindSpeedCharts/YearlyWind";
@@ -41,10 +33,6 @@ import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
 import AirCraftPieChart from "./AirCraftCharts/AirCraftPieChart";
 
-import TempTrend from "./TemperatureCharts/TempTrend";
-import CloudTrend from "./CloudCoverCharts/CloudCoverTrend";
-import PressureTrend from "./PressureCharts/PressureTrend";
-import WindTrend from "./WindSpeedCharts/WindTrend";
 
 import {
   GiftOutlined,
@@ -123,13 +111,11 @@ function DashboardContent() {
   }
 
   useEffect(() => {
-    //   Normal and Anomaly Doughnut chart setup using useeffect
     const access_token = sessionStorage.getItem("token");
     console.log(access_token);
 
     if (access_token ===null){
       navigate('/login')
-
     }
 
 
@@ -365,7 +351,6 @@ function DashboardContent() {
                 sx={{ display: { sm: "none", md: "block", lg: "none" } }}
               />
 
-              {/* row 2 */}
               <Grid item xs={12} md={12} lg={6}>
                 <Grid
                   container
@@ -496,11 +481,10 @@ function DashboardContent() {
               About Aircrafts
             </Typography>
 
-            <AirCraftTemperatureChart />
-            <AirCraftPressureChart />
-            <AirCraftCloudChart />
-            <AirCraftWindspeedChart />
+            <GraphSelectAircraft feature={feature} />
             <AirCraftPieChart />
+
+
             <hr />
           </Paper>
         </Box>
@@ -566,22 +550,25 @@ function GraphSelect({ feature, slot }) {
   }
 }
 
-function GraphSelectTrend({ feature }) {
+
+
+
+function GraphSelectAircraft({ feature }) {
   switch (feature) {
     case "Temperature":
-      return <TempTrend />;
+      return <AirCraftTemperatureChart />;
 
     case "Windspeed":
-      return <WindTrend />;
+      return <AirCraftWindspeedChart />;
 
     case "CloudCover":
-      return <CloudTrend />;
+      return <AirCraftCloudChart />;
 
     case "Pressure":
-      return <Barometer />;
+      return <AirCraftPressureChart />;
 
     default:
-      return <TempTrend />;
+      return <AirCraftTemperatureChart />;
   }
 }
 
@@ -590,9 +577,6 @@ function Statistics({ feature }) {
     case "Temperature":
       return (
         <Stack spacing={2} paddingBottom={4}>
-          {/* <Typography variant="h6" color="textSecondary">
-            Today's Statistics
-          </Typography> */}
           <AnalyticEcommerce
             title="Maximum Temperature"
             count="34.2ºC"
@@ -610,18 +594,12 @@ function Statistics({ feature }) {
             state="Temperature"
             event="increases"
           />
-
-          {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
-                      <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
         </Stack>
       );
 
     case "Windspeed":
       return (
         <Stack spacing={2} paddingBottom={4}>
-          {/* <Typography variant="h6" color="textSecondary">
-              Today's Statistics
-            </Typography> */}
           <AnalyticEcommerce
             title="Maximum Wind Speed"
             count="4.83kmph"
@@ -639,17 +617,11 @@ function Statistics({ feature }) {
             state="Wind speed"
             event="increases"
           />
-
-          {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
-                        <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
         </Stack>
       );
     case "CloudCover":
       return (
         <Stack spacing={2} paddingBottom={4}>
-          {/* <Typography variant="h6" color="textSecondary">
-              Today's Statistics
-            </Typography> */}
           <AnalyticEcommerce
             title="Maximum Cloud Cover"
             count="0.85"
@@ -667,18 +639,12 @@ function Statistics({ feature }) {
             state="CloudCover"
             event="increases"
           />
-
-          {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
-                        <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
         </Stack>
       );
 
     case "Pressure":
       return (
         <Stack spacing={2} paddingBottom={4}>
-          {/* <Typography variant="h6" color="textSecondary">
-              Today's Statistics
-            </Typography> */}
           <AnalyticEcommerce
             title="Maximum Pressure"
             count="101111.4Pa"
@@ -696,19 +662,8 @@ function Statistics({ feature }) {
             state="Pressure"
             event="increases"
           />
-
-          {/* <Typography variant="h4">Max Temperature: 34.2°C</Typography>
-                        <Typography variant="h4">Min Temperature: 18.2°C</Typography> */}
         </Stack>
       );
-
-    // case "Pressure":
-    //     if(slot=="month"){
-    //         return <MonthlyPressure/>;
-
-    //     }else{
-    //         return <YearlyPressure />;
-    //     }
 
     default:
       return null;
