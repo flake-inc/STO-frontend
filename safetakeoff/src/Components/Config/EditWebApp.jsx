@@ -39,6 +39,18 @@ export default function EditWebApp() {
   const [data, setData] = useState([]);
   const [feature, setfeature] = useState('dataset');
   const [email, setemail] = useState(null);
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {  
+
+    if (token == null){
+      toast.error('')
+
+      navigate('/login')
+    }
+
+
+}, []);
 
 
 
@@ -46,7 +58,6 @@ export default function EditWebApp() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [selectedFile, setSelected] = useState(null);
-  const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
 
@@ -190,18 +201,6 @@ Add            </Button>
             
           </Box>
 
-        {/* <Button
-          className="buttons3"
-          type="submit"
-          size="lg"
-          color = 'secondary'
-          variant="contained"
-          // style={{paddingLeft:'20'}}
-          sx={{ mt: 3, mb: 2 }}
-          onClick={OnSubmit}
-        >
-          Add{" "}
-        </Button> */}
        
       </div>
     </Container>);
@@ -258,8 +257,8 @@ Add            </Button>
 
    
 
-
-    axios
+    if(fileName!=null)
+    {axios
       .post("http://127.0.0.1:5000/upload",formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -291,7 +290,11 @@ Add            </Button>
 
 
         }
-      });
+      });}
+      else{
+        toast.error("No file selected");
+      }
+
 
     event.preventDefault();
   };

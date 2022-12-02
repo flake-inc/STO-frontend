@@ -9,6 +9,7 @@ import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
 import Cards from "./cards";
 import YearlyTemp1 from "./TemperatureCharts/yearlytemp1";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -87,6 +88,8 @@ function DashboardContent() {
   const [press, setPress] = useState([]);
   const [cloud, setCloud] = useState([]);
   const [preddata, setpreddata] = useState([]);
+  const navigate = useNavigate();
+
 
   const today = formatDate(new Date());
   console.log(today);
@@ -107,6 +110,11 @@ function DashboardContent() {
     //   Normal and Anomaly Doughnut chart setup using useeffect
     const access_token = sessionStorage.getItem("token");
     console.log(access_token);
+
+    if (access_token ===null){
+      navigate('/login')
+
+    }
 
 
     axios
@@ -132,6 +140,9 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
         }
       });
   }, []);
