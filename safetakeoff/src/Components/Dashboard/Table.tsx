@@ -22,13 +22,6 @@ const options = {
 var dataarray = [];
 
 export default function DangeredTable() {
-  const [Model, set_model] = useState([]);
-  const [Make, set_make] = useState([]);
-  const [Category, set_category] = useState([]);
-  const [Year, set_year] = useState([]);
-  const [REG, set_reg] = useState([]);
-  const [data, set_data] = useState([{}]);
-
 
   useEffect(() => {
     axios
@@ -62,13 +55,13 @@ export default function DangeredTable() {
           console.log(error.response.headers);
         }
       });
-  }, [dataarray]);
+  }, []);
   console.log("data array",dataarray)
 
   return (
     <>
       <MUIDataTable
-        // title={"Aircrafts list"}
+        title={"Dangered Aircrafts in this hour!"}
         data={dataarray}
         columns={columns}
         options={options}

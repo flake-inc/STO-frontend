@@ -302,33 +302,17 @@ function DashboardContent() {
                   ))}
                 </div>
               </MainCard>
-              <Grid
-                item
-                // style={{
-                //   width: "100",
-                //   height: "400",
-                // }}
-              >
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  marginBottom={3}
-                  align="center"
-                  color="text.primary"
-                >
-                  Dangered Aircrafts Today!
-                </Typography>
-
+              <Grid>
                 <DangeredTable />
               </Grid>
 
               <Typography
-                component="h3"
-                variant="h3"
-                marginBottom={3}
-                marginTop={3}
+                component="h5"
+                variant="h5"
                 align="center"
-                color="text.primary"
+                color="text.secondary"
+                paddingTop={5}
+                gutterBottom
               >
                 Select the feature:
               </Typography>

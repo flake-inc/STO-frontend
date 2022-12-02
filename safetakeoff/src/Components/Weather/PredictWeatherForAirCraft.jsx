@@ -116,19 +116,6 @@ export default function WeatherPredictGeneral() {
                 <Cards />
               </MainCard>
 
-              <Grid item>
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  marginBottom={3}
-                  align="center"
-                  color="text.primary"
-                >
-                  Dangered Aircrafts Today!
-                </Typography>
-
-                <DangeredTable />
-              </Grid>
             </Grid>
 
             <Grid
