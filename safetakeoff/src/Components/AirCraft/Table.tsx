@@ -12,10 +12,8 @@ var columns = [
   "Total Seats",
   "Temperature Threshold",
   "Wind Speed Threshold",
-  "Relative Humidity Threshold",
-  "Solar Radiation Threshold",
-  "Thermal Radiation Threshold",
   "Total Cloud Cover Threshold",
+  "Pressure"
 ];
 
 const data = JsonData;
