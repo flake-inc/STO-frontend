@@ -29,6 +29,8 @@ const styles = {
     backgroundImage: `url(${Image})`
   }
 };
+
+
 export default function Login() {
    const navigate = useNavigate();
 
@@ -57,13 +59,16 @@ export default function Login() {
   })
     .then((response) => {
       sessionStorage.setItem("token", response.data.access_token);
-      console.log(response.data.access_token)
+      sessionStorage.setItem("usertype", response.data.usertype);
+
+      console.log(response.data.usertype)
 
       // history.push('/');
 
       // document.location.reload();
       // const res = response.data;
-      navigate('/')
+      navigate("/")
+     
       
     })
     .catch((error) => {

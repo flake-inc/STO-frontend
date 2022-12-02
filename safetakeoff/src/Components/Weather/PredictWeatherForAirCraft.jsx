@@ -21,9 +21,23 @@ import BasicTable from "../AirCraft/Table";
 import DangeredTable from "./Table";
 import { useSelector, useDispatch } from 'react-redux'
 
+
+
+function Userselect(usertype){
+
+  // console.log(usertype)
+  if (usertype.usertype=='admin'){
+    return <ResponsiveAppBar/>
+  }else{
+    return <StaffAppbar/>;
+  }
+}
+
 export default function WeatherPredictGeneral() {
   const date1 = useSelector((state)=>state.date.date)
   const option1 = useSelector((state)=>state.date.option)
+  const usertype = sessionStorage.getItem('usertype')
+
 
   const { state } = useLocation();
   const options = {
@@ -64,7 +78,7 @@ export default function WeatherPredictGeneral() {
         </video>
       </div>
 
-      <ResponsiveAppBar />
+      <Userselect usertype={usertype} />
 
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, pt: 3, pb: 3 }}>

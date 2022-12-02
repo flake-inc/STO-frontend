@@ -60,6 +60,7 @@ import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
 import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
 import DangeredTable from "./Table";
 import Barometer from "./PressureGauge";
+import StaffAppbar from "./staffappbar";
 
 // sales report status
 const status = [
@@ -77,6 +78,16 @@ const status = [
   },
 ];
 
+function Userselect(usertype){
+
+  // console.log(usertype)
+  if (usertype.usertype=='admin'){
+    return <ResponsiveAppBar/>
+  }else{
+    return <StaffAppbar/>;
+  }
+}
+
 function DashboardContent() {
   const [value, setValue] = useState("trend");
   const [slot, setSlot] = useState("month");
@@ -89,6 +100,7 @@ function DashboardContent() {
   const [cloud, setCloud] = useState([]);
   const [preddata, setpreddata] = useState([]);
   const navigate = useNavigate();
+  const usertype = sessionStorage.getItem('usertype')
 
 
   const today = formatDate(new Date());
@@ -179,8 +191,7 @@ function DashboardContent() {
         </video>
       </div>
 
-      <ResponsiveAppBar />
-
+<Userselect usertype={usertype}/>
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, pt: 3, pb: 3 }}>
           {/* Hero unit */}

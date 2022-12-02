@@ -40,11 +40,11 @@ export default function EditWebApp() {
   const [feature, setfeature] = useState('dataset');
   const [email, setemail] = useState(null);
   const token = sessionStorage.getItem("token");
+  const usertype = sessionStorage.getItem("usertype");
 
   useEffect(() => {  
 
-    if (token == null){
-      toast.error('')
+    if (token == null | usertype =='staff'){
 
       navigate('/login')
     }
