@@ -9,6 +9,7 @@ import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
 import Cards from "./cards";
 import YearlyTemp1 from "./TemperatureCharts/yearlytemp1";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -58,6 +59,7 @@ import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
 import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
 import DangeredTable from "./Table";
 import Barometer from "./PressureGauge";
+import StaffAppbar from "./staffappbar";
 
 import AirCraftTemperatureChart from "./AirCraftCharts/TemperatureChart";
 import AirCraftPressureChart from "./AirCraftCharts/PressureChart";
@@ -80,6 +82,16 @@ const status = [
   },
 ];
 
+function Userselect(usertype){
+
+  // console.log(usertype)
+  if (usertype.usertype=='admin'){
+    return <ResponsiveAppBar/>
+  }else{
+    return <StaffAppbar/>;
+  }
+}
+
 function DashboardContent() {
   const [value, setValue] = useState("trend");
   const [slot, setSlot] = useState("month");
@@ -91,6 +103,9 @@ function DashboardContent() {
   const [press, setPress] = useState([]);
   const [cloud, setCloud] = useState([]);
   const [preddata, setpreddata] = useState([]);
+  const navigate = useNavigate();
+  const usertype = sessionStorage.getItem('usertype')
+
 
   const today = formatDate(new Date());
   console.log(today);
@@ -109,15 +124,26 @@ function DashboardContent() {
 
   useEffect(() => {
     //   Normal and Anomaly Doughnut chart setup using useeffect
+    const access_token = sessionStorage.getItem("token");
+    console.log(access_token);
+
+    if (access_token ===null){
+      navigate('/login')
+
+    }
+
 
     axios
       .get("http://127.0.0.1:5000/getpred", {
         headers: {
+
+          'Authorization': `Bearer ${access_token}`,
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
+        // console.log()
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -130,13 +156,13 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
         }
       });
   }, []);
-  // console.log(time)
-  // console.log(temperature)
-  // console.log(cloud)
-  // console.log(press)
+  
   console.log(preddata);
 
   return (
@@ -169,8 +195,7 @@ function DashboardContent() {
         </video>
       </div>
 
-      <ResponsiveAppBar />
-
+<Userselect usertype={usertype}/>
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, pt: 3, pb: 3 }}>
           {/* Hero unit */}

@@ -11,18 +11,55 @@ import * as XLSX from "xlsx";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import { toast,ToastContainer } from 'react-toastify';
+import {
+  Stack,
+  TextField,
+   FormControlLabel
+
+
+} from "@mui/material";
+
 import 'react-toastify/dist/ReactToastify.css';
-// import { Toast } from 'primereact/toast';
+import { Navigate, useNavigate } from "react-router-dom";
+
+// toast.configure()
+
+
 
 
 export default function EditWebApp() {
+
+  const [usererror,setusererror] = useState(false)
+  const [usererrormsge,setusererrormsge] =useState(null)
+
+
+  const [passerror,setpasserror] = useState(false)
+  const [passerrormsge,setpasserrormsge] =useState(null)
   const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
+  const [feature, setfeature] = useState('dataset');
+  const [email, setemail] = useState(null);
+  const token = sessionStorage.getItem("token");
+  const usertype = sessionStorage.getItem("usertype");
+
+  useEffect(() => {  
+
+    if (token == null | usertype =='staff'){
+
+      navigate('/login')
+    }
+
+
+}, []);
+
+
+
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [selectedFile, setSelected] = useState(null);
-  const toast = useRef(null);
+  const navigate = useNavigate();
+
 
   // process CSV data
   const processData = (dataString) => {
@@ -66,6 +103,117 @@ export default function EditWebApp() {
     setColumns(columns);
   };
 
+  function ElementSelect (c) {
+
+    console.log(c.c)
+
+    if (c.c == 'dataset'){
+
+      return(
+      <Container>
+      <div>
+
+      <Typography
+      component="h5"
+      variant="h5"
+      align="left"
+      color="text.primary"
+      gutterBottom
+      marginTop={3}
+    >
+      Add new dataset
+    </Typography>
+        <input
+          type="file"
+          required = "true"
+          accept=".csv,.xlsx,.xls"
+          onChange={handleFileUpload}
+        />
+        <Button
+          className="buttons3"
+          type="submit"
+          size="lg"
+          color = 'secondary'
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={OnSubmit}
+        >
+          Upload{" "}
+        </Button>
+        <DataTable
+          pagination
+          highlightOnHover
+          columns={columns}
+          data={data}
+        />
+      </div>
+    </Container>);
+
+       } else if (c.c== 'staff'){ 
+
+       return(<Container>
+      <div>
+
+      <Typography
+      component="h5"
+      variant="h5"
+      align="left"
+      color="text.primary"
+      gutterBottom
+      marginTop={3}
+    >
+      Add new staff
+    </Typography>
+    <Box
+            component="form"
+            onSubmit={HandleStaffSubmit}
+            Validate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+           
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+Add            </Button>
+            
+          </Box>
+
+       
+      </div>
+    </Container>);
+
+
+      
+
+    }
+
+
+    }
+  
+
   // handle file upload
   const handleFileUpload = (e) => {
     setFile(e.target.files);
@@ -107,9 +255,13 @@ export default function EditWebApp() {
     // console.log(data1);
     // console.log(data1);
 
-    axios
+   
+
+    if(fileName!=null)
+    {axios
       .post("http://127.0.0.1:5000/upload",formData, {
         headers: {
+          'Authorization': `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
      
@@ -117,7 +269,7 @@ export default function EditWebApp() {
       .then((response) => {
         const res = response.data;
         console.log(res)
-        // toast.success("File successfully uploaded");
+        toast.success("File successfully uploaded");
         // window. location. reload(false);
                 // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
       })
@@ -125,11 +277,96 @@ export default function EditWebApp() {
         if (error.response) {
           console.log(error.response.status);
           console.log(error.response.headers);
+
+          if(token==null){
+            toast.error("Authentication Error: Session Expired");
+            sessionStorage.removeItem("token");
+            // navigate('/login')
+
+
+        }else{
+            toast.error("Incorrect file name");
         }
-      });
+
+
+        }
+      });}
+      else{
+        toast.error("No file selected");
+      }
+
 
     event.preventDefault();
   };
+
+
+const HandleStaffSubmit =(e)=>{
+
+  e.preventDefault();
+  const data = new FormData(e.currentTarget);
+  console.log({
+    email: data.get("email"),
+    password: data.get("password"),
+  });
+  console.log(token);
+  const formData = new FormData();
+  formData.append('email',data.get("email"))
+  formData.append('password',data.get("password"))
+
+
+  for (var key of data.entries()) {
+    console.log(key[0] + ', ' + key[1]);
+}
+   
+
+  axios.post('http://127.0.0.1:5000/addstaff',{
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    email: data.get('email'),
+    password: data.get("password")
+  
+})
+  .then((response) => {
+
+    console.log(response);
+    toast.success(response.data.message);
+  
+    
+  })
+  .catch((error) => {
+    if (error.response) {
+
+      console.log(error.response.data.error);
+
+      if (error.response.data.error=='User already exists'){
+        setusererror(true)
+        setusererrormsge('User already exists' );
+        setpasserror(false)
+        toast.error("User already exists");
+
+
+
+      }
+
+      else if(token==null){
+        toast.error("Authentication Error: Session Expired");
+        sessionStorage.removeItem("token");
+        // navigate('/login')
+
+
+    }
+      
+      
+    }
+  });
+
+
+  
+}
+  
+  console.log(email)
 
   return (
     <>
@@ -162,7 +399,11 @@ export default function EditWebApp() {
         </video>
       </div>
       <ResponsiveAppBar />
-      <ToastContainer />
+
+      <ToastContainer
+    autoClose={5000}
+    hideProgressBar={true}
+/>
 
       <Container
         sx={{
@@ -196,31 +437,44 @@ export default function EditWebApp() {
                 Configurations
               </Typography>
 
-              <Container>
-                <div>
-                  <input
-                    type="file"
-                    accept=".csv,.xlsx,.xls"
-                    onChange={handleFileUpload}
-                  />
-                  <Button
-                    className="buttons3"
-                    type="submit"
-                    size="lg"
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    onClick={OnSubmit}
-                  >
-                    Upload{" "}
-                  </Button>
-                  <DataTable
-                    pagination
-                    highlightOnHover
-                    columns={columns}
-                    data={data}
-                  />
-                </div>
-              </Container>
+              <Stack direction="row" alignItems="center" paddingLeft= {10} spacing={1}>
+                      <Button
+                        size="small"
+                        onClick={() => setfeature("dataset")}
+                        // color={slot === "month" ? "primary" : "secondary"}
+                        // variant={slot === "month" ? "outlined" : "text"}
+                        style={{
+                          fontSize: 14,
+                          fontStyle: "bold",
+                          backgroundColor: "#0a0a23",
+                          color: "#fff",
+                          borderRadius: "10px",
+                          boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                          transition: "0.25w",
+                        }}
+                      >
+                        Add dataset
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={() => setfeature("staff")}
+                        // color={slot === "year" ? "primary" : "secondary"}
+                        // variant={slot === "year" ? "outlined" : "text"}
+                        style={{
+                          fontSize: 14,
+                          fontStyle: "bold",
+                          backgroundColor: "#0a0a23",
+                          color: "#fff",
+                          borderRadius: "10px",
+                          boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
+                          transition: "0.25w",
+                        }}
+                      >
+                        Add staff
+                      </Button>
+                    </Stack>
+
+            <ElementSelect c= {feature} />
             </Paper>
           </Box>
         </main>
@@ -228,5 +482,9 @@ export default function EditWebApp() {
 
       <StickyFooter />
     </>
+
+    
   );
+
+ 
 }

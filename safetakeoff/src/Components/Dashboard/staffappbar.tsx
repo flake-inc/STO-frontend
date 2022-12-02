@@ -18,15 +18,16 @@ import axios from "axios";
 import { useState } from "react";
 
 
-const pages = ["Check Weather", "Flights", "Configurations"];
+const pages = ["Check Weather", "Flights"];
 
-export default function ResponsiveAppBar() {
+export default function StaffAppbar() {
 
   const [user, setUser] = useState();
 
   const handleLogout = () => {
    
         sessionStorage.removeItem("token")
+        sessionStorage.removeItem('usertyoe')
         document.location = '/login';
    
     
