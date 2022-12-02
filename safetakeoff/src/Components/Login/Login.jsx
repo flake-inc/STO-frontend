@@ -56,8 +56,13 @@ export default function Login() {
 
   })
     .then((response) => {
-      const res = response.data;
-      console.log(response.data.Message)
+      sessionStorage.setItem("token", response.data.access_token);
+      console.log(response.data.access_token)
+
+      // history.push('/');
+
+      // document.location.reload();
+      // const res = response.data;
       navigate('/')
       
     })

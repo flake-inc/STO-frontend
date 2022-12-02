@@ -105,15 +105,21 @@ function DashboardContent() {
 
   useEffect(() => {
     //   Normal and Anomaly Doughnut chart setup using useeffect
+    const access_token = sessionStorage.getItem("token");
+    console.log(access_token);
+
 
     axios
       .get("http://127.0.0.1:5000/getpred", {
         headers: {
+
+          'Authorization': `Bearer ${access_token}`,
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
+        // console.log()
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -129,10 +135,7 @@ function DashboardContent() {
         }
       });
   }, []);
-  // console.log(time)
-  // console.log(temperature)
-  // console.log(cloud)
-  // console.log(press)
+  
   console.log(preddata);
 
   return (

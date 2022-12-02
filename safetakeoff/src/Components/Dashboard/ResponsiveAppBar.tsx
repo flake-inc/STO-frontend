@@ -24,29 +24,17 @@ export default function ResponsiveAppBar() {
 
   const [user, setUser] = useState();
 
+  const handleLogout = () => {
+   
+        sessionStorage.removeItem("token")
+        document.location = '/login';
+   
+    
+}
 
 
 
-  useEffect(() => {
-    axios.get('http://127.0.0.1:5000/info',{
-      headers: {
-          'Content-Type': 'application/json',
-      },
-     
 
-  })
-    .then((response) => {
-      const res = response.data;
-      console.log(response.data.Message)
-      setUser(response.data.email)
-      navigate('/login')
-      
-    })
-    .catch((error) => {
-      console.log("Not authenticated");
-      // navigate('/login')
-    });
-  }, []);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -72,27 +60,27 @@ export default function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const handleLogout =()=>{
-    axios.get('http://127.0.0.1:5000/logout',{
-      headers: {
-          'Content-Type': 'application/json',
-      },
+  // const handleLogout =()=>{
+  //   axios.get('http://127.0.0.1:5000/logout',{
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //     },
      
 
-  })
-    .then((response) => {
+  // })
+  //   .then((response) => {
      
-      navigate('/login')
+  //     navigate('/login')
       
-    })
-    .catch((error) => {
-      if (error.response) {
+  //   })
+  //   .catch((error) => {
+  //     if (error.response) {
 
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      }
-    });
-  }
+  //       console.log(error.response.status);
+  //       console.log(error.response.headers);
+  //     }
+  //   });
+  // }
 
   const routeChange = (e) => {
     if (e == "Check Weather") {
