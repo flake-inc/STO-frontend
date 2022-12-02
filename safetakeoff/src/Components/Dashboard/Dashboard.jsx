@@ -39,7 +39,6 @@ import MonthlyPressure from "./PressureCharts/MonthlyPressure";
 import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
 import AirCraftPieChart from "./AirCraftCharts/AirCraftPieChart";
-import AirCraftCategories from "./AirCraftCharts/Categories";
 
 import TempTrend from "./TemperatureCharts/TempTrend";
 import CloudTrend from "./CloudCoverCharts/CloudCoverTrend";
@@ -59,6 +58,11 @@ import CloudMinMaxMean from "./CloudCoverCharts/CloudMinMaxMean";
 import PressMinMaxMean from "./PressureCharts/PressMinMaxMean";
 import DangeredTable from "./Table";
 import Barometer from "./PressureGauge";
+
+import AirCraftTemperatureChart from "./AirCraftCharts/TemperatureChart";
+import AirCraftPressureChart from "./AirCraftCharts/PressureChart";
+import AirCraftWindspeedChart from "./AirCraftCharts/WindspeedChart";
+import AirCraftCloudChart from "./AirCraftCharts/CloudChart";
 
 // sales report status
 const status = [
@@ -199,29 +203,29 @@ function DashboardContent() {
               paddingRight={2}
               paddingBottom={5}
             >
-              <Stack
-                direction="row"
-                alignItems="center"
-                className="Gauges"
-              >
-                <Grid style ={{width:'200px'}}item sx={{ mx: "auto" }}>
-                  <TempGauge id="dial7" value={20} title="Average Temperature" />
+              <Stack direction="row" alignItems="center" className="Gauges">
+                <Grid style={{ width: "200px" }} item sx={{ mx: "auto" }}>
+                  <TempGauge
+                    id="dial7"
+                    value={20}
+                    title="Average Temperature"
+                  />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                <WindGauge
-            id="dial5"
-            value={20}
-            title="Average Wind Speed"
-          />
+                  <WindGauge id="dial5" value={20} title="Average Wind Speed" />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                  <CloudCover id="dial4" value={20} title="Average Total Cloud Cover" />
+                  <CloudCover
+                    id="dial4"
+                    value={20}
+                    title="Average Total Cloud Cover"
+                  />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                <Barometer id="dial9" value={100} title="" />
+                  <Barometer id="dial9" value={100} title="" />
                 </Grid>
               </Stack>
 
@@ -229,63 +233,9 @@ function DashboardContent() {
                 <Statistics feature={feature} />
               </Grid>
 
-              <Grid item>
-                <Grid
-                  item
-                  style={{
-                    width: "100",
-                    height: "400",
-                  }}
-                >
-                  <Typography
-                    component="h5"
-                    variant="h5"
-                    marginBottom={3}
-                    align="center"
-                    color="text.primary"
-                  >
-                    Dangered Aircrafts Today!
-                  </Typography>
-
-                  <DangeredTable />
-                </Grid>
-              </Grid>
+              <Grid item></Grid>
             </Grid>
-            <Grid item>
-
-            <MainCard className="weathercontainer" content={false}>
-              {/* <Cards  /> */}
-
-              <Typography
-                component="h3"
-                variant="h3"
-                align="center"
-                color="text.secondary"
-                paddingTop={5}
-                gutterBottom
-              >
-                Weather Conditions for last 24 Hours
-              </Typography>
-              <div
-                className="cardcontainer"
-                spacing={5}
-                style={{ height: "200px" }}
-              >
-                {console.log()}
-                {preddata.map((row) => (
-                  <WeatherCard
-                    style={{ width: "200px" }}
-                    time={row.time}
-                    temperature={row.temperature}
-                    cloud={row.cloudcover}
-                    wind={row.windspeed}
-                    pressure={row.pressure}
-                  />
-                ))}
-              </div>
-            </MainCard>
-            </Grid>
-
+            <Grid item></Grid>
 
             <Box
               sx={{
@@ -298,9 +248,60 @@ function DashboardContent() {
               }}
             >
               <Typography
+                component="h5"
+                variant="h5"
+                align="center"
+                color="text.secondary"
+                paddingTop={5}
+                gutterBottom
+              >
+                Weather Conditions for last 24 Hours
+              </Typography>
+              <MainCard className="weathercontainer">
+                {/* <Cards  /> */}
+
+                <div
+                  className="cardcontainer"
+                  spacing={5}
+                  style={{ height: "250px" }}
+                >
+                  {preddata.map((row) => (
+                    <WeatherCard
+                      style={{ width: "200px" }}
+                      time={row.time}
+                      temperature={row.temperature}
+                      cloud={row.cloudcover}
+                      wind={row.windspeed}
+                      pressure={row.pressure}
+                    />
+                  ))}
+                </div>
+              </MainCard>
+              <Grid
+                item
+                // style={{
+                //   width: "100",
+                //   height: "400",
+                // }}
+              >
+                <Typography
+                  component="h5"
+                  variant="h5"
+                  marginBottom={3}
+                  align="center"
+                  color="text.primary"
+                >
+                  Dangered Aircrafts Today!
+                </Typography>
+
+                <DangeredTable />
+              </Grid>
+
+              <Typography
                 component="h3"
                 variant="h3"
                 marginBottom={3}
+                marginTop={3}
                 align="center"
                 color="text.primary"
               >
@@ -471,7 +472,7 @@ function DashboardContent() {
               </Grid>
             </Grid>
 
-            <GraphSelectTrend feature={feature} />
+            {/* <GraphSelectTrend feature={feature} /> */}
 
             <hr />
 
@@ -486,7 +487,10 @@ function DashboardContent() {
               About Aircrafts
             </Typography>
 
-            <AirCraftCategories />
+            <AirCraftTemperatureChart />
+            <AirCraftPressureChart />
+            <AirCraftCloudChart />
+            <AirCraftWindspeedChart />
             <AirCraftPieChart />
             <hr />
           </Paper>
@@ -565,7 +569,7 @@ function GraphSelectTrend({ feature }) {
       return <CloudTrend />;
 
     case "Pressure":
-      return <Barometer/>
+      return <Barometer />;
 
     default:
       return <TempTrend />;

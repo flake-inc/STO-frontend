@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import zoomPlugin from "chartjs-plugin-zoom";
@@ -23,7 +23,7 @@ ChartJS.register(
   Legend
 );
 
-export default function AirCraftCategories() {
+export default function AirCraftTemperatureChart() {
   const [lineData, set_lineData] = useState({ datasets: [] });
   const [lineOptions, set_lineOptions] = useState({});
 
@@ -43,26 +43,12 @@ export default function AirCraftCategories() {
           labels: res.Model,
           datasets: [
             {
-              label: "Temperature Threshold",
-              data: res.Temperature_t,
-              borderColor: "rgba(54, 162, 235, 1)",
-              borderWidth: 3,
-              backgroundColor: ["rgba(54, 162, 235, 1)"],
-            },
-            {
-              label: "WindSpeed Threshold",
-              data: res.Wind_t,
-              backgroundColor: ["#0a0a23"],
-              borderColor: "#0a0a23",
-              borderWidth: 3,
-            },
-            {
-              label: "Total Cloud Cover Threshold",
-              data: res.Cloud_t,
-              backgroundColor: ["rgba(255, 99, 132, 1)"],
-              borderColor: "rgba(255, 99, 132, 1)",
-              borderWidth: 3,
-            },
+                label: "Temperature Threshold",
+                data: res.Temperature_t,
+                borderColor: "#0a0a23",
+                borderWidth: 1,
+                backgroundColor: ["#0a0a23"],
+              },
           ],
         });
       })
@@ -79,9 +65,7 @@ export default function AirCraftCategories() {
         legend: { display: true, position: position },
 
         title: {
-          display: true,
-          text: " Aircrafts thresholds",
-          position: "bottom",
+          display: false,
         },
         zoom: {
           pan: {
@@ -122,5 +106,5 @@ export default function AirCraftCategories() {
     });
   }, []);
 
-  return <Bar data={lineData} options={lineOptions} height={50} width={200} />;
+  return <Line data={lineData} options={lineOptions} height={50} width={200} />;
 }

@@ -20,7 +20,7 @@ const Barometer = ({ id, value, title }) => {
   return (
     <div style={styles.dial}>
       <Chart
-        height={120}
+        height={150}
         chartType="Gauge"
         loader={<div></div>}
         data={[
