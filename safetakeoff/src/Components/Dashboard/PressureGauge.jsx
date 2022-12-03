@@ -3,7 +3,8 @@ import { Chart } from "react-google-charts";
 
 const styles = {
   dial: {
-    width: `auto`,
+    
+    width: `200px`,
     height: `auto`,
     color: "#000",
     border: "0.5px solid #fff",
@@ -12,7 +13,7 @@ const styles = {
   title: {
     fontSize: "0.7em",
     color: "#000",
-    marginTop:'200px'
+    marginTop: '40px'
   }
 };
 
@@ -20,23 +21,26 @@ const Barometer = ({ id, value, title }) => {
   return (
     <div style={styles.dial}>
       <Chart
-        height={150}
+        height={160}
         chartType="Gauge"
         loader={<div></div>}
         data={[
           ["Label", "Value"],
-          [title, Number(value)]
+          ["", Number(value)]
         ]}
         options={{
-          redFrom: 90,
-          redTo: 200,
-          yellowFrom: 50,
-          yellowTo: 90,
+          redFrom: 103000,
+          redTo: 105000,
+          yellowFrom:101000,
+          yellowTo: 103000,
           minorTicks: 5,
-          min: -200,
-          max: 200
+          min: 95000,
+          max: 105000
         }}
       />
+       <div style={styles.title}>
+        {title}: {value} Pa
+      </div>
     </div>
   );
 };

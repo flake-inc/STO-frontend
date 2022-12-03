@@ -91,6 +91,8 @@ function DashboardContent() {
   const [press, setPress] = useState([]);
   const [cloud, setCloud] = useState([]);
   const [preddata, setpreddata] = useState([]);
+  const [avgdata, setavgdata] = useState([]);
+
   const navigate = useNavigate();
   const usertype = sessionStorage.getItem('usertype')
 
@@ -147,9 +149,120 @@ function DashboardContent() {
           }
         }
       });
+
+      axios
+      .get("http://127.0.0.1:5000/tempminmaxavg", {
+        headers: {
+
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        console.log(response.data)
+        // setTemperature(...temperature,res.temp)
+        // setWind(...wind,res.wind)
+        // setCloud(...cloud,res.cloud)
+        // setPress(...press,res.press)
+        // setdate(...time,res.time)
+        setTemperature(...temperature, res);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
+        }
+      });
+
+      
+      axios
+      .get("http://127.0.0.1:5000/windminmaxavg", {
+        headers: {
+
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        console.log(response.data)
+        // setTemperature(...temperature,res.temp)
+        // setWind(...wind,res.wind)
+        // setCloud(...cloud,res.cloud)
+        // setPress(...press,res.press)
+        // setdate(...time,res.time)
+        setWind(...wind, res);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
+        }
+      });
+      axios
+      .get("http://127.0.0.1:5000/pressminmaxavg", {
+        headers: {
+
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        console.log(response.data)
+        // setTemperature(...temperature,res.temp)
+        // setWind(...wind,res.wind)
+        // setCloud(...cloud,res.cloud)
+        // setPress(...press,res.press)
+        // setdate(...time,res.time)
+        setPress(...press, res);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
+        }
+      });
+      axios
+      .get("http://127.0.0.1:5000/cloudminmaxavg", {
+        headers: {
+
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        console.log(response.data)
+        // setTemperature(...temperature,res.temp)
+        // setWind(...wind,res.wind)
+        // setCloud(...cloud,res.cloud)
+        // setPress(...press,res.press)
+        // setdate(...time,res.time)
+        setCloud(...cloud, res);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
+        }
+      });
   }, []);
+  console.log(wind)
   
-  console.log(preddata);
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -214,34 +327,35 @@ function DashboardContent() {
               paddingRight={2}
               paddingBottom={5}
             >
-              <Stack direction="row" alignItems="center" className="Gauges">
-                <Grid style={{ width: "200px" }} item sx={{ mx: "auto" }}>
+              <Stack direction="row" alignItems="center" marginLeft='10px' className="Gauges">
+                <Grid item sx={{ mx: "auto" }}>
                   <TempGauge
+                    className="temp"
                     id="dial7"
-                    value={20}
+                    value={parseFloat(temperature.avg).toFixed(2)}
                     title="Average Temperature"
                   />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                  <WindGauge id="dial5" value={20} title="Average Wind Speed" />
+                  <WindGauge id="dial5" value={parseFloat(wind.avg).toFixed(2)} title="Average Wind Speed" />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
                   <CloudCover
                     id="dial4"
-                    value={20}
+                    value={parseFloat(cloud.avg).toFixed(2)*100}
                     title="Average Total Cloud Cover"
                   />
                 </Grid>
 
                 <Grid item sx={{ mx: "auto" }}>
-                  <Barometer id="dial9" value={100} title="" />
+                  <Barometer id="dial9" value={parseFloat(press.avg).toFixed(2)} title="Average Pressure" />
                 </Grid>
               </Stack>
 
               <Grid sx={{ p: 3, pb: 0 }}>
-                <Statistics feature={feature} />
+                <Statistics feature={feature} temperature={temperature} wind={wind} cloud={cloud} pressure={press} />
               </Grid>
 
               <Grid item></Grid>
@@ -572,27 +686,22 @@ function GraphSelectAircraft({ feature }) {
   }
 }
 
-function Statistics({ feature }) {
+function Statistics({ feature,temperature,pressure,wind,cloud }) {
   switch (feature) {
     case "Temperature":
       return (
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Temperature"
-            count="34.2ºC"
-            percentage={10.3}
-            isLoss="true"
-            extra="1.5°C"
+            count={parseFloat(temperature.max).toFixed(2)+"°C"}
+
             state="Temperature"
-            event="decreases"
           />
           <AnalyticEcommerce
             title="Minimum Temperature"
-            count="12.56ºC"
-            percentage={7.3}
-            extra="2°C"
+            count={parseFloat(temperature.min).toFixed(2)+"°C"}
+            
             state="Temperature"
-            event="increases"
           />
         </Stack>
       );
@@ -602,20 +711,16 @@ function Statistics({ feature }) {
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Wind Speed"
-            count="4.83kmph"
-            percentage={10.3}
-            isLoss="true"
-            extra="2kmph"
+            count={parseFloat(wind.max).toFixed(2)+" m/s"}
+           
             state="Wind speed"
-            event="decreases"
+           
           />
           <AnalyticEcommerce
             title="Minimum Wind Speed"
-            count="3.83kmph"
-            percentage={7.3}
-            extra="1kmph"
+            count={parseFloat(wind.min).toFixed(2)+" m/s"}
+         
             state="Wind speed"
-            event="increases"
           />
         </Stack>
       );
@@ -624,20 +729,16 @@ function Statistics({ feature }) {
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Cloud Cover"
-            count="0.85"
-            percentage={0.1}
-            isLoss="true"
-            extra="0.085"
+            count={parseFloat(cloud.max).toFixed(2)*100+"%"}
+          
             state="CloudCover"
-            event="decreases"
           />
           <AnalyticEcommerce
             title="Minimum Cloud Cover"
-            count="0.54"
-            percentage={0.7}
-            extra="0.02"
+            count={parseFloat(cloud.min).toFixed(2)*100+"%"}
+          
             state="CloudCover"
-            event="increases"
+           
           />
         </Stack>
       );
@@ -647,20 +748,15 @@ function Statistics({ feature }) {
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Pressure"
-            count="101111.4Pa"
-            percentage={10.3}
-            isLoss="true"
-            extra="100Pa"
+            count={parseFloat(pressure.max).toFixed(2)+"Pa"}
+       
             state="Pressure"
-            event="decreases"
+           
           />
           <AnalyticEcommerce
             title="Minimum Pressure"
-            count="100000Pa"
-            percentage={7.3}
-            extra="200"
+            count={parseFloat(pressure.min).toFixed(2)+"Pa"}
             state="Pressure"
-            event="increases"
           />
         </Stack>
       );

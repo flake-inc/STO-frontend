@@ -4,17 +4,16 @@ import GaugeChart from "react-gauge-chart";
 const styles = {
   dial: {
     display: "inline-block",
-    width: `300px`,
+    width: `auto`,
     height: `auto`,
     color: "#000",
     border: "0.5px solid #fff",
-    padding: "2px"
   },
   title: {
     fontSize: "0.7em",
     color: "#000",
-    // marginTop:"60px",
-    // marginLeft:"60px"
+    marginTop:"60px",
+    marginLeft:"60px"
 
   }
 };
@@ -41,7 +40,7 @@ const CloudCover = ({ id, value, title }) => {
         needleColor={"#5392ff"}
         formatTextValue={(value) => value}
       />
-      <div style={styles.title}>{title}</div>
+      <div style={styles.title}>{title}: {value}%</div>
     </div>
   );
 };

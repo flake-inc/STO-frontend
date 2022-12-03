@@ -12,7 +12,7 @@ const styles = {
   },
   title: {
     fontSize: "0.7em",
-    marginLeft: '100px',
+    marginLeft: '70px',
     color: "#000"
   }
 };
@@ -21,7 +21,7 @@ const WindGauge = ({ id, value, title }) => {
   return (
     <div style={styles.dial}>
       <ReactSpeedometer
-        maxValue={120}
+        maxValue={30}
         minValue={0}
         height={190}
         width={290}
@@ -33,7 +33,7 @@ const WindGauge = ({ id, value, title }) => {
         segments={10}
         endColor="blue"
       />
-      <div style={styles.title}>{title}</div>
+      <div style={styles.title}>{title}: {value}m/s</div>
     </div>
   );
 };
