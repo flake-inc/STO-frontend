@@ -55,7 +55,6 @@ export default function AirCraftList() {
                 backgroundColor: "#0a0a23",
                 color: "#fff",
                 borderRadius: "10px",
-                boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
                 transition: "0.25w",
                 margin: "10px",
               }}
