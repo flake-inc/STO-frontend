@@ -1,5 +1,5 @@
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import StickyFooter from "../Public/Copyright/Copyright";
 import Box from "@mui/material/Box";
 import vid from "../../Assets/large_aviation.mp4";
@@ -10,56 +10,37 @@ import Paper from "@mui/material/Paper";
 import * as XLSX from "xlsx";
 import DataTable from "react-data-table-component";
 import axios from "axios";
-import { toast,ToastContainer } from 'react-toastify';
-import {
-  Stack,
-  TextField,
-   FormControlLabel
+import { toast, ToastContainer } from "react-toastify";
+import { Stack, TextField, FormControlLabel } from "@mui/material";
 
-
-} from "@mui/material";
-
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { Navigate, useNavigate } from "react-router-dom";
 
 // toast.configure()
 
-
-
-
 export default function EditWebApp() {
+  const [usererror, setusererror] = useState(false);
+  const [usererrormsge, setusererrormsge] = useState(null);
 
-  const [usererror,setusererror] = useState(false)
-  const [usererrormsge,setusererrormsge] =useState(null)
-
-
-  const [passerror,setpasserror] = useState(false)
-  const [passerrormsge,setpasserrormsge] =useState(null)
+  const [passerror, setpasserror] = useState(false);
+  const [passerrormsge, setpasserrormsge] = useState(null);
   const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
-  const [feature, setfeature] = useState('dataset');
+  const [feature, setfeature] = useState("dataset");
   const [email, setemail] = useState(null);
   const token = sessionStorage.getItem("token");
   const usertype = sessionStorage.getItem("usertype");
 
-  useEffect(() => {  
-
-    if (token == null | usertype =='staff'){
-
-      navigate('/login')
+  useEffect(() => {
+    if ((token == null) | (usertype == "staff")) {
+      navigate("/login");
     }
-
-
-}, []);
-
-
-
+  }, []);
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [selectedFile, setSelected] = useState(null);
   const navigate = useNavigate();
-
 
   // process CSV data
   const processData = (dataString) => {
@@ -103,116 +84,147 @@ export default function EditWebApp() {
     setColumns(columns);
   };
 
-  function ElementSelect (c) {
+  function ElementSelect(c) {
+    console.log(c.c);
 
-    console.log(c.c)
-
-    if (c.c == 'dataset'){
-
-      return(
-      <Container>
-      <div>
-
-      <Typography
-      component="h5"
-      variant="h5"
-      align="left"
-      color="text.primary"
-      gutterBottom
-      marginTop={3}
-    >
-      Add new dataset
-    </Typography>
-        <input
-          type="file"
-          required = "true"
-          accept=".csv,.xlsx,.xls"
-          onChange={handleFileUpload}
-        />
-        <Button
-          className="buttons3"
-          type="submit"
-          size="lg"
-          color = 'secondary'
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={OnSubmit}
-        >
-          Upload{" "}
-        </Button>
-        <DataTable
-          pagination
-          highlightOnHover
-          columns={columns}
-          data={data}
-        />
-      </div>
-    </Container>);
-
-       } else if (c.c== 'staff'){ 
-
-       return(<Container>
-      <div>
-
-      <Typography
-      component="h5"
-      variant="h5"
-      align="left"
-      color="text.primary"
-      gutterBottom
-      marginTop={3}
-    >
-      Add new staff
-    </Typography>
-    <Box
-            component="form"
-            onSubmit={HandleStaffSubmit}
-            Validate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-           
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    if (c.c == "dataset") {
+      return (
+        <Container>
+          <div>
+            <Typography
+              component="h5"
+              variant="h5"
+              align="center"
+              color="text.primary"
+              gutterBottom
+              marginTop={8}
             >
-Add            </Button>
-            
-          </Box>
+              Add New Dataset
+            </Typography>
+            <Typography
+              component="p"
+              variant="p"
+              align="center"
+              color="text.secondary"
+              gutterBottom
+              fontSize={12}
+            >
+              Choose a dataset from your device.
+            </Typography>
+            <div
+              align="center"
+              style={{
+                textAlign: "center",
+                margin: "auto",
+              }}
+            >
+              <input
+                type="file"
+                required="true"
+                accept=".csv,.xlsx,.xls"
+                onChange={handleFileUpload}
+                style={{
+                  fontSize: 12,
+                  fontStyle: "bold",
+                  backgroundColor: "#0a0a23",
+                  color: "#fff",
+                  borderRadius: "10px",
+                }}
+              />
+            </div>
 
-       
-      </div>
-    </Container>);
+            <div align="center">
+              <Button
+                className="buttons3"
+                type="submit"
+                size="lg"
+                style={{
+                  fontSize: 12,
+                  fontStyle: "bold",
+                  backgroundColor: "#0a0a23",
+                  color: "#fff",
+                  borderRadius: "10px",
+                  transition: "0.25w",
+                }}
+                sx={{ mt: 3, mb: 2 }}
+                onClick={OnSubmit}
+              >
+                Upload{" "}
+              </Button>
+            </div>
 
+            <DataTable
+              pagination
+              highlightOnHover
+              columns={columns}
+              data={data}
+            />
+          </div>
+        </Container>
+      );
+    } else if (c.c == "staff") {
+      return (
+        <Container>
+          <div>
+            <Typography
+              component="h5"
+              variant="h5"
+              align="left"
+              color="text.primary"
+              gutterBottom
+              marginTop={3}
+            >
+              Add new staff
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={HandleStaffSubmit}
+              Validate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
 
-      
-
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style={{
+                  fontSize: 14,
+                  fontStyle: "bold",
+                  backgroundColor: "#0a0a23",
+                  color: "#fff",
+                  borderRadius: "10px",
+                  transition: "0.25w",
+                }}
+              >
+                Add{" "}
+              </Button>
+            </Box>
+          </div>
+        </Container>
+      );
     }
-
-
-    }
-  
+  }
 
   // handle file upload
   const handleFileUpload = (e) => {
@@ -245,128 +257,99 @@ Add            </Button>
     let formData = new FormData();
     // console.log(selectedFile)
     formData.append("file", selectedFile);
-    formData.append("filename",fileName)
-
+    formData.append("filename", fileName);
 
     for (var key of formData.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-  }
+      console.log(key[0] + ", " + key[1]);
+    }
     var x = "";
     // console.log(data1);
     // console.log(data1);
 
-   
+    if (fileName != null) {
+      axios
+        .post("http://127.0.0.1:5000/upload", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          const res = response.data;
+          console.log(res);
+          toast.success("File successfully uploaded");
+          // window. location. reload(false);
+          // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.headers);
 
-    if(fileName!=null)
-    {axios
-      .post("http://127.0.0.1:5000/upload",formData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-     
-      })
-      .then((response) => {
-        const res = response.data;
-        console.log(res)
-        toast.success("File successfully uploaded");
-        // window. location. reload(false);
-                // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.status);
-          console.log(error.response.headers);
-
-          if(token==null){
-            toast.error("Authentication Error: Session Expired");
-            sessionStorage.removeItem("token");
-            // navigate('/login')
-
-
-        }else{
-            toast.error("Incorrect file name");
-        }
-
-
-        }
-      });}
-      else{
-        toast.error("No file selected");
-      }
-
+            if (token == null) {
+              toast.error("Authentication Error: Session Expired");
+              sessionStorage.removeItem("token");
+              // navigate('/login')
+            } else {
+              toast.error("Incorrect file name");
+            }
+          }
+        });
+    } else {
+      toast.error("No file selected");
+    }
 
     event.preventDefault();
   };
 
+  const HandleStaffSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+    console.log(token);
+    const formData = new FormData();
+    formData.append("email", data.get("email"));
+    formData.append("password", data.get("password"));
 
-const HandleStaffSubmit =(e)=>{
-
-  e.preventDefault();
-  const data = new FormData(e.currentTarget);
-  console.log({
-    email: data.get("email"),
-    password: data.get("password"),
-  });
-  console.log(token);
-  const formData = new FormData();
-  formData.append('email',data.get("email"))
-  formData.append('password',data.get("password"))
-
-
-  for (var key of data.entries()) {
-    console.log(key[0] + ', ' + key[1]);
-}
-   
-
-  axios.post('http://127.0.0.1:5000/addstaff',{
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-    email: data.get('email'),
-    password: data.get("password")
-  
-})
-  .then((response) => {
-
-    console.log(response);
-    toast.success(response.data.message);
-  
-    
-  })
-  .catch((error) => {
-    if (error.response) {
-
-      console.log(error.response.data.error);
-
-      if (error.response.data.error=='User already exists'){
-        setusererror(true)
-        setusererrormsge('User already exists' );
-        setpasserror(false)
-        toast.error("User already exists");
-
-
-
-      }
-
-      else if(token==null){
-        toast.error("Authentication Error: Session Expired");
-        sessionStorage.removeItem("token");
-        // navigate('/login')
-
-
+    for (var key of data.entries()) {
+      console.log(key[0] + ", " + key[1]);
     }
-      
-      
-    }
-  });
 
+    axios
+      .post("http://127.0.0.1:5000/addstaff", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+      .then((response) => {
+        console.log(response);
+        toast.success(response.data.message);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data.error);
 
-  
-}
-  
-  console.log(email)
+          if (error.response.data.error == "User already exists") {
+            setusererror(true);
+            setusererrormsge("User already exists");
+            setpasserror(false);
+            toast.error("User already exists");
+          } else if (token == null) {
+            toast.error("Authentication Error: Session Expired");
+            sessionStorage.removeItem("token");
+            // navigate('/login')
+          }
+        }
+      });
+  };
+
+  console.log(email);
 
   return (
     <>
@@ -400,10 +383,7 @@ const HandleStaffSubmit =(e)=>{
       </div>
       <ResponsiveAppBar />
 
-      <ToastContainer
-    autoClose={5000}
-    hideProgressBar={true}
-/>
+      <ToastContainer autoClose={5000} hideProgressBar={true} />
 
       <Container
         sx={{
@@ -436,45 +416,56 @@ const HandleStaffSubmit =(e)=>{
               >
                 Configurations
               </Typography>
+              <Typography
+                component="p"
+                variant="p"
+                align="center"
+                color="text.secondary"
+                gutterBottom
+                marginBottom={5}
+              >
+                You can add a new dataset for the prediction using the add
+                dataset buttom below. If you want to add new staff member,
+                select the add staff button below.
+              </Typography>
 
-              <Stack direction="row" alignItems="center" paddingLeft= {10} spacing={1}>
-                      <Button
-                        size="small"
-                        onClick={() => setfeature("dataset")}
-                        // color={slot === "month" ? "primary" : "secondary"}
-                        // variant={slot === "month" ? "outlined" : "text"}
-                        style={{
-                          fontSize: 14,
-                          fontStyle: "bold",
-                          backgroundColor: "#0a0a23",
-                          color: "#fff",
-                          borderRadius: "10px",
-                          boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
-                          transition: "0.25w",
-                        }}
-                      >
-                        Add dataset
-                      </Button>
-                      <Button
-                        size="small"
-                        onClick={() => setfeature("staff")}
-                        // color={slot === "year" ? "primary" : "secondary"}
-                        // variant={slot === "year" ? "outlined" : "text"}
-                        style={{
-                          fontSize: 14,
-                          fontStyle: "bold",
-                          backgroundColor: "#0a0a23",
-                          color: "#fff",
-                          borderRadius: "10px",
-                          boxShadow: "0px 0px 2px 2px rgb(0,0,0)",
-                          transition: "0.25w",
-                        }}
-                      >
-                        Add staff
-                      </Button>
-                    </Stack>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                spacing={2}
+              >
+                <Button
+                  size="small"
+                  onClick={() => setfeature("dataset")}
+                  style={{
+                    fontSize: 16,
+                    fontStyle: "bold",
+                    backgroundColor: "#0a0a23",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    transition: "0.25w",
+                  }}
+                >
+                  Add dataset
+                </Button>
+                <Button
+                  size="small"
+                  onClick={() => setfeature("staff")}
+                  style={{
+                    fontSize: 16,
+                    fontStyle: "bold",
+                    backgroundColor: "#0a0a23",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    transition: "0.25w",
+                  }}
+                >
+                  Add staff
+                </Button>
+              </Stack>
 
-            <ElementSelect c= {feature} />
+              <ElementSelect c={feature} />
             </Paper>
           </Box>
         </main>
@@ -482,9 +473,5 @@ const HandleStaffSubmit =(e)=>{
 
       <StickyFooter />
     </>
-
-    
   );
-
- 
 }
