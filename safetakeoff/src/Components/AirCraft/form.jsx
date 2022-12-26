@@ -120,7 +120,7 @@ const Form = () => {
         <Grid item>
           <TextField
             fullWidth
-            required
+            
             id="year-input"
             name="year"
             label="Year"
@@ -172,8 +172,8 @@ const Form = () => {
               onChange={handleSliderChange("temperature_threshold")}
               defaultValue={1}
               step={0.01}
-              min={1}
-              max={3}
+              min={10}
+              max={50}
               valueLabelDisplay="auto"
             />
           </div>
@@ -187,8 +187,8 @@ const Form = () => {
               onChange={handleSliderChange("wind_speed_threshold")}
               defaultValue={1}
               step={0.01}
-              min={1}
-              max={3}
+              min={0}
+              max={10}
               valueLabelDisplay="auto"
             />
           </div>
@@ -196,14 +196,14 @@ const Form = () => {
         <hr />
         <Grid item>
           <div>
-            Relative Humidity Threshold
+            Total Cloud Cover Threshold
             <Slider
               value={formValues.relative_humidity_threshold}
               onChange={handleSliderChange("relative_humidity_threshold")}
               defaultValue={1}
               step={0.01}
-              min={1}
-              max={3}
+              min={0}
+              max={1}
               valueLabelDisplay="auto"
             />
           </div>
@@ -211,29 +211,14 @@ const Form = () => {
         <hr />
         <Grid item>
           <div>
-            Solar Radiation Threshold
+            Pressure Threshold
             <Slider
               value={formValues.solar_radiation_threshold}
               onChange={handleSliderChange("solar_radiation_threshold")}
               defaultValue={1}
-              step={0.01}
-              min={1}
-              max={3}
-              valueLabelDisplay="auto"
-            />
-          </div>
-        </Grid>
-        <hr />
-        <Grid item>
-          <div>
-            Thermal Radiation Threshold
-            <Slider
-              value={formValues.thermal_radiation_threshold}
-              onChange={handleSliderChange("thermal_radiation_threshold")}
-              defaultValue={1}
-              step={0.01}
-              min={1}
-              max={3}
+              step={1}
+              min={100000}
+              max={300000}
               valueLabelDisplay="auto"
             />
           </div>
