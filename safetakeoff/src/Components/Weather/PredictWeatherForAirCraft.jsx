@@ -20,7 +20,11 @@ import Windseries from "./Windseries";
 import BasicTable from "../AirCraft/Table";
 import DangeredTable from "./Table";
 import { useSelector, useDispatch } from 'react-redux'
-
+import { useNavigate } from "react-router-dom";
+import WeatherCard from "../Dashboard/WeatherCard";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 
 function Userselect(usertype){
@@ -33,10 +37,72 @@ function Userselect(usertype){
   }
 }
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
+
+
 export default function WeatherPredictGeneral() {
   const date1 = useSelector((state)=>state.date.date)
   const option1 = useSelector((state)=>state.date.option)
   const usertype = sessionStorage.getItem('usertype')
+   const date2 = date1.slice(0, 16);
+  const date3 = formatDate(new Date(date2.slice(5, 16)));
+  const [preddata,setpreddata]= useState([]);
+
+
+  useEffect(() => {
+    const access_token = sessionStorage.getItem("token");
+    console.log(access_token);
+
+    if (access_token ===null){
+      navigate('/login')
+    }
+
+
+    axios
+      .get("http://127.0.0.1:5000/getdaypred", {
+        params: {
+          date: date3
+        },
+        headers: {
+
+          'Authorization': `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        // console.log()
+        // setTemperature(...temperature,res.temp)
+        // setWind(...wind,res.wind)
+        // setCloud(...cloud,res.cloud)
+        // setPress(...press,res.press)
+        // setdate(...time,res.time)
+        setpreddata(...preddata, res);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.data.msg === 'Token has expired'){
+            navigate('/login')
+          }
+        }
+      });
+    }, []);
+    console.log(preddata)
+
 
 
   const { state } = useLocation();
@@ -112,8 +178,25 @@ export default function WeatherPredictGeneral() {
               paddingRight={2}
               paddingBottom={5}
             >
-              <MainCard content={false} sx={{ mt: 1.5 }}>
-                <Cards />
+              <MainCard className="weathercontainer">
+                {/* <Cards  /> */}
+
+                <div
+                  className="cardcontainer"
+                  spacing={5}
+                  style={{ height: "250px" }}
+                >
+                  {preddata.map((row) => (
+                    <WeatherCard
+                      style={{ width: "200px" }}
+                      time={row.time}
+                      temperature={row.temperature}
+                      cloud={row.cloudcover}
+                      wind={row.windspeed}
+                      pressure={row.pressure}
+                    />
+                  ))}
+                </div>
               </MainCard>
 
             </Grid>
