@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
 import MUIDataTable from "mui-datatables";
 import axios from "axios";
 
 var columns = [
-  "Category", 
-  "Make","Model", 
-  "Pressure", 
-  "REG", 
-  "Temperature Threshold", 
+  "Category",
+  "Make",
+  "Model",
+  "Pressure",
+  "REG",
+  "Temperature Threshold",
   "Total Cloud Cover Threshold",
   "Total Seats",
   "Wind Speed Threshold",
-  "Year"];
+  "Year",
+];
 
 const options = {
   filterType: "dropdown",
   responsive: "scroll",
 };
 
-var dataarray = [];
+
 
 export default function DangeredTable() {
-
+  var [dataarray,setDataArray] = useState([]);
+  
   useEffect(() => {
     axios
       .get("http://127.0.0.1:5000/check_today_danger", {
@@ -32,22 +34,20 @@ export default function DangeredTable() {
       })
       .then((response) => {
         const res = response.data;
-        console.log("response data", res)
+        console.log("response is", res)
+        const array = [];
         for (const [key, value] of Object.entries(res)) {
-          let str_val = JSON.stringify(value)
-          var array = [];
-          for(var i in value)
-            array.push(value[i]);
+          // let str_val = JSON.stringify(value);
+          
+          // for (var i in value) array.push(value[i]);
+          array.push(value)
+          // setDataArray([...value])
+          
 
-          console.log("++++++++++++++++++++",array);
-          console.log(key, value);
-          dataarray.push(array);
         }
-      }).then(() => {
-
-      }
-
-      )
+        setDataArray(array)
+        
+      })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
@@ -56,7 +56,6 @@ export default function DangeredTable() {
         }
       });
   }, []);
-  console.log("data array",dataarray)
 
   return (
     <>

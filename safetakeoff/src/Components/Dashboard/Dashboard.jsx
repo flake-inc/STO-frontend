@@ -33,7 +33,6 @@ import YearlyPressure from "./PressureCharts/YearlyPressure";
 import MainCard from "../MainCard";
 import AirCraftPieChart from "./AirCraftCharts/AirCraftPieChart";
 
-
 import {
   GiftOutlined,
   MessageOutlined,
@@ -70,35 +69,26 @@ const status = [
   },
 ];
 
-function Userselect(usertype){
-
-  // console.log(usertype)
-  if (usertype.usertype=='admin'){
-    return <ResponsiveAppBar/>
-  }else{
-    return <StaffAppbar/>;
+function Userselect(usertype) {
+  if (usertype.usertype == "admin") {
+    return <ResponsiveAppBar />;
+  } else {
+    return <StaffAppbar />;
   }
 }
 
 function DashboardContent() {
-  const [value, setValue] = useState("trend");
   const [slot, setSlot] = useState("month");
   const [feature, setFeature] = useState("Temperature");
-  const [time, settime] = useState([]);
-
   const [temperature, setTemperature] = useState([]);
   const [wind, setWind] = useState([]);
   const [press, setPress] = useState([]);
   const [cloud, setCloud] = useState([]);
   const [preddata, setpreddata] = useState([]);
-  const [avgdata, setavgdata] = useState([]);
-
   const navigate = useNavigate();
-  const usertype = sessionStorage.getItem('usertype')
-
+  const usertype = sessionStorage.getItem("usertype");
 
   const today = formatDate(new Date());
-  console.log(today);
 
   function formatDate(date) {
     var d = new Date(date),
@@ -116,22 +106,19 @@ function DashboardContent() {
     const access_token = sessionStorage.getItem("token");
     console.log(access_token);
 
-    if (access_token ===null){
-      navigate('/login')
+    if (access_token === null) {
+      navigate("/login");
     }
-
 
     axios
       .get("http://127.0.0.1:5000/getpred", {
         headers: {
-
-          'Authorization': `Bearer ${access_token}`,
+          Authorization: `Bearer ${access_token}`,
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        // console.log()
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -144,22 +131,21 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
 
-      axios
+    axios
       .get("http://127.0.0.1:5000/tempminmaxavg", {
         headers: {
-
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data)
+        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -172,23 +158,21 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
 
-      
-      axios
+    axios
       .get("http://127.0.0.1:5000/windminmaxavg", {
         headers: {
-
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data)
+        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -201,21 +185,20 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
-      axios
+    axios
       .get("http://127.0.0.1:5000/pressminmaxavg", {
         headers: {
-
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data)
+        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -228,21 +211,20 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
-      axios
+    axios
       .get("http://127.0.0.1:5000/cloudminmaxavg", {
         headers: {
-
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data)
+        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -255,14 +237,13 @@ function DashboardContent() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
   }, []);
-  console.log(wind)
-  
+  console.log(wind);
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -294,7 +275,7 @@ function DashboardContent() {
         </video>
       </div>
 
-<Userselect usertype={usertype}/>
+      <Userselect usertype={usertype} />
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, pt: 3, pb: 3 }}>
           {/* Hero unit */}
@@ -319,48 +300,68 @@ function DashboardContent() {
             >
               Today Overview
             </Typography>
-            <Grid
-              container
-              rowSpacing={1}
-              columnSpacing={5}
-              paddingLeft={5}
-              paddingRight={2}
-              paddingBottom={5}
-            >
-              <Stack direction="row" alignItems="center" marginLeft='10px' className="Gauges">
-                <Grid item sx={{ mx: "auto" }}>
-                  <TempGauge
-                    className="temp"
-                    id="dial7"
-                    value={parseFloat(temperature.avg).toFixed(2)}
-                    title="Average Temperature"
+            <div className="row d-flex flex-row justify-content-evenly">
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={2}
+                paddingLeft={2}
+                paddingRight={0}
+                paddingBottom={5}
+              >
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  marginLeft="10px"
+                  className="Gauges"
+                >
+                  <Grid item sx={{ mx: "auto" }}>
+                    <TempGauge
+                      className="temp"
+                      id="dial7"
+                      value={parseFloat(temperature.avg).toFixed(2)}
+                      title="Average Temperature"
+                    />
+                  </Grid>
+
+                  <Grid item sx={{ mx: "auto" }}>
+                    <WindGauge
+                      id="dial5"
+                      value={parseFloat(wind.avg).toFixed(2)}
+                      title="Average Wind Speed"
+                    />
+                  </Grid>
+
+                  <Grid item sx={{ mx: "auto" }}>
+                    <CloudCover
+                      id="dial4"
+                      value={parseFloat(cloud.avg).toFixed(2) * 100}
+                      title="Average Total Cloud Cover"
+                    />
+                  </Grid>
+
+                  <Grid item sx={{ mx: "auto" }}>
+                    <Barometer
+                      id="dial9"
+                      value={parseFloat(press.avg).toFixed(2)}
+                      title="Average Pressure"
+                    />
+                  </Grid>
+                </Stack>
+
+                <Grid item sx={{ p: 3, pb: 0 }}>
+                  <Statistics
+                    feature={feature}
+                    temperature={temperature}
+                    wind={wind}
+                    cloud={cloud}
+                    pressure={press}
                   />
                 </Grid>
 
-                <Grid item sx={{ mx: "auto" }}>
-                  <WindGauge id="dial5" value={parseFloat(wind.avg).toFixed(2)} title="Average Wind Speed" />
-                </Grid>
-
-                <Grid item sx={{ mx: "auto" }}>
-                  <CloudCover
-                    id="dial4"
-                    value={parseFloat(cloud.avg).toFixed(2)*100}
-                    title="Average Total Cloud Cover"
-                  />
-                </Grid>
-
-                <Grid item sx={{ mx: "auto" }}>
-                  <Barometer id="dial9" value={parseFloat(press.avg).toFixed(2)} title="Average Pressure" />
-                </Grid>
-              </Stack>
-
-              <Grid sx={{ p: 3, pb: 0 }}>
-                <Statistics feature={feature} temperature={temperature} wind={wind} cloud={cloud} pressure={press} />
+                <AirCraftPieChart />
               </Grid>
-
-              <Grid item></Grid>
-            </Grid>
-            <Grid item></Grid>
+            </div>
 
             <Box
               sx={{
@@ -377,8 +378,8 @@ function DashboardContent() {
                 variant="h5"
                 align="center"
                 color="text.secondary"
-                paddingTop={5}
-                gutterBottom
+                paddingTop={2}
+                paddingBottom={2}
               >
                 Weather Conditions for last 24 Hours
               </Typography>
@@ -579,26 +580,8 @@ function DashboardContent() {
                 </MainCard> */}
               </Grid>
             </Grid>
-
-            {/* <GraphSelectTrend feature={feature} /> */}
-
             <hr />
-
-            <Typography
-              component="h3"
-              variant="h3"
-              align="center"
-              color="text.primary"
-              paddingTop={5}
-              gutterBottom
-            >
-              About Aircrafts
-            </Typography>
-
             <GraphSelectAircraft feature={feature} />
-            <AirCraftPieChart />
-
-
             <hr />
           </Paper>
         </Box>
@@ -664,9 +647,6 @@ function GraphSelect({ feature, slot }) {
   }
 }
 
-
-
-
 function GraphSelectAircraft({ feature }) {
   switch (feature) {
     case "Temperature":
@@ -686,21 +666,19 @@ function GraphSelectAircraft({ feature }) {
   }
 }
 
-function Statistics({ feature,temperature,pressure,wind,cloud }) {
+function Statistics({ feature, temperature, pressure, wind, cloud }) {
   switch (feature) {
     case "Temperature":
       return (
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Temperature"
-            count={parseFloat(temperature.max).toFixed(2)+"°C"}
-
+            count={parseFloat(temperature.max).toFixed(2) + "°C"}
             state="Temperature"
           />
           <AnalyticEcommerce
             title="Minimum Temperature"
-            count={parseFloat(temperature.min).toFixed(2)+"°C"}
-            
+            count={parseFloat(temperature.min).toFixed(2) + "°C"}
             state="Temperature"
           />
         </Stack>
@@ -711,15 +689,12 @@ function Statistics({ feature,temperature,pressure,wind,cloud }) {
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Wind Speed"
-            count={parseFloat(wind.max).toFixed(2)+" m/s"}
-           
+            count={parseFloat(wind.max).toFixed(2) + " m/s"}
             state="Wind speed"
-           
           />
           <AnalyticEcommerce
             title="Minimum Wind Speed"
-            count={parseFloat(wind.min).toFixed(2)+" m/s"}
-         
+            count={parseFloat(wind.min).toFixed(2) + " m/s"}
             state="Wind speed"
           />
         </Stack>
@@ -729,16 +704,13 @@ function Statistics({ feature,temperature,pressure,wind,cloud }) {
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Cloud Cover"
-            count={parseFloat(cloud.max).toFixed(2)*100+"%"}
-          
+            count={parseFloat(cloud.max).toFixed(2) * 100 + "%"}
             state="CloudCover"
           />
           <AnalyticEcommerce
             title="Minimum Cloud Cover"
-            count={parseFloat(cloud.min).toFixed(2)*100+"%"}
-          
+            count={parseFloat(cloud.min).toFixed(2) * 100 + "%"}
             state="CloudCover"
-           
           />
         </Stack>
       );
@@ -748,14 +720,12 @@ function Statistics({ feature,temperature,pressure,wind,cloud }) {
         <Stack spacing={2} paddingBottom={4}>
           <AnalyticEcommerce
             title="Maximum Pressure"
-            count={parseFloat(pressure.max).toFixed(2)+"Pa"}
-       
+            count={parseFloat(pressure.max).toFixed(2) + "Pa"}
             state="Pressure"
-           
           />
           <AnalyticEcommerce
             title="Minimum Pressure"
-            count={parseFloat(pressure.min).toFixed(2)+"Pa"}
+            count={parseFloat(pressure.min).toFixed(2) + "Pa"}
             state="Pressure"
           />
         </Stack>
