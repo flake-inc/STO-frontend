@@ -7,6 +7,7 @@ import MainCard from "../MainCard";
 import Cards from "../Dashboard/cards";
 import { useEffect } from "react";
 import axios from "axios";
+import StaffAppbar from "../Dashboard/staffappbar";
 
 
 import {
@@ -30,6 +31,8 @@ export default function WeatherPredictGeneral() {
   const navigate = useNavigate()
   const date1 = useSelector((state) => state.date.date)
   const [preddata,setpreddata]= useState([]);
+  const usertype = sessionStorage.getItem("usertype");
+
 
   const { state } = useLocation();
   const options = {
@@ -49,6 +52,14 @@ export default function WeatherPredictGeneral() {
     if (day.length < 2) day = "0" + day;
 
     return [year, month, day].join("-");
+  }
+
+  function Userselect(usertype) {
+    if (usertype.usertype == "admin") {
+      return <ResponsiveAppBar />;
+    } else {
+      return <StaffAppbar />;
+    }
   }
   
   const date = date1.slice(0, 16);
@@ -132,7 +143,7 @@ export default function WeatherPredictGeneral() {
         </video>
       </div>
 
-      <ResponsiveAppBar />
+      <Userselect usertype={usertype} />
 
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, pt: 3, pb: 3 }}>

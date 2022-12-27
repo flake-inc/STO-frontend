@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { saveDate, saveOption } from "../../redux/date";
+import StaffAppbar from "../Dashboard/staffappbar";
 
 const Checkbox = ({ children, ...props }: JSX.IntrinsicElements["input"]) => (
   <label style={{ marginRight: "1em" }}>
@@ -35,9 +36,19 @@ export default function PredictWeather() {
   const [value, setValue] = React.useState(dayjs("2022-01-01"));
   const [isDisabled, setIsDisabled] = useState(true);
   const [Options, setOptions] = useState([]);
+  const usertype = sessionStorage.getItem("usertype");
+
   const dispatch = useDispatch()
 
   let navigate = useNavigate();
+
+  function Userselect(usertype) {
+    if (usertype.usertype == "admin") {
+      return <ResponsiveAppBar />;
+    } else {
+      return <StaffAppbar />;
+    }
+  }
 
   const getInitialState = () => {
     const options = "R44 RAVEN I";
@@ -112,7 +123,7 @@ export default function PredictWeather() {
           <source src={vid} type="video/mp4" />
         </video>
       </div>
-      <ResponsiveAppBar />
+      <Userselect usertype={usertype} />
       <Container
         sx={{
           py: 5,
