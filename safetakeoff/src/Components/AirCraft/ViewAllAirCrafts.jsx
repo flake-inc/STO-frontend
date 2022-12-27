@@ -4,8 +4,18 @@ import StickyFooter from "../Public/Copyright/Copyright";
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import vid from "../../Assets/large_aviation.mp4";
+import StaffAppbar from "../Dashboard/staffappbar";
 
 export default function ViewAllAirCrafts() {
+  const usertype = sessionStorage.getItem("usertype");
+  function Userselect(usertype) {
+    if (usertype.usertype == "admin") {
+      return <ResponsiveAppBar />;
+    } else {
+      return <StaffAppbar />;
+    }
+  }
+  
   return (
     <>
       <div
@@ -36,7 +46,7 @@ export default function ViewAllAirCrafts() {
           <source src={vid} type="video/mp4" />
         </video>
       </div>
-      <ResponsiveAppBar />
+      <Userselect usertype={usertype} />
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4 }}>
           <br />
