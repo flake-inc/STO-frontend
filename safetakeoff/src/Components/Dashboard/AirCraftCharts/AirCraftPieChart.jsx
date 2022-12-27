@@ -17,7 +17,6 @@ export default function AirCraftPieChart() {
         const res = response.data;
         set_category(res.Categories);
         set_categoryCount(res.CategoryCount);
-
       })
       .catch((error) => {
         if (error.response) {
@@ -31,7 +30,7 @@ export default function AirCraftPieChart() {
   return (
     <>
       <Plot
-      style={{width:"500px"}}
+        style={{ width: "500px" }}
         data={[
           {
             values: categoriesCount,
@@ -40,13 +39,11 @@ export default function AirCraftPieChart() {
             hoverinfo: "label+percent+name",
             type: "pie",
             textinfo: "none",
-            
           },
         ]}
         layout={{
           title: "Aircraft Categories",
-          showlegend: true
-          
+          showlegend: true,
         }}
       />
     </>

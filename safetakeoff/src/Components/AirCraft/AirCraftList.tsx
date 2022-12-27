@@ -31,7 +31,6 @@ export default function AirCraftList() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   return (
     <>
       <Paper
@@ -47,7 +46,7 @@ export default function AirCraftList() {
             <Button
               variant="contained"
               sx={{ mr: 1 }}
-                onClick={handleOpen}
+              onClick={handleOpen}
               style={{
                 display: "inline-block",
                 fontSize: 14,

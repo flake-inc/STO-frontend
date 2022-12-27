@@ -85,8 +85,6 @@ export default function EditWebApp() {
   };
 
   function ElementSelect(c) {
-    console.log(c.c);
-
     if (c.c == "dataset") {
       return (
         <Container>
@@ -179,7 +177,7 @@ export default function EditWebApp() {
             <Box
               component="form"
               onSubmit={HandleStaffSubmit}
-              Validate
+              validate
               sx={{ mt: 1 }}
             >
               <TextField
@@ -234,7 +232,6 @@ export default function EditWebApp() {
 
     const file = e.target.files[0];
     const reader = new FileReader();
-    console.log(file);
     reader.onload = (evt) => {
       /* Parse data */
       const bstr = evt.target.result;
@@ -249,13 +246,8 @@ export default function EditWebApp() {
     reader.readAsBinaryString(file);
   };
 
-  console.log(file);
-  console.log(fileName);
-  console.log(selectedFile);
-
   const OnSubmit = (event) => {
     let formData = new FormData();
-    // console.log(selectedFile)
     formData.append("file", selectedFile);
     formData.append("filename", fileName);
 
@@ -263,8 +255,6 @@ export default function EditWebApp() {
       console.log(key[0] + ", " + key[1]);
     }
     var x = "";
-    // console.log(data1);
-    // console.log(data1);
 
     if (fileName != null) {
       axios
@@ -276,7 +266,6 @@ export default function EditWebApp() {
         })
         .then((response) => {
           const res = response.data;
-          console.log(res);
           toast.success("File successfully uploaded");
           // window. location. reload(false);
           // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
@@ -305,11 +294,6 @@ export default function EditWebApp() {
   const HandleStaffSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    console.log(token);
     const formData = new FormData();
     formData.append("email", data.get("email"));
     formData.append("password", data.get("password"));
@@ -328,7 +312,6 @@ export default function EditWebApp() {
         password: data.get("password"),
       })
       .then((response) => {
-        console.log(response);
         toast.success(response.data.message);
       })
       .catch((error) => {
@@ -348,8 +331,6 @@ export default function EditWebApp() {
         }
       });
   };
-
-  console.log(email);
 
   return (
     <>

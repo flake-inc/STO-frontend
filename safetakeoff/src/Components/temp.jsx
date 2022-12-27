@@ -2,8 +2,7 @@ import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import React from "react";
 import StickyFooter from "../Public/Copyright/Copyright";
 import Box from "@mui/material/Box";
-import vid from '../../Assets/large_aviation.mp4'
-
+import vid from "../../Assets/large_aviation.mp4";
 
 export default function temp() {
   return (
@@ -30,13 +29,9 @@ export default function temp() {
           autoplay=""
           muted="true"
           playsinline
-          loop
-          ="active"
+          loop="active"
         >
-          <source
-            src={vid}
-            type="video/mp4"
-          />
+          <source src={vid} type="video/mp4" />
         </video>
       </div>
       <ResponsiveAppBar />

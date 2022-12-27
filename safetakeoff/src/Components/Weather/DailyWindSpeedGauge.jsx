@@ -1,12 +1,11 @@
 import FusionCharts from "fusioncharts";
 import charts from "fusioncharts/fusioncharts.charts";
 import ReactFusioncharts from "react-fusioncharts";
-import React from 'react';
+import React from "react";
 
-import Widgets from 'fusioncharts/fusioncharts.widgets';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-import ReactFC from 'react-fusioncharts';
-
+import Widgets from "fusioncharts/fusioncharts.widgets";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import ReactFC from "react-fusioncharts";
 
 // Resolves charts dependancy
 charts(FusionCharts);
@@ -29,21 +28,21 @@ const dataSource = {
     minortmthickness: "1",
     minortmnumber: "1",
     showgaugeborder: "0",
-    theme: "fusion"
+    theme: "fusion",
   },
   colorrange: {
     color: [
       {
         minvalue: "0",
         maxvalue: "20.5",
-        code: "#999999"
+        code: "#999999",
       },
       {
         minvalue: "0",
         maxvalue: "280",
-        code: "#F6F6F6"
-      }
-    ]
+        code: "#F6F6F6",
+      },
+    ],
   },
   dials: {
     dial: [
@@ -53,10 +52,10 @@ const dataSource = {
         tooltext: "20.5kmph",
 
         basewidth: "5",
-        x:"$gaugeCenterX",
+        x: "$gaugeCenterX",
         y: "$gaugeCenterY + 70",
-      }
-    ]
+      },
+    ],
   },
   annotations: {
     groups: [
@@ -69,12 +68,12 @@ const dataSource = {
             x: "$gaugeCenterX",
             y: "$gaugeCenterY + 50",
             fontsize: "10",
-            color: "#555555"
-          }
-        ]
-      }
-    ]
-  }
+            color: "#555555",
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default class WindSpeed extends React.Component {

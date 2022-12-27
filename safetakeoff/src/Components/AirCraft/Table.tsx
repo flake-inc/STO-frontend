@@ -13,7 +13,7 @@ var columns = [
   "Temperature Threshold",
   "Wind Speed Threshold",
   "Total Cloud Cover Threshold",
-  "Pressure"
+  "Pressure",
 ];
 
 const data = JsonData;

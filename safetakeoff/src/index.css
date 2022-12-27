@@ -1,71 +1,70 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.weathercard{
+.weathercard {
   width: 300px;
-  
-  
-  /* overflow-x: scroll; */
 
+  /* overflow-x: scroll; */
 }
-.stackscroll{
+.stackscroll {
   overflow-x: scroll;
   padding: 100px;
 }
 
-.button1{
+.button1 {
   width: 500px;
 }
 
-.minmaxmean{
+.minmaxmean {
   overflow-x: scroll;
   width: 70%;
   height: 500px;
   /* max-width: 500px; */
 }
 
-.chartWrapper {/* w w w. j a v  a2 s.co  m*/
+.chartWrapper {
+  /* w w w. j a v  a2 s.co  m*/
   position: relative;
 }
 .chartWrapper > canvas {
   position: absolute;
   left: 0;
   top: 0;
-  pointer-events:none;
+  pointer-events: none;
 }
 .chartAreaWrapper {
   width: 600px;
   overflow-x: scroll;
 }
 
-.barChart{
+.barChart {
   max-width: 700px;
   overflow-x: scroll;
 }
-.Gauges{
+.Gauges {
   max-width: 700px;
   overflow-x: scroll;
   margin-right: 120px;
 }
 
-.weathercontainer{
+.weathercontainer {
   width: 100%;
 }
 
-.cardcontainer{
+.cardcontainer {
   display: flex;
-  
+
   overflow-x: scroll;
   /* overflow-y: hidden; */
   /* // margin-top: 60px; */
@@ -73,16 +72,15 @@ code {
   margin-bottom: 10px;
 }
 
-.cardtext{
+.cardtext {
   margin-left: 10px;
 }
 
-.cardcontainer::-webkit-scrollbar{
+.cardcontainer::-webkit-scrollbar {
   margin-top: 30px;
-  
 }
 
-.thermometer{
+.thermometer {
   width: 200px;
-   margin-left: 20px;
+  margin-left: 20px;
 }

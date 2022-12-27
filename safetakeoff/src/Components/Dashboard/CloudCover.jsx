@@ -12,10 +12,9 @@ const styles = {
   title: {
     fontSize: "0.7em",
     color: "#000",
-    marginTop:"60px",
-    marginLeft:"60px"
-
-  }
+    marginTop: "60px",
+    marginLeft: "60px",
+  },
 };
 
 const CloudCover = ({ id, value, title }) => {
@@ -40,7 +39,9 @@ const CloudCover = ({ id, value, title }) => {
         needleColor={"#5392ff"}
         formatTextValue={(value) => value}
       />
-      <div style={styles.title}>{title}: {value}%</div>
+      <div style={styles.title}>
+        {title}: {value}%
+      </div>
     </div>
   );
 };

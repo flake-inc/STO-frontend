@@ -1,43 +1,38 @@
-html, body {
-    margin: 0;
-  }
-  
-  ::-webkit-scrollbar {
-    width: 0px;
-  }
-  
-  .container {
-    display: flex;
-    // overflow-x:scroll;
-    
-  
+html,
+body {
+  margin: 0;
+}
 
-    width: 80%;
-    // margin-top: 60px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    // border-radius: 10px;
-    
-    
+::-webkit-scrollbar {
+  width: 0px;
+}
 
-    
-  }
-  
-  .card {
-    // overflow:unset;
-    width:200px;
-    height: 200px;
-    margin-left: 5px;
-    // padding: 5px;
-    border-radius: 10px;
-    // margin-left: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color:#16003B;
-    color: white;
-  }
-  .rowclass{
-    // padding: 10px;
-    height: 20px;
-  }
+.container {
+  display: flex;
+  // overflow-x:scroll;
+
+  width: 80%;
+  // margin-top: 60px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  // border-radius: 10px;
+}
+
+.card {
+  // overflow:unset;
+  width: 200px;
+  height: 200px;
+  margin-left: 5px;
+  // padding: 5px;
+  border-radius: 10px;
+  // margin-left: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #16003b;
+  color: white;
+}
+.rowclass {
+  // padding: 10px;
+  height: 20px;
+}

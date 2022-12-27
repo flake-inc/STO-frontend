@@ -8,12 +8,7 @@ import Cards from "../Dashboard/cards";
 import { useEffect } from "react";
 import axios from "axios";
 
-
-import {
-  Box,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import TempSeries from "./Tempseries";
 import { useLocation } from "react-router-dom";
@@ -21,15 +16,14 @@ import Cloudseries from "./Cloudseries";
 import Pressureseries from "./Pressureseries";
 import Windseries from "./Windseries";
 import DangeredTable from "./Table";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import WeatherCard from "../Dashboard/WeatherCard";
 
 export default function WeatherPredictGeneral() {
-  
-  const navigate = useNavigate()
-  const date1 = useSelector((state) => state.date.date)
-  const [preddata,setpreddata]= useState([]);
+  const navigate = useNavigate();
+  const date1 = useSelector((state) => state.date.date);
+  const [preddata, setpreddata] = useState([]);
 
   const { state } = useLocation();
   const options = {
@@ -50,35 +44,30 @@ export default function WeatherPredictGeneral() {
 
     return [year, month, day].join("-");
   }
-  
+
   const date = date1.slice(0, 16);
   const date2 = formatDate(new Date(date1.slice(5, 16)));
   // const date3 = date2.toString('YYYY-MM-dd')
-  console.log(date2)
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
-    console.log(access_token);
 
-    if (access_token ===null){
-      navigate('/login')
+    if (access_token === null) {
+      navigate("/login");
     }
-
 
     axios
       .get("http://127.0.0.1:5000/getdaypred", {
         params: {
-          date: date2
+          date: date2,
         },
         headers: {
-
-          'Authorization': `Bearer ${access_token}`,
+          Authorization: `Bearer ${access_token}`,
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        // console.log()
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -91,16 +80,12 @@ export default function WeatherPredictGeneral() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
-    }, []);
-    console.log(preddata)
-
-
-  
+  }, []);
 
   return (
     <div className="bg-image shadow-4-strong">

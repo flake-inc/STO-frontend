@@ -17,23 +17,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-
 const pages = ["Check Weather", "Flights", "Configurations"];
 
 export default function ResponsiveAppBar() {
-
   const [user, setUser] = useState();
 
   const handleLogout = () => {
-   
-        sessionStorage.removeItem("token")
-        document.location = '/login';
-   
-    
-}
-
-
-
+    sessionStorage.removeItem("token");
+    document.location = "/login";
+  };
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -65,13 +57,12 @@ export default function ResponsiveAppBar() {
   //     headers: {
   //         'Content-Type': 'application/json',
   //     },
-     
 
   // })
   //   .then((response) => {
-     
+
   //     navigate('/login')
-      
+
   //   })
   //   .catch((error) => {
   //     if (error.response) {
@@ -194,16 +185,17 @@ export default function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          <Box>Logout
-          <IconButton
-            className="material-icons"
-            onClick={handleLogout}
-            style={{
-              color: "white",
-            }}
-          >
-            logout
-          </IconButton>
+          <Box>
+            Logout
+            <IconButton
+              className="material-icons"
+              onClick={handleLogout}
+              style={{
+                color: "white",
+              }}
+            >
+              logout
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

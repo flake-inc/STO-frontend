@@ -28,10 +28,6 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
 
     axios
       .post("http://127.0.0.1:5000/login", {
@@ -44,8 +40,6 @@ export default function Login() {
       .then((response) => {
         sessionStorage.setItem("token", response.data.access_token);
         sessionStorage.setItem("usertype", response.data.usertype);
-
-        console.log(response.data.usertype);
 
         // history.push('/');
 
@@ -125,7 +119,7 @@ export default function Login() {
             Powered by flake inc.
           </Typography>
           <br />
-          <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} validate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

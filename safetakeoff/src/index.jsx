@@ -4,10 +4,10 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist';
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
-const persistor = persistStore(store)
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,9 +22,9 @@ root.render(
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
     <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <App />
-    </PersistGate>
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

@@ -88,7 +88,6 @@ const Form = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formValues);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -120,7 +119,6 @@ const Form = () => {
         <Grid item>
           <TextField
             fullWidth
-            
             id="year-input"
             name="year"
             label="Year"

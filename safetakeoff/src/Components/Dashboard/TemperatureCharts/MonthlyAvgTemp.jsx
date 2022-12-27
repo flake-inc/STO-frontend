@@ -1,37 +1,52 @@
-import * as React from 'react';
+import * as React from "react";
 // import { useTheme } from '@mui/material/styles';
 // import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 // import Title from './Title';
-import {Line} from 'react-chartjs-2';
-import { Chart, CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler } from 'chart.js';
+import { Line } from "react-chartjs-2";
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
 // import Papa from 'papaparse';
 import * as d3 from "d3";
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
-Chart.register(CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler)
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
-
-
-
-
-export default function MonthlyAvgTemp(){
-  const [lineData, set_lineData] =
-    useState({ datasets: [] });
-  const [lineOptions, set_lineOptions] =
-    useState({});
-
+export default function MonthlyAvgTemp() {
+  const [lineData, set_lineData] = useState({ datasets: [] });
+  const [lineOptions, set_lineOptions] = useState({});
 
   useEffect(() => {
     //   Normal and Anomaly Doughnut chart setup using useeffect
     const position = "left"; // CSS for graphs
 
-    axios.get('http://127.0.0.1:5000/monthlyavg',{
+    axios
+      .get("http://127.0.0.1:5000/monthlyavg", {
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-    })
+      })
       .then((response) => {
         const res = response.data;
 
@@ -72,20 +87,7 @@ export default function MonthlyAvgTemp(){
         },
       },
     });
-
-    
-         
   }, []);
 
-  return (
-    
-          
-              <Line
-                data={lineData}
-                options={lineOptions}
-              />
-           
-
-        
-  );
-};
+  return <Line data={lineData} options={lineOptions} />;
+}

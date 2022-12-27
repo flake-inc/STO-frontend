@@ -42,14 +42,13 @@ export default function AirCraftCloudChart() {
         set_lineData({
           labels: res.Model,
           datasets: [
-              {
-                label: "Total Cloud Cover Threshold",
-                data: res.Cloud_t,
-                backgroundColor: ["#0a0a23"],
-                borderColor: "#0a0a23",
-                borderWidth: 1,
-              },
-
+            {
+              label: "Total Cloud Cover Threshold",
+              data: res.Cloud_t,
+              backgroundColor: ["#0a0a23"],
+              borderColor: "#0a0a23",
+              borderWidth: 1,
+            },
           ],
         });
       })

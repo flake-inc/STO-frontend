@@ -6,11 +6,7 @@ import Paper from "@mui/material/Paper";
 import MainCard from "../MainCard";
 import Cards from "../Dashboard/cards";
 
-import {
-  Box,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import TempSeries from "./Tempseries";
 import { useLocation } from "react-router-dom";
@@ -19,21 +15,18 @@ import Pressureseries from "./Pressureseries";
 import Windseries from "./Windseries";
 import BasicTable from "../AirCraft/Table";
 import DangeredTable from "./Table";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import WeatherCard from "../Dashboard/WeatherCard";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-
-function Userselect(usertype){
-
-  // console.log(usertype)
-  if (usertype.usertype=='admin'){
-    return <ResponsiveAppBar/>
-  }else{
-    return <StaffAppbar/>;
+function Userselect(usertype) {
+  if (usertype.usertype == "admin") {
+    return <ResponsiveAppBar />;
+  } else {
+    return <StaffAppbar />;
   }
 }
 
@@ -49,40 +42,33 @@ function formatDate(date) {
   return [year, month, day].join("-");
 }
 
-
-
 export default function WeatherPredictGeneral() {
-  const date1 = useSelector((state)=>state.date.date)
-  const option1 = useSelector((state)=>state.date.option)
-  const usertype = sessionStorage.getItem('usertype')
-   const date2 = date1.slice(0, 16);
+  const date1 = useSelector((state) => state.date.date);
+  const option1 = useSelector((state) => state.date.option);
+  const usertype = sessionStorage.getItem("usertype");
+  const date2 = date1.slice(0, 16);
   const date3 = formatDate(new Date(date2.slice(5, 16)));
-  const [preddata,setpreddata]= useState([]);
-
+  const [preddata, setpreddata] = useState([]);
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
-    console.log(access_token);
 
-    if (access_token ===null){
-      navigate('/login')
+    if (access_token === null) {
+      navigate("/login");
     }
-
 
     axios
       .get("http://127.0.0.1:5000/getdaypred", {
         params: {
-          date: date3
+          date: date3,
         },
         headers: {
-
-          'Authorization': `Bearer ${access_token}`,
+          Authorization: `Bearer ${access_token}`,
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         const res = response.data;
-        // console.log()
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -95,15 +81,12 @@ export default function WeatherPredictGeneral() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
-          if (error.response.data.msg === 'Token has expired'){
-            navigate('/login')
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
           }
         }
       });
-    }, []);
-    console.log(preddata)
-
-
+  }, []);
 
   const { state } = useLocation();
   const options = {
@@ -198,7 +181,6 @@ export default function WeatherPredictGeneral() {
                   ))}
                 </div>
               </MainCard>
-
             </Grid>
 
             <Grid

@@ -43,12 +43,12 @@ export default function AirCraftTemperatureChart() {
           labels: res.Model,
           datasets: [
             {
-                label: "Temperature Threshold",
-                data: res.Temperature_t,
-                borderColor: "#0a0a23",
-                borderWidth: 1,
-                backgroundColor: ["#0a0a23"],
-              },
+              label: "Temperature Threshold",
+              data: res.Temperature_t,
+              borderColor: "#0a0a23",
+              borderWidth: 1,
+              backgroundColor: ["#0a0a23"],
+            },
           ],
         });
       })

@@ -5,10 +5,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import vid from "../../Assets/large_aviation.mp4";
 
-
-
 export default function ViewAllAirCrafts() {
-  
   return (
     <>
       <div

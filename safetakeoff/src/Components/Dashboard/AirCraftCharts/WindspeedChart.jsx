@@ -43,12 +43,12 @@ export default function AirCraftWindspeedChart() {
           labels: res.Model,
           datasets: [
             {
-                label: "WindSpeed Threshold",
-                data: res.Wind_t,
-                backgroundColor: ["#0a0a23"],
-                borderColor: "#0a0a23",
-                borderWidth: 1,
-              },
+              label: "WindSpeed Threshold",
+              data: res.Wind_t,
+              backgroundColor: ["#0a0a23"],
+              borderColor: "#0a0a23",
+              borderWidth: 1,
+            },
           ],
         });
       })

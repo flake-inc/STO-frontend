@@ -1,19 +1,22 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { dateSlice } from './date';
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { configureStore } from "@reduxjs/toolkit";
+import { dateSlice } from "./date";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 const persistDateConfig = {
-    key: 'date',
-    storage,
-}
+  key: "date",
+  storage,
+};
 
-const persistedDateReducer = persistReducer(persistDateConfig, dateSlice.reducer)
+const persistedDateReducer = persistReducer(
+  persistDateConfig,
+  dateSlice.reducer
+);
 
 const store = configureStore({
-    reducer: {
-        date: persistedDateReducer,
-    }
-})
+  reducer: {
+    date: persistedDateReducer,
+  },
+});
 
 export default store;

@@ -1,8 +1,7 @@
-
 // import "./exploratory-analysis.scss";
 
 import React, { useState, useEffect } from "react";
-import {Line} from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 // import { Chart, CategoryScale, LinearScale, BarElement,PointElement,LineElement,Title,Tooltip,Legend,Filler } from 'chart.js';
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -28,28 +27,25 @@ ChartJS.register(
   LineElement,
   Title,
   BarElement,
-    Filler
+  Filler
 );
 
 const YearlyTemp1 = () => {
-  const [lineData, set_lineData] =
-    useState({ datasets: [] });
-  const [lineOptions, set_lineOptions] =
-    useState({});
-
+  const [lineData, set_lineData] = useState({ datasets: [] });
+  const [lineOptions, set_lineOptions] = useState({});
 
   useEffect(() => {
     //   Normal and Anomaly Doughnut chart setup using useeffect
     const position = "left"; // CSS for graphs
 
-    axios.get('http://127.0.0.1:5000/yearlyavg',{
+    axios
+      .get("http://127.0.0.1:5000/yearlyavg", {
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-    })
+      })
       .then((response) => {
         const res = response.data;
-        console.log(res.year)
 
         set_lineData({
           labels: res.year,
@@ -88,17 +84,9 @@ const YearlyTemp1 = () => {
         },
       },
     });
-
-    
-         
   }, []);
 
-  return (
-              <Line
-                data={lineData}
-                options={lineOptions}
-              /> 
-  );
+  return <Line data={lineData} options={lineOptions} />;
 };
 
 export default YearlyTemp1;

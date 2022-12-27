@@ -46,8 +46,7 @@ const movies = [
 ];
 
 export default function Cards(props) {
-  const [preddata, setpreddata] = useState(props.data)
-  console.log(preddata)
+  const [preddata, setpreddata] = useState(props.data);
   const [style, set] = useSpring(() => ({
     transform: "perspective(500px) rotateY(0deg)",
   }));

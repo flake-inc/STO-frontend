@@ -8,13 +8,13 @@ const styles = {
     height: `auto`,
     color: "#000",
     border: "0.5px solid #fff",
-    padding: "2px"
+    padding: "2px",
   },
   title: {
     fontSize: "0.7em",
-    marginLeft: '70px',
-    color: "#000"
-  }
+    marginLeft: "70px",
+    color: "#000",
+  },
 };
 
 const WindGauge = ({ id, value, title }) => {
@@ -33,7 +33,9 @@ const WindGauge = ({ id, value, title }) => {
         segments={10}
         endColor="blue"
       />
-      <div style={styles.title}>{title}: {value}m/s</div>
+      <div style={styles.title}>
+        {title}: {value}m/s
+      </div>
     </div>
   );
 };

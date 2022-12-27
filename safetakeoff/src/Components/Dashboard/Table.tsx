@@ -20,11 +20,9 @@ const options = {
   responsive: "scroll",
 };
 
-
-
 export default function DangeredTable() {
-  var [dataarray,setDataArray] = useState([]);
-  
+  var [dataarray, setDataArray] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:5000/check_today_danger", {
@@ -34,19 +32,15 @@ export default function DangeredTable() {
       })
       .then((response) => {
         const res = response.data;
-        console.log("response is", res)
         const array = [];
         for (const [key, value] of Object.entries(res)) {
           // let str_val = JSON.stringify(value);
-          
-          // for (var i in value) array.push(value[i]);
-          array.push(value)
-          // setDataArray([...value])
-          
 
+          // for (var i in value) array.push(value[i]);
+          array.push(value);
+          // setDataArray([...value])
         }
-        setDataArray(array)
-        
+        setDataArray(array);
       })
       .catch((error) => {
         if (error.response) {

@@ -45,7 +45,7 @@ export default function DangeredTable() {
     <>
       <MUIDataTable
         title={"Aircrafts list"}
-        data={Model, Make, Category, Year, REG}
+        data={(Model, Make, Category, Year, REG)}
         columns={columns}
         options={options}
       />

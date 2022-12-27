@@ -104,7 +104,6 @@ function DashboardContent() {
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
-    console.log(access_token);
 
     if (access_token === null) {
       navigate("/login");
@@ -145,7 +144,6 @@ function DashboardContent() {
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -172,7 +170,6 @@ function DashboardContent() {
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -198,7 +195,6 @@ function DashboardContent() {
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -224,7 +220,6 @@ function DashboardContent() {
       })
       .then((response) => {
         const res = response.data;
-        console.log(response.data);
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
@@ -243,7 +238,6 @@ function DashboardContent() {
         }
       });
   }, []);
-  console.log(wind);
 
   return (
     <div className="bg-image shadow-4-strong">
@@ -614,8 +608,6 @@ function GraphSelect2({ feature, slot }) {
 function GraphSelect({ feature, slot }) {
   switch (feature) {
     case "Temperature":
-      console.log("Temp99");
-
       if (slot == "month") {
         return <MonthlyTemp />;
       } else {

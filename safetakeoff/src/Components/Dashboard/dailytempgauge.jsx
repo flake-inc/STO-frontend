@@ -4,18 +4,18 @@ import Thermometer from "react-thermometer-component";
 const styles = {
   dial: {
     display: "inline-block",
-    width: '200px',
+    width: "200px",
     height: `auto`,
     color: "#000",
     border: "0.5px solid #fff",
-    padding: "2px"
+    padding: "2px",
   },
   title: {
     fontSize: "0.7em",
     color: "#000",
     marginTop: "39px",
     marginLeft: "5px",
-  }
+  },
 };
 
 const TempGauge = ({ id, value, title }) => {
@@ -29,7 +29,7 @@ const TempGauge = ({ id, value, title }) => {
         format="°C"
         size="normal"
         height="160"
-        width = '300'
+        width="300"
       />
       <div style={styles.title}>
         {title}: {value}°C

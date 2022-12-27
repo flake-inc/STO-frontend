@@ -17,24 +17,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-
 const pages = ["Check Weather", "Flights"];
 
 export default function StaffAppbar() {
-
   const [user, setUser] = useState();
 
   const handleLogout = () => {
-   
-        sessionStorage.removeItem("token")
-        sessionStorage.removeItem('usertyoe')
-        document.location = '/login';
-   
-    
-}
-
-
-
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("usertyoe");
+    document.location = "/login";
+  };
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -66,13 +58,12 @@ export default function StaffAppbar() {
   //     headers: {
   //         'Content-Type': 'application/json',
   //     },
-     
 
   // })
   //   .then((response) => {
-     
+
   //     navigate('/login')
-      
+
   //   })
   //   .catch((error) => {
   //     if (error.response) {
@@ -195,16 +186,17 @@ export default function StaffAppbar() {
               </Button>
             ))}
           </Box>
-          <Box>Logout
-          <IconButton
-            className="material-icons"
-            onClick={handleLogout}
-            style={{
-              color: "white",
-            }}
-          >
-            logout
-          </IconButton>
+          <Box>
+            Logout
+            <IconButton
+              className="material-icons"
+              onClick={handleLogout}
+              style={{
+                color: "white",
+              }}
+            >
+              logout
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>
