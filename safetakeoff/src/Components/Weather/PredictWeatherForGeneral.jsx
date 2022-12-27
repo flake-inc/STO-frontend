@@ -22,12 +22,10 @@ import { useNavigate } from "react-router-dom";
 import WeatherCard from "../Dashboard/WeatherCard";
 
 export default function WeatherPredictGeneral() {
-  
-  const navigate = useNavigate()
-  const date1 = useSelector((state) => state.date.date)
-  const [preddata,setpreddata]= useState([]);
+  const navigate = useNavigate();
+  const date1 = useSelector((state) => state.date.date);
+  const [preddata, setpreddata] = useState([]);
   const usertype = sessionStorage.getItem("usertype");
-
 
   const { state } = useLocation();
   const options = {
@@ -56,7 +54,7 @@ export default function WeatherPredictGeneral() {
       return <StaffAppbar />;
     }
   }
-  
+
   const date = date1.slice(0, 16);
   const date2 = formatDate(new Date(date1.slice(5, 16)));
   // const date3 = date2.toString('YYYY-MM-dd')
@@ -162,6 +160,8 @@ export default function WeatherPredictGeneral() {
               paddingLeft={5}
               paddingRight={2}
               paddingBottom={5}
+              alignItems="center"
+              justifyContent="center"
             >
               {/* <MainCard content={false} sx={{ mt: 1.5 }}>
                 <Cards />
@@ -195,7 +195,7 @@ export default function WeatherPredictGeneral() {
                   align="center"
                   color="text.primary"
                 >
-                  Dangered Aircrafts Today!
+                  Dangered Aircrafts on {date}
                 </Typography>
 
                 <DangeredTable />

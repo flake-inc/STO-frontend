@@ -53,6 +53,7 @@ export default function WeatherPredictGeneral() {
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
+    console.log("access_token", access_token)
 
     if (access_token === null) {
       navigate("/login");
