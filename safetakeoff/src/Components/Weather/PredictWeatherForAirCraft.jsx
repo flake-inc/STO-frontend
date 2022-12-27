@@ -5,6 +5,7 @@ import vid from "../../Assets/large_aviation.mp4";
 import Paper from "@mui/material/Paper";
 import MainCard from "../MainCard";
 import Cards from "../Dashboard/cards";
+import CardContent from "@mui/material/CardContent";
 
 import { Box, Grid, Typography } from "@mui/material";
 
@@ -50,10 +51,14 @@ export default function WeatherPredictGeneral() {
   const date2 = date1.slice(0, 16);
   const date3 = formatDate(new Date(date2.slice(5, 16)));
   const [preddata, setpreddata] = useState([]);
+  const [tempavg, settempavg] = useState([]);
+  const [cloudavg, setcloudavg] = useState([]);
+  const [pressureavg, setpressureavg] = useState([]);
+  const [windavg, setwindavg] = useState([]);
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
-    console.log("access_token", access_token)
+    console.log("access_token", access_token);
 
     if (access_token === null) {
       navigate("/login");
@@ -71,12 +76,32 @@ export default function WeatherPredictGeneral() {
       })
       .then((response) => {
         const res = response.data;
+
         // setTemperature(...temperature,res.temp)
         // setWind(...wind,res.wind)
         // setCloud(...cloud,res.cloud)
         // setPress(...press,res.press)
         // setdate(...time,res.time)
         setpreddata(...preddata, res);
+      })
+      .then(() => {
+        preddata.map(
+          (row) => (
+            settempavg(
+              row.temperature.reduce((a, b) => a + b, 0) /
+                row.temperature.length
+            ),
+            setcloudavg(
+              row.cloudcover.reduce((a, b) => a + b, 0) / row.cloudcover.length
+            ),
+            setpressureavg(
+              row.pressure.reduce((a, b) => a + b, 0) / row.pressure.length
+            ),
+            setwindavg(
+              row.windspeed.reduce((a, b) => a + b, 0) / row.windspeed.length
+            )
+          )
+        );
       })
       .catch((error) => {
         if (error.response) {
@@ -89,6 +114,37 @@ export default function WeatherPredictGeneral() {
         }
       });
   }, []);
+
+  // useEffect(() => {
+  //   axios
+  //   .get("http://127.0.0.1:5000/getcomparison", {
+  //     params: {
+  //       date: date3,
+  //       aircraft: option1
+  //     },
+  //     headers: {
+  //       Authorization: `Bearer ${access_token}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //   .then((response) => {
+  //     const res = response.data;
+  //     console.log("here?")
+  //     console.log("=================== response =================",res)
+  //     console.log(response.t_mean)
+  //     setcompdata(...compdata, res);
+  //   })
+  //   .catch((error) => {
+  //     if (error.response) {
+  //       console.log(error.response);
+  //       console.log(error.response.status);
+  //       console.log(error.response.headers);
+  //       if (error.response.data.msg === "Token has expired") {
+  //         navigate("/login");
+  //       }
+  //     }
+  //   });
+  // }, []);
 
   const { state } = useLocation();
   const options = {
@@ -184,6 +240,66 @@ export default function WeatherPredictGeneral() {
                 </div>
               </MainCard>
             </Grid>
+
+            <div className="row d-flex flex-row justify-content-evenly">
+              <Grid
+                container
+                rowSpacing={1.5}
+                columnSpacing={5}
+                paddingLeft={5}
+                paddingRight={2}
+                paddingBottom={5}
+                sx={{ flex: 1, display: "flex", flexDirection: "column" }}
+              >
+                <React.Fragment>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 18 }}
+                      color="text.secondary"
+                      marginBottom={3}
+                    >
+                      {option1} Aircraft's Threshold Values
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Temperature Threshold : {tempavg}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Wind Threshold : {windavg}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Cloud Threshold : {cloudavg}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Pressure Threshold : {pressureavg}
+                    </Typography>
+                  </CardContent>
+                </React.Fragment>
+
+                <React.Fragment>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 18 }}
+                      color="text.secondary"
+                      marginBottom={3}
+                    >
+                      Average weather condition on {date}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Temperature Average : {tempavg}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Wind Average : {windavg}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Cloud Average : {cloudavg}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Pressure Average : {pressureavg}
+                    </Typography>
+                  </CardContent>
+                </React.Fragment>
+              </Grid>
+            </div>
 
             <Grid
               container
