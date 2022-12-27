@@ -126,8 +126,11 @@ export default function Login() {
               fullWidth
               error={usererror}
               id="email"
-              label="Email Address"
+              label="EmailAddress"
               name="email"
+              inputProps={{"data-testid" :'email'
+            }}
+
               helperText={usererrormsge}
               autoComplete="email"
               autoFocus
@@ -140,6 +143,9 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
+
+              data-testid = 'password'
+
               error={passerror}
               helperText={passerrormsge}
               autoComplete="current-password"
@@ -152,6 +158,7 @@ export default function Login() {
               type="submit"
               fullWidth
               variant="contained"
+              data-testid = 'button'
               sx={{ mt: 3, mb: 2 }}
               style={{
                 fontSize: 14,
