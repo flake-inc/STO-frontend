@@ -31,6 +31,30 @@ export default function EditWebApp() {
   const token = sessionStorage.getItem("token");
   const usertype = sessionStorage.getItem("usertype");
 
+  function handleModel (){
+
+    axios
+      .post("http://127.0.0.1:5000/prediction", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        
+      })
+      .then((response) => {
+        toast.success(response.data.message);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data.error);
+          toast.error(error.response.data.message)
+
+         
+        }
+      });
+    
+  }
+
   useEffect(() => {
     if ((token == null) | (usertype == "staff")) {
       navigate("/login");
@@ -302,7 +326,6 @@ export default function EditWebApp() {
       console.log(key[0] + ", " + key[1]);
     }
 
-    
     axios
       .post("http://127.0.0.1:5000/addstaff", {
         headers: {
@@ -444,6 +467,22 @@ export default function EditWebApp() {
                   }}
                 >
                   Add staff
+                </Button>
+
+                <Button
+                  size="small"
+                  
+                  style={{
+                    fontSize: 16,
+                    fontStyle: "bold",
+                    backgroundColor: "#0a0a23",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    transition: "0.25w",
+                  }}
+                  onClick ={handleModel}
+                >
+                  Update Model{" "}
                 </Button>
               </Stack>
 
