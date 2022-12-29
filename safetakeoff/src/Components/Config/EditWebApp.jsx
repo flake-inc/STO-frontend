@@ -13,8 +13,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { Stack, TextField, FormControlLabel } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { Navigate, useNavigate } from "react-router-dom";
 
 // toast.configure()
 
@@ -30,6 +30,7 @@ export default function EditWebApp() {
   const [email, setemail] = useState(null);
   const token = sessionStorage.getItem("token");
   const usertype = sessionStorage.getItem("usertype");
+
 
   function handleModel (){
 
@@ -144,6 +145,7 @@ export default function EditWebApp() {
                 type="file"
                 required="true"
                 accept=".csv,.xlsx,.xls"
+                data-testid = 'dataset'
                 onChange={handleFileUpload}
                 style={{
                   fontSize: 12,
@@ -208,12 +210,14 @@ export default function EditWebApp() {
                 margin="normal"
                 required
                 fullWidth
+                data-testid = 'email'
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus
-              />
+                inputProps={{"data-testid" :'email1',
+              }}              />
               <TextField
                 margin="normal"
                 required
@@ -221,6 +225,8 @@ export default function EditWebApp() {
                 name="password"
                 label="Password"
                 type="password"
+                inputProps={{'data-testid':'password'}}
+
                 id="password"
                 autoComplete="current-password"
               />

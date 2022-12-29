@@ -143,8 +143,8 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
-
-              data-testid = 'password'
+              inputProps={{"data-testid" :'password'
+            }}
 
               error={passerror}
               helperText={passerrormsge}
@@ -158,8 +158,9 @@ export default function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              data-testid = 'button'
+              data-testid = 'subbutton'
               sx={{ mt: 3, mb: 2 }}
+            
               style={{
                 fontSize: 14,
                 fontStyle: "bold",

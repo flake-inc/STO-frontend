@@ -149,7 +149,7 @@ export default function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} data-testid={page}> 
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -193,6 +193,7 @@ export default function ResponsiveAppBar() {
               style={{
                 color: "white",
               }}
+              data-testid = 'logout'
             >
               logout
             </IconButton>

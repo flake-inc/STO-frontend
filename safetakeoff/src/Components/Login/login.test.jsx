@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginPage from './Login';
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
 // import fireEvent from "@testing-library/user-event"
 
 
@@ -8,16 +8,27 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { act,create } from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const setup = () => {
-    const utils = render(<Router><LoginPage /></Router>);
-    const input = utils.queryByLabelText('EmailAddress')
-    return {
-      input,
-      ...utils,
-    }
-  }
+
+test('login page testing for email  ', () => {
+  // const {input} = setup()
+  const {getByTestId} = render(<Router><LoginPage /></Router>);
+  const usernameField = getByTestId('email')
+
+fireEvent.change(usernameField, {target: {value: 'testuser@gmail.com'}})
+expect(usernameField.value).toBe('testuser@gmail.com')
 
 
+});
+
+test('login page testing for password  ', () => {
+  // const {input} = setup()
+  const {getByTestId} = render(<Router><LoginPage /></Router>);
+  const passwordField = getByTestId('email')
+
+fireEvent.change(passwordField, {target: {value: 'testpassword'}})
+expect(passwordField.value).toBe('testpassword')
+
+});
 
 
 test('login page displays the correct form fields', () => {
@@ -33,35 +44,40 @@ test('login page displays the correct form fields', () => {
 
 
 
-   
 
-//   const usernameField = screen.findAllByTestId('email');
-//   const passwordField = screen.findAllByTestId('password' );
-//   const loginButton = screen.findAllByTestId('button');
+
+
+ 
+
+// Check that the user is redirected to the appropriate page after login
+
+
+
+
+
+test('login page pass  when the correct credentials given', () => {
+    // const {input} = setup()
+    const {getByTestId} = render(<Router><LoginPage /></Router>);
+    const usernameField = getByTestId('email')
+  const passwordField = getByTestId('password')
+  const confirm = getByTestId("subbutton")
   
-//   act(() => {
-//     usernameField.onChange({ target: { value: 'testuser' } });
-//     passwordField.props.onChange({ target: { value: 'testpassword' } });
-//     loginButton.props.onClick();
-//   });
-//   // Check that the user is redirected to the appropriate page after login
-//   expect(window.location.pathname).toBe('/dashboard');
+  fireEvent.change(usernameField, {target: {value: 'testuser@gmail.com'}})
+  fireEvent.change(passwordField,{target: {value: 'testpassword'}})
+  expect(usernameField.value).toBe('testuser@gmail.com')
+  expect(passwordField.value).toBe('testpassword')
+  fireEvent.click(confirm);
+  expect(window.location.pathname).toBe('/');
 
 
-test('login page displays an error message when the login fails', () => {
-    const {input} = setup()
-    const usernameField = screen.findAllByTestId('email');
-  const passwordField = screen.findAllByTestId('password' );
-//   const loginButton = screen.findAllByTestId('button');
-  
-  fireEvent.change(input, {target: {value: 'testuser@gmail.com'}})
-  fireEvent.change(screen.findAllByTestId('password'), {target: {value: 'testpassword'}})
-  expect(usernameField).toBe('testuser@gmail.com')
-  expect(passwordField).toBe('testpassword')
 
 
    
  
   // Check that the user is redirected to the appropriate page after login
-//   expect(window.location.pathname).toBe('/dashboard');
 });
+
+
+
+
+
