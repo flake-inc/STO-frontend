@@ -46,15 +46,19 @@ function formatDate(date) {
 
 export default function WeatherPredictGeneral() {
   const date1 = useSelector((state) => state.date.date);
-  const option1 = useSelector((state) => state.date.option);
+  const option1 = String(useSelector((state) => state.date.option));
   const usertype = sessionStorage.getItem("usertype");
   const date2 = date1.slice(0, 16);
   const date3 = formatDate(new Date(date2.slice(5, 16)));
   const [preddata, setpreddata] = useState([]);
-  const [tempavg, settempavg] = useState([]);
-  const [cloudavg, setcloudavg] = useState([]);
-  const [pressureavg, setpressureavg] = useState([]);
-  const [windavg, setwindavg] = useState([]);
+  const [tempmean, settempmean] = useState([]);
+  const [cloudmean, setcloudmean] = useState([]);
+  const [pressuremean, setpressuremean] = useState([]);
+  const [windmean, setwindmean] = useState([]);
+  const [tempth, settempth] = useState([]);
+  const [cloudth, setcloudth] = useState([]);
+  const [pressureth, setpressureth] = useState([]);
+  const [windth, setwindth] = useState([]);
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
@@ -84,25 +88,6 @@ export default function WeatherPredictGeneral() {
         // setdate(...time,res.time)
         setpreddata(...preddata, res);
       })
-      .then(() => {
-        preddata.map(
-          (row) => (
-            settempavg(
-              row.temperature.reduce((a, b) => a + b, 0) /
-                row.temperature.length
-            ),
-            setcloudavg(
-              row.cloudcover.reduce((a, b) => a + b, 0) / row.cloudcover.length
-            ),
-            setpressureavg(
-              row.pressure.reduce((a, b) => a + b, 0) / row.pressure.length
-            ),
-            setwindavg(
-              row.windspeed.reduce((a, b) => a + b, 0) / row.windspeed.length
-            )
-          )
-        );
-      })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
@@ -115,36 +100,46 @@ export default function WeatherPredictGeneral() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //   .get("http://127.0.0.1:5000/getcomparison", {
-  //     params: {
-  //       date: date3,
-  //       aircraft: option1
-  //     },
-  //     headers: {
-  //       Authorization: `Bearer ${access_token}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //   .then((response) => {
-  //     const res = response.data;
-  //     console.log("here?")
-  //     console.log("=================== response =================",res)
-  //     console.log(response.t_mean)
-  //     setcompdata(...compdata, res);
-  //   })
-  //   .catch((error) => {
-  //     if (error.response) {
-  //       console.log(error.response);
-  //       console.log(error.response.status);
-  //       console.log(error.response.headers);
-  //       if (error.response.data.msg === "Token has expired") {
-  //         navigate("/login");
-  //       }
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    const access_token = sessionStorage.getItem("token");
+
+    if (access_token === null) {
+      navigate("/login");
+    }
+
+    axios
+      .get("http://127.0.0.1:5000/getcomparison", {
+        params: {
+          date: date3,
+          aircraft: option1,
+        },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const res = response.data;
+        settempmean(res.t_mean);
+        setcloudmean(res.c_mean);
+        setwindmean(res.w_mean);
+        setpressuremean(res.p_mean);
+        settempth(res.t_th);
+        setwindth(res.w_th);
+        setcloudth(res.c_th);
+        setpressureth(res.p_th);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.data.msg === "Token has expired") {
+            navigate("/login");
+          }
+        }
+      });
+  }, []);
 
   const { state } = useLocation();
   const options = {
@@ -241,65 +236,62 @@ export default function WeatherPredictGeneral() {
               </MainCard>
             </Grid>
 
-            <div className="row d-flex flex-row justify-content-evenly">
-              <Grid
-                container
-                rowSpacing={1.5}
-                columnSpacing={5}
-                paddingLeft={5}
-                paddingRight={2}
-                paddingBottom={5}
-                sx={{ flex: 1, display: "flex", flexDirection: "column" }}
-              >
-                <React.Fragment>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 18 }}
-                      color="text.secondary"
-                      marginBottom={3}
-                    >
-                      {option1} Aircraft's Threshold Values
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Temperature Threshold : {tempavg}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Wind Threshold : {windavg}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Cloud Threshold : {cloudavg}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Pressure Threshold : {pressureavg}
-                    </Typography>
-                  </CardContent>
-                </React.Fragment>
-
-                <React.Fragment>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 18 }}
-                      color="text.secondary"
-                      marginBottom={3}
-                    >
-                      Average weather condition on {date}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Temperature Average : {tempavg}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Wind Average : {windavg}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Cloud Average : {cloudavg}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Pressure Average : {pressureavg}
-                    </Typography>
-                  </CardContent>
-                </React.Fragment>
+            <Grid
+              container
+              rowSpacing={1.5}
+              columnSpacing={5}
+              paddingLeft={5}
+              paddingRight={2}
+              paddingBottom={5}
+            >
+              <Grid item xs={6} direction="column">
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18 }}
+                    color="text.secondary"
+                    marginBottom={3}
+                  >
+                    {option1} Aircraft's Threshold Values
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Temperature Threshold : {tempth}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Wind Threshold : {windth}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Cloud Threshold : {cloudth}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Pressure Threshold : {pressureth}
+                  </Typography>
+                </CardContent>
               </Grid>
-            </div>
+
+              <Grid item xs={6} direction="column">
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18 }}
+                    color="text.secondary"
+                    marginBottom={3}
+                  >
+                    Average weather condition on {date}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Temperature Average : {tempmean}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Wind Average : {windmean}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Cloud Average : {cloudmean}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Pressure Average : {pressuremean}
+                  </Typography>
+                </CardContent>
+              </Grid>
+            </Grid>
 
             <Grid
               container
