@@ -14,10 +14,7 @@ import { useLocation } from "react-router-dom";
 import Cloudseries from "./Cloudseries";
 import Pressureseries from "./Pressureseries";
 import Windseries from "./Windseries";
-import BasicTable from "../AirCraft/Table";
-import DangeredTable from "./Table";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import WeatherCard from "../Dashboard/WeatherCard";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -59,6 +56,7 @@ export default function WeatherPredictGeneral() {
   const [cloudth, setcloudth] = useState([]);
   const [pressureth, setpressureth] = useState([]);
   const [windth, setwindth] = useState([]);
+  const [isDangered, setIsDangered] = useState([]);
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
@@ -128,6 +126,7 @@ export default function WeatherPredictGeneral() {
         setwindth(res.w_th);
         setcloudth(res.c_th);
         setpressureth(res.p_th);
+        setIsDangered(res.dangered);
       })
       .catch((error) => {
         if (error.response) {
@@ -204,7 +203,7 @@ export default function WeatherPredictGeneral() {
               color="text.primary"
               gutterBottom
             >
-              Prediction for {option1} on {date}
+              Prediction for <strong>{option1}</strong> on <strong>{date}</strong>
             </Typography>
             <Grid
               container
@@ -244,14 +243,16 @@ export default function WeatherPredictGeneral() {
               paddingRight={2}
               paddingBottom={5}
             >
-              <Grid item xs={6} direction="column">
+              <Grid item xs={3} direction="column"></Grid>
+
+              <Grid item xs={3} direction="column">
                 <CardContent>
                   <Typography
                     sx={{ fontSize: 18 }}
                     color="text.secondary"
                     marginBottom={3}
                   >
-                    {option1} Aircraft's Threshold Values
+                    <strong>{option1}</strong> Aircraft's Threshold Values
                   </Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     Temperature Threshold : {tempth}
@@ -268,14 +269,14 @@ export default function WeatherPredictGeneral() {
                 </CardContent>
               </Grid>
 
-              <Grid item xs={6} direction="column">
+              <Grid item xs={4} direction="column">
                 <CardContent>
                   <Typography
                     sx={{ fontSize: 18 }}
                     color="text.secondary"
                     marginBottom={3}
                   >
-                    Average weather condition on {date}
+                    Average weather condition on <strong>{date}</strong>
                   </Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     Temperature Average : {tempmean}
@@ -290,6 +291,123 @@ export default function WeatherPredictGeneral() {
                     Pressure Average : {pressuremean}
                   </Typography>
                 </CardContent>
+              </Grid>
+              <Grid item xs={2} direction="column"></Grid>
+            </Grid>
+
+            <Grid
+              container
+              rowSpacing={1.5}
+              columnSpacing={5}
+              paddingLeft={5}
+              paddingRight={2}
+              paddingBottom={5}
+            >
+              <Grid item xs={12} md={12} lg={12}>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                  sx={{ flex: 1, display: "flex", flexDirection: "column" }}
+                >
+                  <Grid item>
+                    {isDangered ? (
+                      <div>
+                        <Typography
+                          component="h3"
+                          variant="h3"
+                          align="center"
+                          color="text.primary"
+                          paddingTop={5}
+                          gutterBottom 
+                        >
+                          The AirCraft <strong>{option1}</strong>
+                          <Typography
+                            component="h3"
+                            variant="h3"
+                            align="center"
+                            color="red"
+                          >
+                            Cannot
+                          </Typography>
+                          land/takeoff on {date}!{" "}
+                        </Typography>
+
+                        <Typography
+                          sx={{ mb: 1.5, fontSize: 14 }}
+                          color="text.secondary"
+                          align="center"
+
+                        >
+                          The Predicted weather conditions are higher than the <strong>{option1}</strong>'s
+                          threshold values. Hence the <strong>{option1}</strong> is endangered by
+                          the weather. We are suggesting not to land or take off{" "}
+                          <strong>{option1}</strong> on {date3}.
+                        </Typography>
+                        <Typography
+                          sx={{ mb: 1.5, fontSize: 11 }}
+                          color="text.secondary"
+                          align="center"
+
+                        >
+                          (*Please consider that the mean (average) of all
+                          predicted weather conditions on {date3} are
+                          considered. There can be an hour of that day the{" "}
+                          <strong>{option1}</strong> can be land/takeoff without any harm.
+                          Therefore please compare the <strong>{option1}</strong>'s threshold
+                          values with each hourly prediction)
+                        </Typography>
+                      </div>
+                    ) : (
+                      <div>
+                        <Typography
+                          component="h3"
+                          variant="h3"
+                          align="center"
+                          color="text.primary"
+                          paddingTop={5}
+                          gutterBottom
+                        >
+                          The AirCraft <strong>{option1}</strong>
+                          <Typography
+                            component="h3"
+                            variant="h3"
+                            align="center"
+                            color="green"
+                          >
+                            Can 
+                          </Typography>
+                          land/takeoff on {date}!{" "}
+                        </Typography>
+
+                        <Typography
+                          sx={{ mb: 1.5, fontSize: 14 }}
+                          color="text.secondary"
+                          align="center"
+
+                        >
+                          The Predicted weather conditions are lower than the <strong>{option1}</strong>'s
+                          threshold values. Hence the <strong>{option1}</strong> is not
+                          endangered by the weather. Therefore it is okay to
+                          land or take off <strong>{option1}</strong> on {date3}.
+                        </Typography>
+                        <Typography
+                          sx={{ mb: 1.5, fontSize: 11 }}
+                          color="text.secondary"
+                          align="center"
+
+                        >
+                          (*Please consider that the mean (average) of all
+                          predicted weather conditions on {date3} are
+                          considered. There can be an hour of that day the{" "}
+                          <strong>{option1}</strong> cannot be land/takeoff without any harm.
+                          Therefore please compare the <strong>{option1}</strong>'s threshold
+                          values with each hourly prediction.)
+                        </Typography>
+                      </div>
+                    )}
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
 
