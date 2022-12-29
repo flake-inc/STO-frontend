@@ -10,7 +10,6 @@ export default function temp() {
       <div
         className="visual"
         style={{
-          // backgroundColor: bgGif ?? "#41B3A3",
           width: "100vw",
           height: "100vh",
           textAlign: "center",

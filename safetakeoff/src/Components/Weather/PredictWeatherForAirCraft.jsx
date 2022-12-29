@@ -79,11 +79,7 @@ export default function WeatherPredictGeneral() {
       .then((response) => {
         const res = response.data;
 
-        // setTemperature(...temperature,res.temp)
-        // setWind(...wind,res.wind)
-        // setCloud(...cloud,res.cloud)
-        // setPress(...press,res.press)
-        // setdate(...time,res.time)
+        
         setpreddata(...preddata, res);
       })
       .catch((error) => {
@@ -214,7 +210,6 @@ export default function WeatherPredictGeneral() {
               paddingBottom={5}
             >
               <MainCard className="weathercontainer">
-                {/* <Cards  /> */}
 
                 <div
                   className="cardcontainer"

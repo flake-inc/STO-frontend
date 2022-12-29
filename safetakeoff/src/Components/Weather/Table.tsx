@@ -56,11 +56,8 @@ export default function DangeredTable() {
         const res = response.data;
         const array = [];
         for (const [key, value] of Object.entries(res)) {
-          // let str_val = JSON.stringify(value);
-
-          // for (var i in value) array.push(value[i]);
+          
           array.push(value);
-          // setDataArray([...value])
         }
         setDataArray(array);
       })

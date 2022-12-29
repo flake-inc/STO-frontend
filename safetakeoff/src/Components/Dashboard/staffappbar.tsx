@@ -53,27 +53,7 @@ export default function StaffAppbar() {
     setAnchorElUser(null);
   };
 
-  // const handleLogout =()=>{
-  //   axios.get('http://127.0.0.1:5000/logout',{
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //     },
-
-  // })
-  //   .then((response) => {
-
-  //     navigate('/login')
-
-  //   })
-  //   .catch((error) => {
-  //     if (error.response) {
-
-  //       console.log(error.response.status);
-  //       console.log(error.response.headers);
-  //     }
-  //   });
-  // }
-
+  
   const routeChange = (e) => {
     if (e == "Check Weather") {
       let path = `/weather`;

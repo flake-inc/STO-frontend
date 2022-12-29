@@ -118,18 +118,12 @@ function DashboardContent() {
       })
       .then((response) => {
         const res = response.data;
-        // setTemperature(...temperature,res.temp)
-        // setWind(...wind,res.wind)
-        // setCloud(...cloud,res.cloud)
-        // setPress(...press,res.press)
-        // setdate(...time,res.time)
+      
         setpreddata(...preddata, res);
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
+         
           if (error.response.data.msg === "Token has expired") {
             navigate("/login");
           }
@@ -153,9 +147,7 @@ function DashboardContent() {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
+      
           if (error.response.data.msg === "Token has expired") {
             navigate("/login");
           }
@@ -179,9 +171,7 @@ function DashboardContent() {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
+
           if (error.response.data.msg === "Token has expired") {
             navigate("/login");
           }
@@ -204,9 +194,7 @@ function DashboardContent() {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
+        
           if (error.response.data.msg === "Token has expired") {
             navigate("/login");
           }
@@ -229,9 +217,7 @@ function DashboardContent() {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
+       
           if (error.response.data.msg === "Token has expired") {
             navigate("/login");
           }
@@ -387,6 +373,7 @@ function DashboardContent() {
                 >
                   {preddata.map((row) => (
                     <WeatherCard
+                    data-testid='weathercarc'
                       style={{ width: "200px" }}
                       time={row.time}
                       temperature={row.temperature}

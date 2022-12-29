@@ -81,6 +81,4 @@ const TempSeries = () => {
 
 export default TempSeries;
 
-// '#0a0a23',
-// '#FFF',
-// '#000'
+

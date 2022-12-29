@@ -297,8 +297,6 @@ export default function EditWebApp() {
         .then((response) => {
           const res = response.data;
           toast.success("File successfully uploaded");
-          // window. location. reload(false);
-          // toast.current.show({ severity: 'success', summary: 'File uploaded successfully', life: 5000 });        // console.log(response.data.Message)// navigate('/')
         })
         .catch((error) => {
           if (error.response) {
@@ -308,7 +306,6 @@ export default function EditWebApp() {
             if (token == null) {
               toast.error("Authentication Error: Session Expired");
               sessionStorage.removeItem("token");
-              // navigate('/login')
             } else {
               toast.error("Incorrect file name");
             }
@@ -356,7 +353,6 @@ export default function EditWebApp() {
           } else if (token == null) {
             toast.error("Authentication Error: Session Expired");
             sessionStorage.removeItem("token");
-            // navigate('/login')
           }
         }
       });
@@ -367,7 +363,6 @@ export default function EditWebApp() {
       <div
         className="visual"
         style={{
-          // backgroundColor: bgGif ?? "#41B3A3",
           width: "100vw",
           height: "100vh",
           textAlign: "center",

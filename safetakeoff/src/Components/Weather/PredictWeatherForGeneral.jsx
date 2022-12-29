@@ -57,7 +57,6 @@ export default function WeatherPredictGeneral() {
 
   const date = date1.slice(0, 16);
   const date2 = formatDate(new Date(date1.slice(5, 16)));
-  // const date3 = date2.toString('YYYY-MM-dd')
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("token");
@@ -78,11 +77,7 @@ export default function WeatherPredictGeneral() {
       })
       .then((response) => {
         const res = response.data;
-        // setTemperature(...temperature,res.temp)
-        // setWind(...wind,res.wind)
-        // setCloud(...cloud,res.cloud)
-        // setPress(...press,res.press)
-        // setdate(...time,res.time)
+       
         setpreddata(...preddata, res);
       })
       .catch((error) => {
@@ -163,11 +158,8 @@ export default function WeatherPredictGeneral() {
               alignItems="center"
               justifyContent="center"
             >
-              {/* <MainCard content={false} sx={{ mt: 1.5 }}>
-                <Cards />
-              </MainCard> */}
+            
               <MainCard className="weathercontainer">
-                {/* <Cards  /> */}
 
                 <div
                   className="cardcontainer"

@@ -1,7 +1,6 @@
 import React from 'react';
 import ResponsiveAppBar from "../Dashboard/ResponsiveAppBar";
 import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
-// import fireEvent from "@testing-library/user-event"
 
 
 
@@ -13,7 +12,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 
 test('log out navigation test', () => {
-    // const {input} = setup()
     const {getByTestId} = render(<Router><ResponsiveAppBar /></Router>);
     const confirm = getByTestId("logout")
 
@@ -26,7 +24,6 @@ test('log out navigation test', () => {
 });
 
 test('check weather navigation test', () => {
-    // const {input} = setup()
     const {getByTestId} = render(<Router><ResponsiveAppBar /></Router>);
     const confirm = getByTestId("Check Weather")
 
@@ -39,7 +36,6 @@ test('check weather navigation test', () => {
 });
 
 test('Congigurations navigation test', () => {
-    // const {input} = setup()
     const {getByTestId} = render(<Router><ResponsiveAppBar /></Router>);
     const confirm = getByTestId("Configurations")
 
@@ -52,7 +48,6 @@ test('Congigurations navigation test', () => {
 });
 
 test('Flights navigation test', () => {
-    // const {input} = setup()
     const {getByTestId} = render(<Router><ResponsiveAppBar /></Router>);
     const confirm = getByTestId("Flights")
 
